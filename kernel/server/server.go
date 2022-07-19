@@ -1,4 +1,3 @@
-// REF https://github.com/siyuan-note/siyuan/blob/master/kernel/server/serve.go
 package server
 
 import (
@@ -10,8 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// REF [siyuan/serve.go at master · siyuan-note/siyuan](https://github.com/siyuan-note/siyuan/blob/master/kernel/server/serve.go)
 func Server() (router *gin.Engine) {
-
 	router = gin.Default()
 
 	// REF [Gin框架Gin渲染 - RandySun - 博客园](https://www.cnblogs.com/randysun/p/15626537.html)
@@ -36,6 +35,7 @@ func Server() (router *gin.Engine) {
 	{
 		/* 请求重定向 */
 		redirect := func(c *gin.Context) {
+			// REF [重定向 | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/redirects/)
 			c.Request.URL.Path = strings.Replace(c.Request.URL.Path, "/block", "", 1)
 			router.HandleContext(c)
 		}

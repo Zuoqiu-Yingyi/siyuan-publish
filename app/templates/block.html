@@ -14,10 +14,12 @@
     <link id="stylesheet" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
     {{ if eq .Render.Mode 0 }}
     <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Default}}" />
-    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Custom}}" />
+    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Theme}}" />
+    <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Custom}}" />
     {{ else }}
     <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Default}}" />
-    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Custom}}" />
+    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Theme}}" />
+    <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Custom}}" />
     {{ end }}
     <link id="publishStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Publish}}" />
 </head>

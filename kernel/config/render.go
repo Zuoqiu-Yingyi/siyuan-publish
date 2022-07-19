@@ -21,6 +21,7 @@ type Style struct {
 
 type Theme struct {
 	Default string `json:"default"`
+	Theme   string `json:"theme"`
 	Custom  string `json:"custom"`
 }
 

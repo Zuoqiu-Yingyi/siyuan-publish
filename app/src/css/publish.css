@@ -1,5 +1,6 @@
 #editor {
   overflow: auto;
+  height: 100%;
 }
 #editor #preview a {
   outline: 0;

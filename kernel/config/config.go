@@ -76,10 +76,12 @@ func LoadDefaultConfig() {
 					Publish: "/css/publish.css",
 					Light: Theme{
 						Default: "/appearance/themes/daylight/theme.css",
+						Theme:   "/appearance/themes/daylight/theme.css",
 						Custom:  "/appearance/themes/daylight/custom.css",
 					},
 					Dark: Theme{
 						Default: "/appearance/themes/midnight/theme.css",
+						Theme:   "/appearance/themes/midnight/theme.css",
 						Custom:  "/appearance/themes/midnight/custom.css",
 					},
 				},
