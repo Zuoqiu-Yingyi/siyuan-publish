@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>{{.Title}}</title>
+
+    <link id="editorFontSize" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Font}}" />
+    <link id="stylesheet" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
+    {{ if eq .Render.Mode 0 }}
+    <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Default}}" />
+    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Custom}}" />
+    {{ else }}
+    <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Default}}" />
+    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Custom}}" />
+    {{ end }}
+    <link id="publishStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Publish}}" />
+</head>
+
+<body class="fn__flex-column">
+    <div id="editor">
+        <div class="protyle-content">
+            <div id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">{{html .Content}}</div>
+        </div>
+    </div>
+    <script id="configScript" src="{{.Render.File.Script.Config}}"></script>
+    <script id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
+    <script id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
+    <script id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
+    <script id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
+    <script id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
+    {{ template "render.html" . }}
+    <script id="publishScript" src="{{.Render.File.Script.Publish}}"></script>
+</body>
+
+</html>

@@ -13,3 +13,23 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# 自定义配置文件
+custom.config.toml
+
+# 临时文件
+/kernel/temp/*
+
+# 静态资源文件目录
+/app/static/appearance/emojis/*
+/app/static/appearance/icons/*
+/app/static/appearance/themes/*
+/app/static/assets/*
+/app/static/emojis/*
+/app/static/stage/build/*
+/app/static/stage/fonts/*
+/app/static/stage/protyle/*
+/app/static/widgets/*
+
+# 示例文件
+/examples

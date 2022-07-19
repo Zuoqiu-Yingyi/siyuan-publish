@@ -1,0 +1,11 @@
+#editor {
+  overflow: auto;
+}
+#editor #preview a {
+  outline: 0;
+  text-decoration: none;
+  color: transparent;
+}
+#editor #preview a:hover {
+  text-decoration: none;
+}

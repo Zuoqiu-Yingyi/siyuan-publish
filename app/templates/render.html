@@ -1,0 +1,24 @@
+<!-- porotyle 解析脚本 -->
+<script id="renderScript">
+    {
+        window.siyuan.config.appearance.mode = {{ .Render.Mode }};
+        const previewElement = document.getElementById('preview');
+        Protyle.highlightRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.mathRender(previewElement, "{{.Render.Path.Protyle}}", false);
+        Protyle.mermaidRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.flowchartRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.graphvizRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.chartRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.mindmapRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.abcRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.plantumlRender(previewElement, "{{.Render.Path.Protyle}}");
+        Protyle.mediaRender(previewElement);
+        document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+            item.addEventListener("click", (event) => {
+                navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd());
+                event.preventDefault();
+                event.stopPropagation();
+            })
+        });
+    }
+</script>

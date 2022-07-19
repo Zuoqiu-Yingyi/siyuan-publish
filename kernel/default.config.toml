@@ -1,0 +1,74 @@
+# 服务器配置
+[Server]
+Port = 8080                             # 服务器端口
+Templates = "./../app/templates/*.html" # 模板目录
+
+# 静态 Web 文件服务目录配置
+[Server.Static]
+# 外观文件目录, 存放思源笔记工作区 /conf/appearance/ 目录下的文件
+Appearance.Path = "/appearance"                    # 访问目录
+Appearance.FilePath = "./../app/static/appearance" # 文件目录
+
+# 资源文件目录, 存放思源笔记工作区 /data/assets/ 目录下的文件
+Assets.Path = "/assets"                    # 访问目录
+Assets.FilePath = "./../app/static/assets" # 文件目录
+
+# 表情文件目录, 存放思源笔记工作区 /data/emojis/ 目录下的文件
+Emojis.Path = "/emojis"                    # 访问目录
+Emojis.FilePath = "./../app/static/emojis" # 文件目录
+
+# 挂件文件目录, 存放思源笔记工作区 /data/widgets/ 目录下的文件
+Widgets.Path = "/widgets"                    # 访问目录
+Widgets.FilePath = "./../app/static/widgets" # 文件目录
+
+# 思源应用文件目录, 存放思源笔记安装目录中 /resources/stage/ 目录下的文件
+Stage.Path = "/stage"                    # 访问目录
+Stage.FilePath = "./../app/static/stage" # 文件目录
+
+# 前端 JavaScript 文件目录, 存放异步加载的 JavaScript 文件
+JavaScript.Path = "/js"                 # 访问目录
+JavaScript.FilePath = "./../app/src/js" # 文件目录
+
+# 前端 CSS 文件目录, 存放异步加载的 CSS 文件
+CSS.Path = "/css"                 # 访问目录
+CSS.FilePath = "./../app/src/css" # 文件目录
+
+
+# 思源适配器配置
+[Siyuan]
+Server = "http://localhost:6806" # 思源内核服务地址
+Token = ""                       # 思源内核服务访问令牌
+Timeout = 10_000                 # 思源内核服务访问超时时间(单位: ms)
+
+# 渲染器配置
+[Render]
+# 主题模式, 0: 明亮模式, 1: 暗黑模式
+Mode = 0
+
+# 渲染器资源文件目录
+[Render.Path]
+Protyle = "/stage/protyle" # 渲染器 protyle 资源目录
+
+# 渲染器样式文件 URL
+[Render.File.Style]
+Font = "/css/font.css"                # 字体样式文件 URL
+Base = "/stage/build/export/base.css" # 基础样式文件 URL
+Publish = "/css/publish.css"          # 发布样式文件 URL
+# 渲染器明亮主题样式文件 URL
+[Render.File.Style.Light]
+Default = "/appearance/themes/daylight/theme.css" # 默认样式
+Custom = "/appearance/themes/daylight/custom.css" # 自定义样式
+# 渲染器暗黑主题样式文件 URL
+[Render.File.Style.Dark]
+Default = "/appearance/themes/midnight/theme.css" # 默认样式
+Custom = "/appearance/themes/midnight/custom.css" # 自定义样式
+
+# 渲染器脚本文件 URL
+[Render.File.Script]
+Icon = "/appearance/icons/material/icon.js"       # 图标脚本 URL
+Emoji = "/appearance/emojis/twitter-emoji.js"     # 表情脚本 URL
+Lute = "/stage/protyle/js/lute/lute.min.js"       # 解析器脚本 URL
+HTML = "/stage/protyle/js/protyle-html.js"        # HTML 解析脚本 URL
+Protyle = "/stage/build/export/protyle-method.js" # 渲染器脚本 URL
+Config = "/js/config.js"                          # 配置脚本 URL
+Publish = "/js/publish.js"                        # 发布脚本 URL
