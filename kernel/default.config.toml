@@ -42,7 +42,7 @@ Timeout = 10_000                 # 思源内核服务访问超时时间(单位: 
 
 # 渲染器配置
 [Render]
-# 主题模式, 0: 明亮模式, 1: 暗黑模式
+# 主题模式, 0: 明亮模式, 1: 暗黑模式, 2: 自动模式,
 Mode = 0
 
 # 渲染器资源文件目录
@@ -56,14 +56,14 @@ Base = "/stage/build/export/base.css" # 基础样式文件 URL
 Publish = "/css/publish.css"          # 发布样式文件 URL
 # 渲染器明亮主题样式文件 URL
 [Render.File.Style.Light]
-Default = "/appearance/themes/daylight/theme.css" # 基础配色
+Default = "/appearance/themes/daylight/theme.css" # 基础主题配色
 Theme = "/appearance/themes/daylight/theme.css"   # 主题样式
-Custom = "/appearance/themes/daylight/custom.css" # 自定义样式
+Custom = "/appearance/themes/daylight/custom.css" # 自定义主题样式
 # 渲染器暗黑主题样式文件 URL
 [Render.File.Style.Dark]
-Default = "/appearance/themes/midnight/theme.css" # 基础配色
+Default = "/appearance/themes/midnight/theme.css" # 基础主题配色
 Theme = "/appearance/themes/midnight/theme.css"   # 主题样式
-Custom = "/appearance/themes/midnight/custom.css" # 自定义样式
+Custom = "/appearance/themes/midnight/custom.css" # 自定义主题样式
 
 # 渲染器脚本文件 URL
 [Render.File.Script]

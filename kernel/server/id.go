@@ -25,12 +25,17 @@ func id(c *gin.Context) {
 		block := data[0].(map[string]interface{})
 		switch block["type"].(string) {
 		case "d":
-			c.Redirect(http.StatusMovedPermanently, "/block/"+id)
+			c.Request.URL.Path = "/block/" + id
+			query := c.Request.URL.Query()
+			query.Del("id")
+			// fmt.Printf("%+v\n", query)
+			// fmt.Printf("%+v\n", query.Encode())
+			c.Request.URL.RawQuery = query.Encode()
 		default:
 			c.Request.URL.Path = "/block/" + block["root_id"].(string)
-			c.Redirect(http.StatusMovedPermanently, c.Request.URL.String())
 			// router.HandleContext(c)
 		}
+		c.Redirect(http.StatusMovedPermanently, c.Request.URL.String())
 	}
 
 }

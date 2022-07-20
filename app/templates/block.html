@@ -12,14 +12,14 @@
 
     <link id="editorFontSize" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Font}}" />
     <link id="stylesheet" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
-    {{ if eq .Render.Mode 0 }}
-    <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Default}}" />
-    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Theme}}" />
-    <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Custom}}" />
-    {{ else }}
+    {{ if eq .Render.Mode 1 }}
     <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Default}}" />
     <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Theme}}" />
     <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Custom}}" />
+    {{ else }}
+    <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Default}}" />
+    <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Theme}}" />
+    <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Custom}}" />
     {{ end }}
     <link id="publishStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Publish}}" />
 </head>

@@ -4,9 +4,9 @@ window.siyuan = {
         editor: {
             codeLineWrap: true,
             codeLigatures: true,
+            codeSyntaxHighlightLineNum: true,
             plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
-            codeSyntaxHighlightLineNum: false,
-        }
+        },
     },
-    languages: { copy: "复制" }
+    languages: { copy: "复制" },
 };

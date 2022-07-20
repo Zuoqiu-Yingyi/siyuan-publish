@@ -1,7 +1,84 @@
 <!-- porotyle 解析脚本 -->
 <script id="renderScript">
     {
-        window.siyuan.config.appearance.mode = {{ .Render.Mode }};
+        const url = new URL(window.location.href);
+
+        /* 主题模式 */
+        window.siyuan.config.appearance.mode = parseInt("{{.Render.Mode}}");
+
+        /* 发布配置 */
+        window.publish = {
+            config: {
+                theme: {
+                    light: {
+                        default: "{{.Render.File.Style.Light.Default}}",
+                        theme: "{{.Render.File.Style.Light.Theme}}",
+                        custom: "{{.Render.File.Style.Light.Custom}}"
+                    },
+                    dark: {
+                        default: "{{.Render.File.Style.Dark.Default}}",
+                        theme: "{{.Render.File.Style.Dark.Theme}}",
+                        custom: "{{.Render.File.Style.Dark.Custom}}"
+                    },
+                },
+            },
+        };
+
+        /* 设置主题模式 */
+        function setThemeMode(mode) {
+            switch (mode) {
+                case 0:
+                    document.getElementById('themeDefaultStyle').href = window.publish.config.theme.light.default;
+                    document.getElementById('themeStyle').href = window.publish.config.theme.light.theme;
+                    document.getElementById('themeCustomStyle').href = window.publish.config.theme.light.custom;
+                    window.siyuan.config.appearance.mode = 0;
+                    break;
+                case 1:
+                    document.getElementById('themeDefaultStyle').href = window.publish.config.theme.dark.default;
+                    document.getElementById('themeStyle').href = window.publish.config.theme.dark.theme;
+                    document.getElementById('themeCustomStyle').href = window.publish.config.theme.dark.custom;
+                    window.siyuan.config.appearance.mode = 1;
+                    break;
+            }
+        }
+
+        /* 使用 URL 参数 theme 设置主题模式 */
+        switch (url.searchParams.get('theme')) {
+            case 'light':
+                setThemeMode(0);
+                break;
+            case 'dark':
+                setThemeMode(1);
+                break;
+            case 'auto':
+            default:
+                /* 使用服务器配置设置主题模式 */
+                switch (window.siyuan.config.appearance.mode) {
+                    case 0:
+                    default:
+                        setThemeMode(0);
+                        break;
+                    case 1:
+                        setThemeMode(1);
+                        break;
+                    case 2:
+                        /* 使用浏览器配置设置主题模式 */
+                        switch (true) {
+                            case window.matchMedia('(prefers-color-scheme: light)').matches:
+                                setThemeMode(0);
+                                break;
+                            case window.matchMedia('(prefers-color-scheme: dark)').matches:
+                                setThemeMode(1);
+                                break;
+                            default:
+                                setThemeMode(0);
+                                break;
+                        }
+                        break;
+                }
+        }
+
+        /* 渲染 */
         const previewElement = document.getElementById('preview');
         Protyle.highlightRender(previewElement, "{{.Render.Path.Protyle}}");
         Protyle.mathRender(previewElement, "{{.Render.Path.Protyle}}", false);
