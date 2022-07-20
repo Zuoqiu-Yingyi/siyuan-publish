@@ -55,8 +55,19 @@ Private.Value = "private"      # 不可公开访问的文档的属性值(黑名�
 
 # 渲染器配置
 [Render]
-# 主题模式, 0: 明亮模式, 1: 暗黑模式, 2: 自动模式,
-Mode = 0
+
+# 外观设置
+[Render.Appearance]
+Mode = 0                               # 主题模式, 0: 明亮模式, 1: 暗黑模式, 2: 自动模式
+CodeBlockThemeLight = "atom-one-light" # 明亮模式代码块配色方案
+CodeBlockThemeDark = "atom-one-dark"   # 暗黑模式代码块配色方案
+
+# 编辑器设置
+[Render.Editor]
+CodeLineWrap = true                                            # 代码行是否启用自动换行
+CodeLigatures = true                                           # 代码是否启用连字符
+CodeSyntaxHighlightLineNum = true                              # 代码块是否显示行号
+PlantUMLServePath = "https://www.plantuml.com/plantuml/svg/~1" # plant UML 渲染服务 URL
 
 # 渲染器资源文件目录
 [Render.Path]

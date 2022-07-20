@@ -75,7 +75,17 @@ func LoadDefaultConfig() {
 			},
 		},
 		Render: Render{
-			Mode: 0,
+			Appearance: Appearance{
+				Mode:                0,
+				CodeBlockThemeLight: "atom-one-light",
+				CodeBlockThemeDark:  "atom-one-dark",
+			},
+			Editor: Editor{
+				CodeLineWrap:               true,
+				CodeLigatures:              true,
+				CodeSyntaxHighlightLineNum: true,
+				PlantUMLServePath:          "https://www.plantuml.com/plantuml/svg/~1",
+			},
 			Path: Path{
 				Protyle: "/stage/protyle",
 			},

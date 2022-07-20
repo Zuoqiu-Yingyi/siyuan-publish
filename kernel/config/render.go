@@ -1,9 +1,23 @@
 package config
 
 type Render struct {
-	Mode int  `json:"mode"`
-	Path Path `json:"path"`
-	File File `json:"file"`
+	Appearance Appearance `json:"appearance"`
+	Editor     Editor     `json:"editor"`
+	Path       Path       `json:"path"`
+	File       File       `json:"file"`
+}
+
+type Appearance struct {
+	Mode                int    `json:"mode"`
+	CodeBlockThemeLight string `json:"codeBlockThemeLight"`
+	CodeBlockThemeDark  string `json:"codeBlockThemeDark"`
+}
+
+type Editor struct {
+	CodeLineWrap               bool   `json:"codeLineWrap"`
+	CodeLigatures              bool   `json:"codeLigatures"`
+	CodeSyntaxHighlightLineNum bool   `json:"codeSyntaxHighlightLineNum"`
+	PlantUMLServePath          string `json:"plantUMLServePath"`
 }
 
 type File struct {

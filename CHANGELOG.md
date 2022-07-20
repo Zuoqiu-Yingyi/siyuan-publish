@@ -10,3 +10,4 @@
   - `public`: 公开访问 | Public access.
   - `private`: 私有访问 | Private access.
   - `protected`: 受保护访问 | Protected access.
+- 支持在配置文件 `*.config.toml` 中设置代码块渲染样式 | Support set code block render style in `*.config.toml` file.

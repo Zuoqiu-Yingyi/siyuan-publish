@@ -14,7 +14,7 @@ func main() {
 		path string
 	)
 
-	flag.StringVar(&path, "config", "./default.config.toml", `config file path (*.config.toml, default: "./default.config.toml")`)
+	flag.StringVar(&path, "config", "./default.config.toml", `config file path (*.config.toml")`)
 	flag.Parse()
 	// fmt.Println(path)
 

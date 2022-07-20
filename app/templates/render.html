@@ -3,27 +3,6 @@
     {
         const url = new URL(window.location.href);
 
-        /* 主题模式 */
-        window.siyuan.config.appearance.mode = parseInt("{{.Render.Mode}}");
-
-        /* 发布配置 */
-        window.publish = {
-            config: {
-                theme: {
-                    light: {
-                        default: "{{.Render.File.Style.Light.Default}}",
-                        theme: "{{.Render.File.Style.Light.Theme}}",
-                        custom: "{{.Render.File.Style.Light.Custom}}"
-                    },
-                    dark: {
-                        default: "{{.Render.File.Style.Dark.Default}}",
-                        theme: "{{.Render.File.Style.Dark.Theme}}",
-                        custom: "{{.Render.File.Style.Dark.Custom}}"
-                    },
-                },
-            },
-        };
-
         /* 设置主题模式 */
         function setThemeMode(mode) {
             switch (mode) {

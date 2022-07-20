@@ -1,0 +1,39 @@
+<script>
+    /* 渲染配置 */
+    window.siyuan = {
+        config: {
+            appearance: {
+                mode: parseInt("{{.Render.Appearance.Mode}}"),  // 主题模式
+                codeBlockThemeLight: "{{.Render.Appearance.CodeBlockThemeLight}}", // 明亮主题代码块配色
+                codeBlockThemeDark: "{{.Render.Appearance.CodeBlockThemeDark}}", // 暗黑主题代码块配色
+            },
+            editor: {
+                codeLineWrap: "{{.Render.Editor.CodeLineWrap}}" === "true", // 代码行是否启用自动换行
+                codeLigatures: "{{.Render.Editor.CodeLigatures}}" === "true", // 代码是否启用连字符
+                codeSyntaxHighlightLineNum: "{{.Render.Editor.CodeSyntaxHighlightLineNum}}" === "true", // 代码块是否显示行号
+                plantUMLServePath: "{{.Render.Editor.PlantUMLServePath}}", // plant UML 渲染服务 URL
+            },
+        },
+        languages: {
+            copy: "复制",
+        },
+    };
+
+    /* 发布配置 */
+    window.publish = {
+        config: {
+            theme: {
+                light: {
+                    default: "{{.Render.File.Style.Light.Default}}",
+                    theme: "{{.Render.File.Style.Light.Theme}}",
+                    custom: "{{.Render.File.Style.Light.Custom}}",
+                },
+                dark: {
+                    default: "{{.Render.File.Style.Dark.Default}}",
+                    theme: "{{.Render.File.Style.Dark.Theme}}",
+                    custom: "{{.Render.File.Style.Dark.Custom}}",
+                },
+            },
+        },
+    };
+</script>

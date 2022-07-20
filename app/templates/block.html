@@ -12,7 +12,7 @@
 
     <link id="editorFontSize" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Font}}" />
     <link id="stylesheet" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
-    {{ if eq .Render.Mode 1 }}
+    {{ if eq .Render.Appearance.Mode 1 }}
     <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Default}}" />
     <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Theme}}" />
     <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Custom}}" />
@@ -30,6 +30,7 @@
             <div id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">{{html .Content}}</div>
         </div>
     </div>
+    {{ template "config.html" . }}
     <script id="configScript" src="{{.Render.File.Script.Config}}"></script>
     <script id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
     <script id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
