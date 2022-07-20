@@ -1,10 +1,13 @@
 (() => {
     const url = new URL(window.location.href);
+    const a_url = new URL(url);
+    a_url.pathname = "/block";
     /* 将块引用转化为超链接 */
     document.querySelectorAll(`#preview span[data-type="block-ref"][data-id]`).forEach(item => {
         const id = item.dataset.id;
         const a = document.createElement("a");
-        a.href = `${url.origin}/block?id=${id}`;
+        a_url.searchParams.set("id", id);
+        a.href = a_url.href;
         // a.target = "_blank";
         item.parentElement.replaceChild(a, item);
         a.appendChild(item);
