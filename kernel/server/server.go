@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"strings"
 
+	"publish/auth"
 	"publish/config"
 
 	"github.com/gin-gonic/gin"
@@ -47,10 +48,10 @@ func Server() (router *gin.Engine) {
 		b.GET("/export/*path", redirect)
 
 		// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
-		b.GET("/", id)
+		b.Handle("GET", "/", auth.Access, id)
 
 		// REF [绑定 Uri | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/bind-uri/)
-		b.GET("/:id", block)
+		b.Handle("GET", "/:id", auth.Access, block)
 	}
 	return
 }

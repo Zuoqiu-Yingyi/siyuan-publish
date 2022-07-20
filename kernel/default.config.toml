@@ -1,6 +1,7 @@
 # 服务器配置
 [Server]
-Port = 8080                             # 服务器端口
+Debug = false                           # 调试模式
+Port = 8080                             # 发布服务端口                      
 Templates = "./../app/templates/*.html" # 模板目录
 
 # 静态 Web 文件服务目录配置
@@ -38,7 +39,19 @@ CSS.FilePath = "./../app/src/css" # 文件目录
 [Siyuan]
 Server = "http://localhost:6806" # 思源内核服务地址
 Token = ""                       # 思源内核服务访问令牌
-Timeout = 10_000                 # 思源内核服务访问超时时间(单位: ms)
+Timeout = 10_000                 # 向思源内核发起 HTTP 请求的超时时间(单位: ms)
+Retry = 3                        # 向思源内核发起 HTTP 请求的重试次数
+
+# 思源发布相关设置
+[Siyuan.Publish]
+
+# 思源发布内容访问权限控制属性
+[Siyuan.Publish.Access]
+# 请保持下列字段的 Name 值一致
+Name = "custom-publish-access" # 属性名称
+Public.Value = "public"        # 可公开访问的文档的属性值(白名单)
+Protected.Value = "protected"  # 鉴权后可公开访问的文档的属性值
+Private.Value = "private"      # 不可公开访问的文档的属性值(黑名单)
 
 # 渲染器配置
 [Render]
@@ -48,6 +61,9 @@ Mode = 0
 # 渲染器资源文件目录
 [Render.Path]
 Protyle = "/stage/protyle" # 渲染器 protyle 资源目录
+
+# 渲染器资源文件 URL
+[Render.File]
 
 # 渲染器样式文件 URL
 [Render.File.Style]
@@ -59,6 +75,7 @@ Publish = "/css/publish.css"          # 发布样式文件 URL
 Default = "/appearance/themes/daylight/theme.css" # 基础主题配色
 Theme = "/appearance/themes/daylight/theme.css"   # 主题样式
 Custom = "/appearance/themes/daylight/custom.css" # 自定义主题样式
+
 # 渲染器暗黑主题样式文件 URL
 [Render.File.Style.Dark]
 Default = "/appearance/themes/midnight/theme.css" # 基础主题配色

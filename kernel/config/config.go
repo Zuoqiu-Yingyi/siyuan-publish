@@ -26,6 +26,7 @@ func LoadConfigFile(path string) error {
 func LoadDefaultConfig() {
 	C = &Config{
 		Server: Server{
+			Debug:     false,
 			Port:      8080,
 			Templates: "./../app/templates/*.html",
 			Static: Static{
@@ -63,6 +64,15 @@ func LoadDefaultConfig() {
 			Server:  "http://localhost:6806",
 			Token:   "",
 			Timeout: 10000,
+			Retry:   3,
+			Publish: Publish{
+				Access: Access{
+					Name:      "custom-publish-access",
+					Public:    Attribute{Value: "public"},
+					Protected: Attribute{Value: "protected"},
+					Private:   Attribute{Value: "private"},
+				},
+			},
 		},
 		Render: Render{
 			Mode: 0,

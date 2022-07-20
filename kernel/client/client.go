@@ -15,8 +15,12 @@ func init() {
 
 func InitClient() {
 	C = req.C().
-		// DevMode().
 		// SetCommonContentType("application/json").
 		SetCommonHeader("Authorization", "Token "+config.C.Siyuan.Token).
-		SetTimeout(time.Duration(config.C.Siyuan.Timeout) * time.Millisecond)
+		SetTimeout(time.Duration(config.C.Siyuan.Timeout) * time.Millisecond).
+		SetCommonRetryCount(config.C.Siyuan.Retry)
+
+	if config.C.Server.Debug { // 是否启动调试模式
+		C.DevMode()
+	}
 }

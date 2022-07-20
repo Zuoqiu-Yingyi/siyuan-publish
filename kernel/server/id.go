@@ -3,6 +3,7 @@ package server
 import (
 	"net/http"
 
+	"publish/auth"
 	"publish/client"
 
 	"github.com/gin-gonic/gin"
@@ -13,14 +14,14 @@ func id(c *gin.Context) {
 	r, err := client.GetBlockByID(client.C.R(), id)
 	r = client.Response(c, r, err)
 	if r == nil {
+		auth.StatusSiyuanServerError(c)
 		return
 	}
 	data := r.Data.([]interface{})
 	switch {
 	case len(data) == 0:
-		c.String(http.StatusNotFound, "Block Not Found")
-	case len(data) > 1:
-		c.String(http.StatusInternalServerError, "More than one block found")
+		auth.StatusBlockNotFound(c)
+		return
 	default:
 		block := data[0].(map[string]interface{})
 		switch block["type"].(string) {
@@ -37,5 +38,4 @@ func id(c *gin.Context) {
 		}
 		c.Redirect(http.StatusMovedPermanently, c.Request.URL.String())
 	}
-
 }
