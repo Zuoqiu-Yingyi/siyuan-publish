@@ -14,6 +14,7 @@ type Appearance struct {
 }
 
 type Editor struct {
+	FontSize                   int    `json:"fontSize"`
 	CodeLineWrap               bool   `json:"codeLineWrap"`
 	CodeLigatures              bool   `json:"codeLigatures"`
 	CodeSyntaxHighlightLineNum bool   `json:"codeSyntaxHighlightLineNum"`
@@ -26,7 +27,6 @@ type File struct {
 }
 
 type Style struct {
-	Font    string `json:"font"`
 	Base    string `json:"base"`
 	Publish string `json:"publish"`
 	Light   Theme  `json:"light"`

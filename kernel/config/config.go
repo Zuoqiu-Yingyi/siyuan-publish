@@ -81,6 +81,7 @@ func LoadDefaultConfig() {
 				CodeBlockThemeDark:  "atom-one-dark",
 			},
 			Editor: Editor{
+				FontSize:                   16,
 				CodeLineWrap:               true,
 				CodeLigatures:              true,
 				CodeSyntaxHighlightLineNum: true,
@@ -91,7 +92,6 @@ func LoadDefaultConfig() {
 			},
 			File: File{
 				Style: Style{
-					Font:    "/css/font.css",
 					Base:    "/stage/build/export/base.css",
 					Publish: "/css/publish.css",
 					Light: Theme{

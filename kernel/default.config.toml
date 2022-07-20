@@ -64,6 +64,7 @@ CodeBlockThemeDark = "atom-one-dark"   # 暗黑模式代码块配色方案
 
 # 编辑器设置
 [Render.Editor]
+FontSize = 16                                                  # 编辑器字体大小(单位: px)
 CodeLineWrap = true                                            # 代码行是否启用自动换行
 CodeLigatures = true                                           # 代码是否启用连字符
 CodeSyntaxHighlightLineNum = true                              # 代码块是否显示行号
@@ -78,9 +79,9 @@ Protyle = "/stage/protyle" # 渲染器 protyle 资源目录
 
 # 渲染器样式文件 URL
 [Render.File.Style]
-Font = "/css/font.css"                # 字体样式文件 URL
 Base = "/stage/build/export/base.css" # 基础样式文件 URL
 Publish = "/css/publish.css"          # 发布样式文件 URL
+
 # 渲染器明亮主题样式文件 URL
 [Render.File.Style.Light]
 Default = "/appearance/themes/daylight/theme.css" # 基础主题配色

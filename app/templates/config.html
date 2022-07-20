@@ -8,6 +8,7 @@
                 codeBlockThemeDark: "{{.Render.Appearance.CodeBlockThemeDark}}", // 暗黑主题代码块配色
             },
             editor: {
+                fontSize: parseInt("{{.Render.Editor.FontSize}}"), // 编辑器字体大小
                 codeLineWrap: "{{.Render.Editor.CodeLineWrap}}" === "true", // 代码行是否启用自动换行
                 codeLigatures: "{{.Render.Editor.CodeLigatures}}" === "true", // 代码是否启用连字符
                 codeSyntaxHighlightLineNum: "{{.Render.Editor.CodeSyntaxHighlightLineNum}}" === "true", // 代码块是否显示行号
