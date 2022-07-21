@@ -6,6 +6,7 @@ import (
 
 	"publish/auth"
 	"publish/config"
+	"publish/server/mode/cache"
 	"publish/server/mode/dynamic"
 
 	"github.com/gin-gonic/gin"
@@ -43,7 +44,12 @@ func Server() (router *gin.Engine) {
 		router.GET(config.C.Server.Static.Export.Path+"/*path", dynamic.File)
 		router.GET(config.C.Server.Static.Stage.Path+"/*path", dynamic.File)
 	case "cache": // 动态缓存
-		// TODO
+		router.GET(config.C.Server.Static.Appearance.Path+"/*path", cache.File)
+		router.GET(config.C.Server.Static.Assets.Path+"/*path", cache.File)
+		router.GET(config.C.Server.Static.Emojis.Path+"/*path", cache.File)
+		router.GET(config.C.Server.Static.Widgets.Path+"/*path", cache.File)
+		router.GET(config.C.Server.Static.Export.Path+"/*path", cache.File)
+		router.GET(config.C.Server.Static.Stage.Path+"/*path", cache.File)
 	case "static": // 静态加载
 		fallthrough
 	default:
@@ -73,7 +79,7 @@ func Server() (router *gin.Engine) {
 		router_block.GET("/stage/*path", redirect)
 
 		/* 文档页面加载方式 */
-		switch config.C.Server.Mode.File {
+		switch config.C.Server.Mode.Page {
 		case "dynamic": // 动态加载
 			// 使用 URL 参数 id 跳转到指定的块
 			// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)

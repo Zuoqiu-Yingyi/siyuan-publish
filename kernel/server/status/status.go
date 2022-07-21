@@ -56,6 +56,10 @@ func (s *Status) StatusSiyuanServerError(c *gin.Context) {
 	s.StatusInternalServerError(c, "Siyuan Serve Error")
 }
 
+func (s *Status) StatusPublishServerError(c *gin.Context) {
+	s.StatusInternalServerError(c, "Publish Serve Error")
+}
+
 func (s *Status) StatusBlockNotFound(c *gin.Context) {
 	s.StatusNotFound(c, "Block Not Found")
 }
