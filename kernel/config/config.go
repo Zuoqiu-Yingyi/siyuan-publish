@@ -31,6 +31,12 @@ func LoadDefaultConfig() {
 			Debug:     false,
 			Port:      8080,
 			Templates: "./../app/templates/*.html",
+			Index: Index{
+				Paths: []string{
+					"/",
+				},
+				URL: "/block?id=20200812220555-lj3enxa",
+			},
 			Static: Static{
 				Appearance: StaticPath{
 					Path:     "/appearance",

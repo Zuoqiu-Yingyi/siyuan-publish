@@ -23,6 +23,11 @@ func Server() (router *gin.Engine) {
 
 	router.LoadHTMLGlob(config.C.Server.Templates) // 加载模板文件
 
+	/* 主页 */
+	for _, path := range config.C.Server.Index.Paths {
+		router.GET(path, index)
+	}
+
 	/* 静态文件服务 */
 	router.Static(config.C.Server.Static.Appearance.Path, config.C.Server.Static.Appearance.FilePath)
 	router.Static(config.C.Server.Static.Assets.Path, config.C.Server.Static.Assets.FilePath)
@@ -32,7 +37,7 @@ func Server() (router *gin.Engine) {
 	router.Static(config.C.Server.Static.JavaScript.Path, config.C.Server.Static.JavaScript.FilePath)
 	router.Static(config.C.Server.Static.CSS.Path, config.C.Server.Static.CSS.FilePath)
 
-	b := router.Group("/block")
+	router_block := router.Group("/block")
 	{
 		/* 请求重定向 */
 		redirect := func(c *gin.Context) {
@@ -41,17 +46,20 @@ func Server() (router *gin.Engine) {
 			router.HandleContext(c)
 		}
 
-		b.GET("/appearance/*path", redirect)
-		b.GET("/assets/*path", redirect)
-		b.GET("/emojis/*path", redirect)
-		b.GET("/widgets/*path", redirect)
-		b.GET("/export/*path", redirect)
+		/* 资源文件请求重定向 */
+		router_block.GET("/appearance/*path", redirect)
+		router_block.GET("/assets/*path", redirect)
+		router_block.GET("/emojis/*path", redirect)
+		router_block.GET("/widgets/*path", redirect)
+		router_block.GET("/export/*path", redirect)
 
+		// 使用 URL 参数 id 跳转到指定的块
 		// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
-		b.Handle("GET", "/", auth.Access, id)
+		router_block.GET("/", auth.Access, id)
 
+		// 请求指定的文档
 		// REF [绑定 Uri | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/bind-uri/)
-		b.Handle("GET", "/:id", auth.Access, block)
+		router_block.GET("/:id", auth.Access, block)
 	}
 	return
 }

@@ -4,7 +4,13 @@ type Server struct {
 	Debug     bool   `json:"debug"`     // 是否开启调试模式
 	Port      int    `json:"port"`      // 服务端口
 	Templates string `json:"templates"` // 模板目录
+	Index     Index  `json:"index"`     // 首页配置
 	Static    Static `json:"static"`    // 静态资源目录
+}
+
+type Index struct {
+	Paths []string `json:"path"` // 首页路径
+	URL   string   `json:"url"`  // 首页重定向至的 URL
 }
 
 type Static struct {
