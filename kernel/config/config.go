@@ -31,6 +31,10 @@ func LoadDefaultConfig() {
 			Debug:     false,
 			Port:      8080,
 			Templates: "./../app/templates/*.html",
+			Mode: Mode{
+				Page: "dynamic",
+				File: "dynamic",
+			},
 			Index: Index{
 				Paths: []string{
 					"/",
@@ -40,31 +44,35 @@ func LoadDefaultConfig() {
 			Static: Static{
 				Appearance: StaticPath{
 					Path:     "/appearance",
-					FilePath: "./../app/static/appearance",
+					FilePath: "./../app/static/appearance/",
 				},
 				Assets: StaticPath{
 					Path:     "/assets",
-					FilePath: "./../app/static/assets",
+					FilePath: "./../app/static/assets/",
 				},
 				Emojis: StaticPath{
 					Path:     "/emojis",
-					FilePath: "./../app/static/emojis",
+					FilePath: "./../app/static/emojis/",
 				},
-				Widgets: StaticPath{
-					Path:     "/widgets",
-					FilePath: "./../app/static/widgets",
+				Export: StaticPath{
+					Path:     "/export",
+					FilePath: "./../app/static/export/",
 				},
 				Stage: StaticPath{
 					Path:     "/stage",
-					FilePath: "./../app/static/stage",
+					FilePath: "./../app/static/stage/",
+				},
+				Widgets: StaticPath{
+					Path:     "/widgets",
+					FilePath: "./../app/static/widgets/",
 				},
 				JavaScript: StaticPath{
 					Path:     "/js",
-					FilePath: "./../app/src/js",
+					FilePath: "./../app/src/js/",
 				},
 				CSS: StaticPath{
 					Path:     "/css",
-					FilePath: "./../app/src/css",
+					FilePath: "./../app/src/css/",
 				},
 			},
 		},

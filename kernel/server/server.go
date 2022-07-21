@@ -6,6 +6,7 @@ import (
 
 	"publish/auth"
 	"publish/config"
+	"publish/server/mode/dynamic"
 
 	"github.com/gin-gonic/gin"
 )
@@ -29,13 +30,30 @@ func Server() (router *gin.Engine) {
 	}
 
 	/* 静态文件服务 */
-	router.Static(config.C.Server.Static.Appearance.Path, config.C.Server.Static.Appearance.FilePath)
-	router.Static(config.C.Server.Static.Assets.Path, config.C.Server.Static.Assets.FilePath)
-	router.Static(config.C.Server.Static.Emojis.Path, config.C.Server.Static.Emojis.FilePath)
-	router.Static(config.C.Server.Static.Stage.Path, config.C.Server.Static.Stage.FilePath)
-	router.Static(config.C.Server.Static.Widgets.Path, config.C.Server.Static.Widgets.FilePath)
 	router.Static(config.C.Server.Static.JavaScript.Path, config.C.Server.Static.JavaScript.FilePath)
 	router.Static(config.C.Server.Static.CSS.Path, config.C.Server.Static.CSS.FilePath)
+
+	/* 资源文件加载模式 */
+	switch config.C.Server.Mode.File {
+	case "dynamic": // 动态加载
+		router.GET(config.C.Server.Static.Appearance.Path+"/*path", dynamic.File)
+		router.GET(config.C.Server.Static.Assets.Path+"/*path", dynamic.File)
+		router.GET(config.C.Server.Static.Emojis.Path+"/*path", dynamic.File)
+		router.GET(config.C.Server.Static.Widgets.Path+"/*path", dynamic.File)
+		router.GET(config.C.Server.Static.Export.Path+"/*path", dynamic.File)
+		router.GET(config.C.Server.Static.Stage.Path+"/*path", dynamic.File)
+	case "cache": // 动态缓存
+		// TODO
+	case "static": // 静态加载
+		fallthrough
+	default:
+		router.Static(config.C.Server.Static.Appearance.Path, config.C.Server.Static.Appearance.FilePath)
+		router.Static(config.C.Server.Static.Assets.Path, config.C.Server.Static.Assets.FilePath)
+		router.Static(config.C.Server.Static.Emojis.Path, config.C.Server.Static.Emojis.FilePath)
+		router.Static(config.C.Server.Static.Widgets.Path, config.C.Server.Static.Widgets.FilePath)
+		router.Static(config.C.Server.Static.Export.Path, config.C.Server.Static.Export.FilePath)
+		router.Static(config.C.Server.Static.Stage.Path, config.C.Server.Static.Stage.FilePath)
+	}
 
 	router_block := router.Group("/block")
 	{
@@ -52,14 +70,25 @@ func Server() (router *gin.Engine) {
 		router_block.GET("/emojis/*path", redirect)
 		router_block.GET("/widgets/*path", redirect)
 		router_block.GET("/export/*path", redirect)
+		router_block.GET("/stage/*path", redirect)
 
-		// 使用 URL 参数 id 跳转到指定的块
-		// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
-		router_block.GET("/", auth.Access, id)
+		/* 文档页面加载方式 */
+		switch config.C.Server.Mode.File {
+		case "dynamic": // 动态加载
+			// 使用 URL 参数 id 跳转到指定的块
+			// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
+			router_block.GET("/", auth.Access, dynamic.P.ID)
 
-		// 请求指定的文档
-		// REF [绑定 Uri | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/bind-uri/)
-		router_block.GET("/:id", auth.Access, block)
+			// 请求指定的文档
+			// REF [绑定 Uri | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/bind-uri/)
+			router_block.GET("/:id", auth.Access, dynamic.P.Block)
+		case "cache": // 动态缓存
+			// TODO
+		case "static": // 静态加载
+			fallthrough
+		default:
+			// TODO
+		}
 	}
 	return
 }

@@ -26,6 +26,7 @@ custom.config.toml
 /app/static/appearance/themes/*
 /app/static/assets/*
 /app/static/emojis/*
+/app/static/export/*
 /app/static/stage/build/*
 /app/static/stage/fonts/*
 /app/static/stage/protyle/*

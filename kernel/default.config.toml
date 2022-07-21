@@ -4,6 +4,14 @@ Debug = false                           # 调试模式
 Port = 8080                             # 发布服务端口                      
 Templates = "./../app/templates/*.html" # 模板目录
 
+# 服务模式
+[Server.Mode]
+# dynamic: 动态加载
+# cache: 动态缓存
+# static: 静态加载
+Page = "dynamic" # 文档页面加载模式
+File = "dynamic" # 资源文件加载模式
+
 # Web 服务首页配置
 [Server.Index]
 Paths = ["/"]                            # 首页路径
@@ -12,32 +20,36 @@ URL = "/block?id=20200812220555-lj3enxa" # 首页重定向至的
 # 静态 Web 文件服务目录配置
 [Server.Static]
 # 外观文件目录, 存放思源笔记工作区 /conf/appearance/ 目录下的文件
-Appearance.Path = "/appearance"                    # 访问目录
-Appearance.FilePath = "./../app/static/appearance" # 文件目录
+Appearance.Path = "/appearance"                     # 访问目录
+Appearance.FilePath = "./../app/static/appearance/" # 文件目录
 
 # 资源文件目录, 存放思源笔记工作区 /data/assets/ 目录下的文件
-Assets.Path = "/assets"                    # 访问目录
-Assets.FilePath = "./../app/static/assets" # 文件目录
+Assets.Path = "/assets"                     # 访问目录
+Assets.FilePath = "./../app/static/assets/" # 文件目录
 
 # 表情文件目录, 存放思源笔记工作区 /data/emojis/ 目录下的文件
-Emojis.Path = "/emojis"                    # 访问目录
-Emojis.FilePath = "./../app/static/emojis" # 文件目录
+Emojis.Path = "/emojis"                     # 访问目录
+Emojis.FilePath = "./../app/static/emojis/" # 文件目录
 
 # 挂件文件目录, 存放思源笔记工作区 /data/widgets/ 目录下的文件
-Widgets.Path = "/widgets"                    # 访问目录
-Widgets.FilePath = "./../app/static/widgets" # 文件目录
+Widgets.Path = "/widgets"                     # 访问目录
+Widgets.FilePath = "./../app/static/widgets/" # 文件目录
+
+# 导出文件目录, 存放思源笔记工作区 /temp/export/ 目录下的文件
+Export.Path = "/export"                     # 访问目录
+Export.FilePath = "./../app/static/export/" # 文件目录
 
 # 思源应用文件目录, 存放思源笔记安装目录中 /resources/stage/ 目录下的文件
-Stage.Path = "/stage"                    # 访问目录
-Stage.FilePath = "./../app/static/stage" # 文件目录
+Stage.Path = "/stage"                     # 访问目录
+Stage.FilePath = "./../app/static/stage/" # 文件目录
 
 # 前端 JavaScript 文件目录, 存放异步加载的 JavaScript 文件
-JavaScript.Path = "/js"                 # 访问目录
-JavaScript.FilePath = "./../app/src/js" # 文件目录
+JavaScript.Path = "/js"                  # 访问目录
+JavaScript.FilePath = "./../app/src/js/" # 文件目录
 
 # 前端 CSS 文件目录, 存放异步加载的 CSS 文件
-CSS.Path = "/css"                 # 访问目录
-CSS.FilePath = "./../app/src/css" # 文件目录
+CSS.Path = "/css"                  # 访问目录
+CSS.FilePath = "./../app/src/css/" # 文件目录
 
 
 # 思源适配器配置
