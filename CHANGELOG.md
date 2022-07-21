@@ -16,3 +16,4 @@
 - 使用结构体整理异常状态响应 | Use structure to organize exception status response.
 - 支持自定义首页路径列表与首页重定向的 URL | Support custom homepage path list and homepage redirect URL.
 - 添加资源文件动态加载模式 | Add resource file dynamic loading mode.
+- 解析文档内嵌入的链接 | Parse embedded links in document.

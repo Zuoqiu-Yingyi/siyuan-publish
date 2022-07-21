@@ -91,6 +91,7 @@ func Access(c *gin.Context) {
 			c.Next()
 			return
 		case config.C.Siyuan.Publish.Access.Protected.Value:
+			// TODO
 			fallthrough
 		case config.C.Siyuan.Publish.Access.Private.Value:
 			status.S.StatusAccessDenied(c)

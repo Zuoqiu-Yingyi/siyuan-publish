@@ -22,7 +22,11 @@ func main() {
 		fmt.Printf("load config file error: %v\n", err)
 		config.LoadDefaultConfig()
 	}
-	fmt.Printf(`%+v\n`, config.C)
+
+	if config.C.Server.Debug {
+		fmt.Printf("%+v\n", config.C)
+	}
+
 	client.InitClient()
 
 	router := server.Server()
