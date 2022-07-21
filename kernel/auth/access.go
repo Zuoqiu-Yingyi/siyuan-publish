@@ -9,6 +9,7 @@ import (
 
 	"publish/client"
 	"publish/config"
+	"publish/server/status"
 
 	"github.com/gin-gonic/gin"
 )
@@ -29,7 +30,7 @@ func Access(c *gin.Context) {
 	r, err = client.GetDocsByAttrName(client.C.R(), config.C.Siyuan.Publish.Access.Name)
 	r = client.Response(c, r, err)
 	if r == nil {
-		StatusSiyuanServerError(c)
+		status.S.StatusSiyuanServerError(c)
 		c.Abort()
 		return
 	}
@@ -39,7 +40,7 @@ func Access(c *gin.Context) {
 	docs_with_access := make(map[string]string)
 	switch {
 	case len(data) == 0:
-		StatusAccessDenied(c)
+		status.S.StatusAccessDenied(c)
 		c.Abort()
 		return
 	default:
@@ -56,21 +57,21 @@ func Access(c *gin.Context) {
 	case c.Param("id") != "":
 		id = c.Param("id")
 	default:
-		StatusParamsError(c)
+		status.S.StatusParamsError(c)
 		c.Abort()
 		return
 	}
 	r, err = client.GetBlockByID(client.C.R(), id)
 	r = client.Response(c, r, err)
 	if r == nil {
-		StatusSiyuanServerError(c)
+		status.S.StatusSiyuanServerError(c)
 		c.Abort()
 		return
 	}
 	data = r.Data.([]interface{})
 	switch {
 	case len(data) == 0:
-		StatusBlockNotFound(c)
+		status.S.StatusBlockNotFound(c)
 		c.Abort()
 		return
 	default:
@@ -92,11 +93,11 @@ func Access(c *gin.Context) {
 		case config.C.Siyuan.Publish.Access.Protected.Value:
 			fallthrough
 		case config.C.Siyuan.Publish.Access.Private.Value:
-			StatusAccessDenied(c)
+			status.S.StatusAccessDenied(c)
 			c.Abort()
 			return
 		}
 	}
-	StatusAccessDenied(c)
+	status.S.StatusAccessDenied(c)
 	c.Abort()
 }

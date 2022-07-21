@@ -3,8 +3,8 @@ package server
 import (
 	"net/http"
 
-	"publish/auth"
 	"publish/client"
+	"publish/server/status"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,13 +14,13 @@ func id(c *gin.Context) {
 	r, err := client.GetBlockByID(client.C.R(), id)
 	r = client.Response(c, r, err)
 	if r == nil {
-		auth.StatusSiyuanServerError(c)
+		status.S.StatusSiyuanServerError(c)
 		return
 	}
 	data := r.Data.([]interface{})
 	switch {
 	case len(data) == 0:
-		auth.StatusBlockNotFound(c)
+		status.S.StatusBlockNotFound(c)
 		return
 	default:
 		block := data[0].(map[string]interface{})

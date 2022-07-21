@@ -4,7 +4,9 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-var C *Config
+var (
+	C *Config
+)
 
 type Config struct {
 	Server Server `json:"server"`

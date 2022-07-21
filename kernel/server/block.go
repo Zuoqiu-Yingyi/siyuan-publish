@@ -3,9 +3,9 @@ package server
 import (
 	"net/http"
 
-	"publish/auth"
 	"publish/client"
 	"publish/config"
+	"publish/server/status"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,13 +15,13 @@ func block(c *gin.Context) {
 	r, err := client.GetBlockDomByID(client.C.R(), root_id, 0)
 	r = client.Response(c, r, err)
 	if r == nil {
-		auth.StatusSiyuanServerError(c)
+		status.S.StatusSiyuanServerError(c)
 		return
 	}
 	blocks := r.Data.(map[string]interface{})["blocks"].([]interface{})
 	switch {
 	case len(blocks) == 0:
-		auth.StatusBlockNotFound(c)
+		status.S.StatusBlockNotFound(c)
 		return
 	default:
 		block := blocks[0].(map[string]interface{})

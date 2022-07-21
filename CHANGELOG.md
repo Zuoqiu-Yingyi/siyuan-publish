@@ -13,3 +13,4 @@
 - 支持在配置文件 `*.config.toml` 中设置代码块渲染样式 | Support set code block render style in `*.config.toml` file.
 - 支持在配置文件 `*.config.toml` 中设置字号 | Support set font size in `*.config.toml` file.
 - 支持块引用超链接跳转时携带参数 | Support jump to block reference with parameters.
+- 使用结构体整理异常状态响应 | Use structure to organize exception status response.
