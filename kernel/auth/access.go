@@ -14,6 +14,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+/* 从 URL 请求参数中获得 ID */
+func QueryID(c *gin.Context) {
+	c.Set("id", c.Query("id"))
+	c.Next()
+}
+
+/* 从 URL 路径参数中获得 ID */
+func ParamID(c *gin.Context) {
+	c.Set("id", c.Param("id"))
+	c.Next()
+}
+
 /*
 判断文档是否可访问
 REF [siyuan/session.go at master · siyuan-note/siyuan](https://github.com/siyuan-note/siyuan/blob/master/kernel/model/session.go)
@@ -50,13 +62,8 @@ func Access(c *gin.Context) {
 	}
 
 	/* 获得文档路径 */
-	var id string // 查询的块 ID
-	switch {
-	case c.Query("id") != "":
-		id = c.Query("id")
-	case c.Param("id") != "":
-		id = c.Param("id")
-	default:
+	id := c.GetString("id")
+	if id == "" {
 		status.S.StatusParamsError(c)
 		c.Abort()
 		return

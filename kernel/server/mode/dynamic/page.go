@@ -22,7 +22,7 @@ func init() {
 
 /* 解析 URL 参数 id */
 func (*Page) ID(c *gin.Context) {
-	id := c.Query("id")
+	id := c.GetString("id")
 	r, err := client.GetBlockByID(client.C.R(), id)
 	r = client.Response(c, r, err)
 	if r == nil {
@@ -54,7 +54,7 @@ func (*Page) ID(c *gin.Context) {
 
 /* 解析路由参数 id */
 func (*Page) Block(c *gin.Context) {
-	root_id := c.Param("id")
+	root_id := c.GetString("id")
 	r, err := client.GetBlockDomByID(client.C.R(), root_id, 0)
 	r = client.Response(c, r, err)
 	if r == nil {

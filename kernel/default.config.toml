@@ -1,7 +1,11 @@
+Debug = false # 调试模式(控制台打印配置文件信息)
+
 # 服务器配置
 [Server]
 Debug = false                           # 调试模式
 Port = 8080                             # 发布服务端口                      
+Logs = "./temp/logs/"                   # 日志目录
+Database = "./temp/publish.db"          # 数据库文件
 Templates = "./../app/templates/*.html" # 模板目录
 
 # 服务模式
@@ -20,28 +24,28 @@ URL = "/block?id=20200812220555-lj3enxa" # 首页重定向至的
 # 静态 Web 文件服务目录配置
 [Server.Static]
 # 外观文件目录, 存放思源笔记工作区 /conf/appearance/ 目录下的文件
-Appearance.Path = "/appearance"                     # 访问目录
-Appearance.FilePath = "./../app/static/appearance/" # 文件目录
+Appearance.Path = "/appearance"                   # 访问目录
+Appearance.FilePath = "./temp/static/appearance/" # 文件目录
 
 # 资源文件目录, 存放思源笔记工作区 /data/assets/ 目录下的文件
-Assets.Path = "/assets"                     # 访问目录
-Assets.FilePath = "./../app/static/assets/" # 文件目录
+Assets.Path = "/assets"                   # 访问目录
+Assets.FilePath = "./temp/static/assets/" # 文件目录
 
 # 表情文件目录, 存放思源笔记工作区 /data/emojis/ 目录下的文件
-Emojis.Path = "/emojis"                     # 访问目录
-Emojis.FilePath = "./../app/static/emojis/" # 文件目录
+Emojis.Path = "/emojis"                   # 访问目录
+Emojis.FilePath = "./temp/static/emojis/" # 文件目录
 
 # 挂件文件目录, 存放思源笔记工作区 /data/widgets/ 目录下的文件
-Widgets.Path = "/widgets"                     # 访问目录
-Widgets.FilePath = "./../app/static/widgets/" # 文件目录
+Widgets.Path = "/widgets"                   # 访问目录
+Widgets.FilePath = "./temp/static/widgets/" # 文件目录
 
 # 导出文件目录, 存放思源笔记工作区 /temp/export/ 目录下的文件
-Export.Path = "/export"                     # 访问目录
-Export.FilePath = "./../app/static/export/" # 文件目录
+Export.Path = "/export"                   # 访问目录
+Export.FilePath = "./temp/static/export/" # 文件目录
 
 # 思源应用文件目录, 存放思源笔记安装目录中 /resources/stage/ 目录下的文件
-Stage.Path = "/stage"                     # 访问目录
-Stage.FilePath = "./../app/static/stage/" # 文件目录
+Stage.Path = "/stage"                   # 访问目录
+Stage.FilePath = "./temp/static/stage/" # 文件目录
 
 # 前端 JavaScript 文件目录, 存放异步加载的 JavaScript 文件
 JavaScript.Path = "/js"                  # 访问目录
@@ -54,6 +58,7 @@ CSS.FilePath = "./../app/src/css/" # 文件目录
 
 # 思源适配器配置
 [Siyuan]
+Debug = false                    # 调试模式
 Server = "http://localhost:6806" # 思源内核服务地址
 Token = ""                       # 思源内核服务访问令牌
 Timeout = 10_000                 # 向思源内核发起 HTTP 请求的超时时间(单位: ms)

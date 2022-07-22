@@ -2,6 +2,7 @@ package config
 
 /* 思源相关设置 */
 type Siyuan struct {
+	Debug   bool    `json:"debug"`   // 是否开启调试模式
 	Server  string  `json:"server"`  // 思源服务地址 http(s)://host:port
 	Token   string  `json:"token"`   // 思源服务 token
 	Timeout int     `json:"timeout"` // 向思源内核发起 HTTP 请求的超时时间(单位: ms)

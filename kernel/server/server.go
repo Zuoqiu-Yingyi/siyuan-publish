@@ -2,7 +2,11 @@ package server
 
 import (
 	"html/template"
+	"io"
+	"os"
+	"path"
 	"strings"
+	"time"
 
 	"publish/auth"
 	"publish/config"
@@ -12,10 +16,35 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+/* 初始化 Web 服务配置 */
+func Init() {
+	/* 设置服务运行模式 */
+	if config.C.Server.Debug {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
+	/* 同时将日志写入日志文件与控制台 */
+	// REF [如何记录日志 | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/write-log/)
+	now := time.Now()
+	log_file_name := now.Format("2006-01-02") + ".log"
+	log_file_path := path.Join(config.C.Server.Logs, log_file_name)
+	// REF [打开或新建一个文件](https://blog.csdn.net/weixin_45193103/article/details/123479196)
+	// REF [os - Constants](https://studygolang.com/static/pkgdoc/pkg/os.htm#pkg-index)
+	if log_file, err := os.OpenFile(log_file_path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666); err != nil {
+		panic(err)
+	} else {
+		gin.DefaultWriter = io.MultiWriter(log_file, os.Stdout)
+	}
+}
+
 // REF [siyuan/serve.go at master · siyuan-note/siyuan](https://github.com/siyuan-note/siyuan/blob/master/kernel/server/serve.go)
 func Server() (router *gin.Engine) {
+	/* 引擎 */
 	router = gin.Default()
 
+	/* 注册自定义模板函数 */
 	// REF [Gin框架Gin渲染 - RandySun - 博客园](https://www.cnblogs.com/randysun/p/15626537.html)
 	router.SetFuncMap(template.FuncMap{
 		"html": func(str string) template.HTML {
@@ -23,7 +52,8 @@ func Server() (router *gin.Engine) {
 		},
 	})
 
-	router.LoadHTMLGlob(config.C.Server.Templates) // 加载模板文件
+	/* 加载模板文件 */
+	router.LoadHTMLGlob(config.C.Server.Templates)
 
 	/* 主页 */
 	for _, path := range config.C.Server.Index.Paths {
@@ -83,11 +113,11 @@ func Server() (router *gin.Engine) {
 		case "dynamic": // 动态加载
 			// 使用 URL 参数 id 跳转到指定的块
 			// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
-			router_block.GET("/", auth.Access, dynamic.P.ID)
+			router_block.GET("/", auth.QueryID, auth.Access, dynamic.P.ID)
 
 			// 请求指定的文档
 			// REF [绑定 Uri | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/bind-uri/)
-			router_block.GET("/:id", auth.Access, dynamic.P.Block)
+			router_block.GET("/:id", auth.ParamID, auth.Access, dynamic.P.Block)
 		case "cache": // 动态缓存
 			// TODO
 		case "static": // 静态加载

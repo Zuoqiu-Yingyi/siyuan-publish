@@ -1,6 +1,9 @@
 package config
 
 import (
+	"encoding/json"
+	"fmt"
+
 	"github.com/BurntSushi/toml"
 )
 
@@ -9,12 +12,24 @@ var (
 )
 
 type Config struct {
+	Debug  bool   `json:"debug"`
 	Server Server `json:"server"`
 	Siyuan Siyuan `json:"siyuan"`
 	Render Render `json:"render"`
 }
 
-func init() {
+func Init(path string) {
+	if err := LoadConfigFile(path); err != nil {
+		fmt.Printf("load config file error: %v\n", err)
+
+		/* 加载默认配置 */
+		LoadDefaultConfig()
+	}
+	if C.Debug {
+		if str, err := json.MarshalIndent(C, "", "    "); err == nil {
+			fmt.Println(string(str))
+		}
+	}
 }
 
 func LoadConfigFile(path string) error {
@@ -27,9 +42,12 @@ func LoadConfigFile(path string) error {
 
 func LoadDefaultConfig() {
 	C = &Config{
+		Debug: true,
 		Server: Server{
 			Debug:     false,
 			Port:      8080,
+			Logs:      "./temp/logs/",
+			Database:  "./temp/publish.db",
 			Templates: "./../app/templates/*.html",
 			Mode: Mode{
 				Page: "dynamic",
@@ -44,27 +62,27 @@ func LoadDefaultConfig() {
 			Static: Static{
 				Appearance: StaticPath{
 					Path:     "/appearance",
-					FilePath: "./../app/static/appearance/",
+					FilePath: "./temp/static/appearance/",
 				},
 				Assets: StaticPath{
 					Path:     "/assets",
-					FilePath: "./../app/static/assets/",
+					FilePath: "./temp/static/assets/",
 				},
 				Emojis: StaticPath{
 					Path:     "/emojis",
-					FilePath: "./../app/static/emojis/",
+					FilePath: "./temp/static/emojis/",
 				},
 				Export: StaticPath{
 					Path:     "/export",
-					FilePath: "./../app/static/export/",
+					FilePath: "./temp/static/export/",
 				},
 				Stage: StaticPath{
 					Path:     "/stage",
-					FilePath: "./../app/static/stage/",
+					FilePath: "./temp/static/stage/",
 				},
 				Widgets: StaticPath{
 					Path:     "/widgets",
-					FilePath: "./../app/static/widgets/",
+					FilePath: "./temp/static/widgets/",
 				},
 				JavaScript: StaticPath{
 					Path:     "/js",
@@ -77,6 +95,7 @@ func LoadDefaultConfig() {
 			},
 		},
 		Siyuan: Siyuan{
+			Debug:   false,
 			Server:  "http://localhost:6806",
 			Token:   "",
 			Timeout: 10000,

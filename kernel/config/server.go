@@ -3,6 +3,8 @@ package config
 type Server struct {
 	Debug     bool   `json:"debug"`     // 是否开启调试模式
 	Port      int    `json:"port"`      // 服务端口
+	Logs      string `json:"logs"`      // 日志目录
+	Database  string `json:"database"`  // 数据库文件路径
 	Templates string `json:"templates"` // 模板目录
 	Mode      Mode   `json:"mode"`      // 模式
 	Index     Index  `json:"index"`     // 首页配置

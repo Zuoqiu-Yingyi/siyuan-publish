@@ -14,23 +14,26 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-# 自定义配置文件
-custom.config.toml
+# 日志文件
+*.log
 
-# 临时文件
-/kernel/temp/*
+# 数据库文件
+*.db
+
+# 自定义配置文件
+/kernel/custom.config.toml
 
 # 静态资源文件目录
-/app/static/appearance/emojis/*
-/app/static/appearance/icons/*
-/app/static/appearance/themes/*
-/app/static/assets/*
-/app/static/emojis/*
-/app/static/export/*
-/app/static/stage/build/*
-/app/static/stage/fonts/*
-/app/static/stage/protyle/*
-/app/static/widgets/*
+/kernel/temp/static/appearance/emojis/*
+/kernel/temp/static/appearance/icons/*
+/kernel/temp/static/appearance/themes/*
+/kernel/temp/static/assets/*
+/kernel/temp/static/emojis/*
+/kernel/temp/static/export/*
+/kernel/temp/static/stage/build/*
+/kernel/temp/static/stage/fonts/*
+/kernel/temp/static/stage/protyle/*
+/kernel/temp/static/widgets/*
 
-# 示例文件
+# 示例文件目录
 /examples

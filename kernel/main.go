@@ -6,6 +6,7 @@ import (
 
 	"publish/client"
 	"publish/config"
+	"publish/models"
 	"publish/server"
 )
 
@@ -14,21 +15,24 @@ func main() {
 		path string
 	)
 
+	/* 解析命令行参数 */
 	flag.StringVar(&path, "config", "./default.config.toml", `config file path (*.config.toml")`)
 	flag.Parse()
 	// fmt.Println(path)
 
-	if err := config.LoadConfigFile(path); err != nil {
-		fmt.Printf("load config file error: %v\n", err)
-		config.LoadDefaultConfig()
-	}
+	/* 初始化配置文件 */
+	config.Init(path)
 
-	if config.C.Server.Debug {
-		fmt.Printf("%+v\n", config.C)
-	}
+	/* 初始化 HTTP 客户端 */
+	client.Init()
 
-	client.InitClient()
+	/* 初始化数据库 */
+	models.Init()
 
+	/* 初始化 Web 服务 */
+	server.Init()
 	router := server.Server()
+
+	/* 运行 Web 服务 */
 	router.Run(fmt.Sprintf(":%d", config.C.Server.Port))
 }
