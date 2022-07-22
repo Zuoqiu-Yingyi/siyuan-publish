@@ -18,3 +18,4 @@
 - 添加资源文件动态加载模式 | Add resource file dynamic loading mode.
 - 解析文档内嵌入的链接 | Parse embedded links in document.
 - 添加资源文件动态缓存加载模式 | Add resource file dynamic cache loading mode.
+- 资源文件动态加载模式响应转发切换为 `DataFromReader` 方法 | Resource file dynamic loading mode response forwarding switch to `DataFromReader` method.

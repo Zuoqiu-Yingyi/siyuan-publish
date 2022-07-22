@@ -43,8 +43,8 @@ func File(c *gin.Context) {
 		c.Status(http.StatusNotFound)
 	} else {
 		// [从 reader 读取数据 | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/serving-data-from-reader/)
-		c.Data(http.StatusOK, response.GetContentType(), buffer.Bytes())
-		// c.DataFromReader(http.StatusOK, response.ContentLength, response.GetContentType(), buffer, nil)
+		// c.Data(http.StatusOK, response.GetContentType(), buffer.Bytes())
+		c.DataFromReader(http.StatusOK, response.ContentLength, response.GetContentType(), buffer, nil)
 	}
 
 	/* 返回资源文件 */
