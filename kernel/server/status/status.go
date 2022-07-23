@@ -53,7 +53,7 @@ func (*BaseStatus) StatusForbidden(c *gin.Context, msg string) {
 }
 
 /* 思源内核服务错误 */
-func (s *Status) StatusSiyuanServerError(c *gin.Context) {
+func (s *Status) StatusSiyuanServerError(c *gin.Context, msg string) {
 	s.StatusInternalServerError(c, "Siyuan Serve Error")
 }
 

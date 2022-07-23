@@ -131,7 +131,19 @@ func Server() (router *gin.Engine) {
 				dynamic.P.Block,
 			)
 		case "cache": // 动态缓存
-			// TODO
+			router_block.GET(
+				"/",
+				parser.QueryID,
+				access.Access,
+				cache.P.ID,
+			)
+
+			router_block.GET(
+				"/:id",
+				parser.ParamID,
+				access.Access,
+				cache.P.Block,
+			)
 		case "static": // 静态加载
 			fallthrough
 		default:

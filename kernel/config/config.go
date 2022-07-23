@@ -12,10 +12,11 @@ var (
 )
 
 type Config struct {
-	Debug  bool   `json:"debug"`
-	Server Server `json:"server"`
-	Siyuan Siyuan `json:"siyuan"`
-	Render Render `json:"render"`
+	Debug    bool     `json:"debug"`
+	Database Database `json:"database"`
+	Server   Server   `json:"server"`
+	Siyuan   Siyuan   `json:"siyuan"`
+	Render   Render   `json:"render"`
 }
 
 func Init(path string) {
@@ -43,11 +44,15 @@ func LoadConfigFile(path string) error {
 func LoadDefaultConfig() {
 	C = &Config{
 		Debug: true,
+		Database: Database{
+			Debug:  false,
+			Reset:  true,
+			SQLite: "./temp/publish.db",
+		},
 		Server: Server{
 			Debug:     false,
 			Port:      8080,
 			Logs:      "./temp/logs/",
-			Database:  "./temp/publish.db",
 			Templates: "./../app/templates/*.html",
 			Mode: Mode{
 				Page: "dynamic",

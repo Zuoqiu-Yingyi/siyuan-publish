@@ -32,7 +32,7 @@ func SQL(request *req.Request, stmt string) (r *ResponseBody, err error) {
 	@return error: 错误
 */
 func GetBlockByID(request *req.Request, id string) (r *ResponseBody, err error) {
-	return SQL(request, fmt.Sprintf(`SELECT * FROM blocks WHERE id = '%s';`, id))
+	return SQL(request, fmt.Sprintf(`SELECT * FROM blocks WHERE id = '%s' LIMIT 1;`, id))
 }
 
 /*
@@ -94,5 +94,5 @@ func SearchEmbedBlock(request *req.Request, stmt string, headingMode int, exclud
 	@return error: 错误
 */
 func GetBlockDomByID(request *req.Request, id string, headingMode int) (r *ResponseBody, err error) {
-	return SearchEmbedBlock(request, fmt.Sprintf(`SELECT * FROM blocks WHERE id = '%s';`, id), headingMode, make([]string, 0))
+	return SearchEmbedBlock(request, fmt.Sprintf(`SELECT * FROM blocks WHERE id = '%s' LIMIT 1;`, id), headingMode, make([]string, 0))
 }

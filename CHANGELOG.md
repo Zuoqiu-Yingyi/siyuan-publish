@@ -22,3 +22,4 @@
 - 设计数据模型 | Design data model.
 - 输出日志文件 | Output log file.
 - 使用 MVC 框架重构项目结构 | Use MVC framework to rebuild project structure.
+- 实现文档页面加载的动态缓存模式 | Implement document page loading dynamic cache mode.

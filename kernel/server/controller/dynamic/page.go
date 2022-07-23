@@ -2,6 +2,7 @@ package dynamic
 
 import (
 	"net/http"
+	"strings"
 
 	"publish/client"
 	"publish/config"
@@ -67,8 +68,10 @@ func (*page) Block(c *gin.Context) {
 		return
 	default:
 		block := blocks[0].(map[string]interface{})
+		hpath := strings.Split(block["hPath"].(string), "/")
+		title := hpath[len(hpath)-1]
 		c.HTML(http.StatusOK, "block.html", gin.H{
-			"Title":   block["hPath"],
+			"Title":   title,
 			"Content": block["content"],
 			"Render":  config.C.Render,
 		})
