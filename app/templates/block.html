@@ -27,6 +27,7 @@
 <body class="fn__flex-column">
     <div id="editor">
         <div class="protyle-content">
+            {{ template "title.html" . }}
             <div id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">{{html .Content}}</div>
         </div>
     </div>
