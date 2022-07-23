@@ -46,26 +46,29 @@ func Dynamic(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) 
 	}
 
 	/* 将文档路径分割为文档 ID 列表, 按照层级从深到浅排列 */
-	docs = strings.Split(string([]byte(path)[1:len(path)-3]), "/")
+	docs = strings.Split(path[1:len(path)-3], "/")
 	for i, j := 0, len(docs)-1; i < j; i, j = i+1, j-1 {
 		docs[i], docs[j] = docs[j], docs[i]
 	}
 	// fmt.Printf("%#v\n%#v\n", acl, docs)
-	for _, doc_id := range docs {
-		switch acl[doc_id] {
-		case config.C.Siyuan.Publish.Access.Public.Value:
-			c.Set("access", config.C.Siyuan.Publish.Access.Public.Value)
-			return true, nil, nil
-		case config.C.Siyuan.Publish.Access.Protected.Value:
-			c.Set("access", config.C.Siyuan.Publish.Access.Protected.Value)
-			// TODO
-			fallthrough
-		case config.C.Siyuan.Publish.Access.Private.Value:
-			fallthrough
-		default:
-			c.Set("access", config.C.Siyuan.Publish.Access.Private.Value)
-			return false, status.S.StatusAccessDenied, nil
+
+	/* 根据访问权限判断是否继续或终止 */
+	for _, root_id := range docs {
+		if right, ok := acl[root_id]; ok {
+			c.Set("access", right)
+			switch right {
+			case config.C.Siyuan.Publish.Access.Public.Value:
+				return true, nil, nil
+			case config.C.Siyuan.Publish.Access.Protected.Value:
+				// TODO
+				fallthrough
+			case config.C.Siyuan.Publish.Access.Private.Value:
+				fallthrough
+			default:
+				return false, status.S.StatusAccessDenied, nil
+			}
 		}
 	}
+	c.Set("access", "?")
 	return false, status.S.StatusAccessDenied, nil
 }

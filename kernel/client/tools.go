@@ -1,6 +1,8 @@
 package client
 
-import "publish/config"
+import (
+	"publish/config"
+)
 
 /*
 获得访问控制列表

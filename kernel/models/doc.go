@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"publish/client"
 	"time"
 
 	"gorm.io/gorm"
@@ -39,4 +40,64 @@ func (doc *Doc) One(id string) interface{} {
 		return nil
 	}
 	return doc
+}
+
+/*
+查询文档信息并构造文档信息结构体
+	@params id string: 文档 ID
+	@return *Doc: 文档信息结构体
+	@return error: 错误信息
+*/
+func GetDoc(id string) (*Doc, error) {
+	var (
+		r       *client.ResponseBody
+		err     error
+		err_msg string
+		doc     = &Doc{}
+	)
+
+	/* 查询文档块 */
+	r, err = client.GetBlockByID(client.C.R(), id)
+	r, err_msg = client.Response(r, err)
+	if r == nil {
+		return nil, errors.New(err_msg)
+	}
+	doc_block := r.Data.([]interface{})
+	switch {
+	case len(doc_block) == 0:
+		return nil, errors.New("document not found")
+
+	default:
+		record := doc_block[0].(map[string]interface{})
+		path := record["path"].(string)
+		hpath := record["hpath"].(string)
+
+		doc.ID = id
+		doc.Path = path[1 : len(path)-3]
+		doc.Hpath = hpath
+		doc.Title = record["content"].(string)
+		doc.Tag = record["tag"].(string)
+
+		// TODO 解析 IAL
+		// block.Doc.Icon
+		// block.Doc.TitleImg
+	}
+
+	/* 查询文档 DOM */
+	r, err = client.GetBlockDomByID(client.C.R(), id, 0)
+	r, err_msg = client.Response(r, err)
+	if r == nil {
+		return nil, errors.New(err_msg)
+
+	}
+	blocks := r.Data.(map[string]interface{})["blocks"].([]interface{})
+	switch {
+	case len(blocks) == 0:
+		return nil, errors.New("document not found")
+
+	default:
+		record := blocks[0].(map[string]interface{})
+		doc.Dom = record["content"].(string)
+	}
+	return doc, nil
 }

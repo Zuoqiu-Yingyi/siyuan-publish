@@ -44,7 +44,7 @@ func Cache(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 
 			block.ID = id
 			block.RootId = root_id
-			block.Path = string([]byte(path)[1 : len(path)-3])
+			block.Path = path[1 : len(path)-3]
 
 			models.DB.Create(block)
 		}
@@ -98,18 +98,18 @@ func Cache(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 		}
 	}
 
+	c.Set("access", right)
+
+	/* 根据访问权限判断是否继续或终止 */
 	switch right {
 	case config.C.Siyuan.Publish.Access.Public.Value:
-		c.Set("access", config.C.Siyuan.Publish.Access.Public.Value)
 		return true, nil, nil
 	case config.C.Siyuan.Publish.Access.Protected.Value:
-		c.Set("access", config.C.Siyuan.Publish.Access.Protected.Value)
 		// TODO protected
 		fallthrough
 	case config.C.Siyuan.Publish.Access.Private.Value:
 		fallthrough
 	default:
-		c.Set("access", config.C.Siyuan.Publish.Access.Private.Value)
 		return false, status.S.StatusAccessDenied, nil
 	}
 }

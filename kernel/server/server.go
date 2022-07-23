@@ -9,8 +9,10 @@ import (
 	"time"
 
 	"publish/config"
+	"publish/server/controller"
 	"publish/server/controller/cache"
 	"publish/server/controller/dynamic"
+	"publish/server/controller/static"
 	"publish/server/middleware/auth/access"
 	"publish/server/middleware/parser"
 
@@ -111,43 +113,40 @@ func Server() (router *gin.Engine) {
 		router_block.GET("/stage/*path", redirect)
 
 		/* 文档页面加载方式 */
+		// 使用 URL 参数 id 跳转到指定的块
+		// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
+		router_block.GET(
+			"/",
+			parser.QueryID,
+			access.Access,
+			controller.ID,
+		)
 		switch config.C.Server.Mode.Page {
 		case "dynamic": // 动态加载
-			// 使用 URL 参数 id 跳转到指定的块
-			// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
-			router_block.GET(
-				"/",
-				parser.QueryID,
-				access.Access,
-				dynamic.P.ID,
-			)
-
 			// 请求指定的文档
 			// REF [绑定 Uri | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/bind-uri/)
 			router_block.GET(
 				"/:id",
 				parser.ParamID,
 				access.Access,
-				dynamic.P.Block,
+				dynamic.Block,
 			)
 		case "cache": // 动态缓存
-			router_block.GET(
-				"/",
-				parser.QueryID,
-				access.Access,
-				cache.P.ID,
-			)
-
 			router_block.GET(
 				"/:id",
 				parser.ParamID,
 				access.Access,
-				cache.P.Block,
+				cache.Block,
 			)
 		case "static": // 静态加载
 			fallthrough
 		default:
-			// TODO
+			router_block.GET(
+				"/:id",
+				parser.ParamID,
+				access.Access,
+				static.Block,
+			)
 		}
 	}
 	return
