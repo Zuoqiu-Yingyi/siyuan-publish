@@ -22,6 +22,8 @@ type Index struct {
 }
 
 type Static struct {
+	Reset      bool       `json:"reset"`      // 是否在启动时重置静态资源目录
+	Path       string     `json:"path"`       // 静态资源目录
 	Appearance StaticPath `json:"appearance"` // 外观资源目录
 	Assets     StaticPath `json:"assets"`     // 思源 assets 目录
 	Emojis     StaticPath `json:"emojis"`     // 思源 emojis 目录

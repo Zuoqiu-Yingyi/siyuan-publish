@@ -24,3 +24,4 @@
 - 使用 MVC 框架重构项目结构 | Use MVC framework to rebuild project structure.
 - 实现文档页面加载的动态缓存模式 | Implement document page loading dynamic cache mode.
 - 实现文档页面加载的静态加载模式 | Implement document page loading static mode.
+- 添加启动时重置静态资源目录配置选项 | Add reset static resource directory configuration option when booting.

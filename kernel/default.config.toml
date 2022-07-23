@@ -3,7 +3,7 @@ Debug = false # 调试模式(控制台打印配置文件信息)
 # 数据库配置
 [Database]
 Debug = false                # 调试模式
-Reset = true                 # 是否在每次启动时重置数据库
+Reset = true                 # 是否在启动时重置数据库
 SQLite = "./temp/publish.db" # 数据库文件
 
 # 服务器配置
@@ -18,8 +18,8 @@ Templates = "./../app/templates/*.html" # 模板目录
 # dynamic: 动态加载
 # cache: 动态缓存
 # static: 静态加载
-Page = "dynamic" # 文档页面加载模式
-File = "dynamic" # 资源文件加载模式
+Page = "cache" # 文档页面加载模式
+File = "cache" # 资源文件加载模式
 
 # Web 服务首页配置
 [Server.Index]
@@ -28,6 +28,9 @@ URL = "/block?id=20200812220555-lj3enxa" # 首页重定向至的
 
 # 静态 Web 文件服务目录配置
 [Server.Static]
+Reset = false           # 是否在启动时重置静态资源目录
+Path = "./temp/static/" # 静态资源目录
+
 # 外观文件目录, 存放思源笔记工作区 /conf/appearance/ 目录下的文件
 Appearance.Path = "/appearance"                   # 访问目录
 Appearance.FilePath = "./temp/static/appearance/" # 文件目录

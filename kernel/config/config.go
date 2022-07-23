@@ -65,6 +65,8 @@ func LoadDefaultConfig() {
 				URL: "/block?id=20200812220555-lj3enxa",
 			},
 			Static: Static{
+				Reset: false,
+				Path:  "./temp/static/",
 				Appearance: StaticPath{
 					Path:     "/appearance",
 					FilePath: "./temp/static/appearance/",

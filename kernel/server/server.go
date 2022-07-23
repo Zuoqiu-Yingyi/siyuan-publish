@@ -28,6 +28,13 @@ func Init() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	/* 是否重置静态目录 */
+	if config.C.Server.Static.Reset {
+		if err := os.RemoveAll(config.C.Server.Static.Path); err != nil {
+			panic(err)
+		}
+	}
+
 	/* 同时将日志写入日志文件与控制台 */
 	// REF [如何记录日志 | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/write-log/)
 	now := time.Now()
