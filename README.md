@@ -1,2 +1,60 @@
 # siyuan-publish
-思源笔记发布工具 | Source Notes Publishing Tool.
+
+<center>
+
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Zuoqiu-Yingyi/siyuan-publish?include_prereleases&style=flat-square)](https://github.com/Zuoqiu-Yingyi/siyuan-publish/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/Zuoqiu-Yingyi/siyuan-publish?style=flat-square)](https://github.com/Zuoqiu-Yingyi/siyuan-publish/releases/latest)
+[![GitHub License](https://img.shields.io/github/license/Zuoqiu-Yingyi/siyuan-publish?style=flat-square)](https://github.com/Zuoqiu-Yingyi/siyuan-publish/blob/main/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Zuoqiu-Yingyi/siyuan-publish?style=flat-square)](https://github.com/Zuoqiu-Yingyi/siyuan-publish/commits/main)
+![GitHub repo size](https://img.shields.io/github/repo-size/Zuoqiu-Yingyi/siyuan-publish?style=flat-square)
+![hits](https://hits.b3log.org/Zuoqiu-Yingyi/siyuan-publish.svg)
+[![GitHub all releases](https://img.shields.io/github/downloads/Zuoqiu-Yingyi/siyuan-publish/total?style=flat-square)](https://github.com/Zuoqiu-Yingyi/siyuan-publish/releases)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#贡献者介绍--contributor-introduction)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+</center>
+
+[思源笔记](https://github.com/siyuan-note/siyuan) 发布工具  
+[SiYuan Note](https://github.com/siyuan-note/siyuan) Publishing Tool.
+
+## 文档 | DOCUMENTATION
+
+[简体中文](./doc/README-zh_CN.md) | [English](./doc/README-en_US.md)
+
+
+## 贡献者介绍 | CONTRIBUTOR INTRODUCTION
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+注: 该表格使用 [All Contributors · GitHub](https://github.com/all-contributors) 自动生成, 请到 [emoji key](https://allcontributors.org/docs/en/emoji-key) 查看贡献类型  
+PS: The table is generated automatically using [All Contributors · GitHub](https://github.com/all-contributors), go to [emoji key](https://allcontributors.org/docs/en/emoji-key) to see the contribution type.
+
+## 参考 & 感谢 | REFERENCE & THANKS
+
+| 作者 \| Author                                    | 项目 \| Project                                             | 许可证 \| License                                                               |
+| :------------------------------------------------ | :---------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| **[siyuan-note](https://github.com/siyuan-note)** | [siyuan-note/siyuan](https://github.com/siyuan-note/siyuan) | *[AGPL-3.0 license](https://github.com/siyuan-note/siyuan/blob/master/LICENSE)* |
+
+## 依赖 | DEPENDENCIES
+
+| 仓库 \| Repository                                    | 主页 \| Home                            | 许可证 \| License                                                          |
+| :---------------------------------------------------- | :-------------------------------------- | :------------------------------------------------------------------------- |
+| [golang/go](https://github.com/golang/go)             | [go.dev](https://go.dev/)               | *[BSD-3-Clause license](https://github.com/golang/go/blob/master/LICENSE)* |
+| [cosmtrek/air](https://github.com/cosmtrek/air)       |                                         | *[GPL-3.0 license](https://github.com/cosmtrek/air/blob/master/LICENSE)*   |
+| [gin-gonic/gin](https://github.com/gin-gonic/gin)     | [gin-gonic.com](https://gin-gonic.com/) | *[MIT license](https://github.com/gin-gonic/gin/blob/master/LICENSE)*      |
+| [BurntSushi/toml](https://github.com/BurntSushi/toml) |                                         | *[MIT license](https://github.com/BurntSushi/toml/blob/master/COPYING)*    |
+| [imroc/req](https://github.com/imroc/req)             | [req.cool](https://req.cool/)           | *[MIT license](https://github.com/imroc/req/blob/master/LICENSE)*          |
+| [go-gorm/gorm](https://github.com/go-gorm/gorm)       | [gorm.io](https://gorm.io/)             | *[MIT license](https://github.com/go-gorm/gorm/blob/master/License)*       |
+
+注: 按引入时间排序
+ps: Sort by introduction time.
+
+## 更改日志 | CHANGE LOGS
+
+[CHANGELOG](./CHANGELOG.md)
