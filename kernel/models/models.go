@@ -24,4 +24,11 @@ func Init() {
 	/* 迁移数据库 */
 	// REF [迁移 | GORM](https://gorm.io/zh_CN/docs/migration.html)
 	DB.AutoMigrate(&ACL{}, &Doc{}, &Block{})
+
+	/* 初始化 ACL */
+	initACL()
+}
+
+func initACL() {
+
 }

@@ -1,8 +1,4 @@
-/*
- * 访问权限控制
- */
-
-package auth
+package access
 
 import (
 	"strings"
@@ -14,37 +10,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-/* 从 URL 请求参数中获得 ID */
-func QueryID(c *gin.Context) {
-	c.Set("id", c.Query("id"))
-	c.Next()
-}
-
-/* 从 URL 路径参数中获得 ID */
-func ParamID(c *gin.Context) {
-	c.Set("id", c.Param("id"))
-	c.Next()
-}
-
-/*
-判断文档是否可访问
-REF [siyuan/session.go at master · siyuan-note/siyuan](https://github.com/siyuan-note/siyuan/blob/master/kernel/model/session.go)
-*/
-func Access(c *gin.Context) {
+func Dynamic(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 	var (
-		r    *client.ResponseBody
-		err  error
-		data []interface{}
-		path string
-		docs []string
+		r       *client.ResponseBody
+		err     error
+		err_msg string
+		data    []interface{}
+		path    string
+		docs    []string
 	)
 	/* 通过 API 查询具有访问控制字段的文档 ID 列表 */
 	r, err = client.GetDocsByAttrName(client.C.R(), config.C.Siyuan.Publish.Access.Name)
-	r = client.Response(c, r, err)
+	r, err_msg = client.Response(r, err)
 	if r == nil {
-		status.S.StatusSiyuanServerError(c)
-		c.Abort()
-		return
+		return false, func(c *gin.Context) { status.S.StatusInternalServerError(c, err_msg) }, nil
 	}
 
 	/* 建立文档 ID => 访问权限类型 public/protected/private 的映射 */
@@ -52,9 +31,7 @@ func Access(c *gin.Context) {
 	docs_with_access := make(map[string]string)
 	switch {
 	case len(data) == 0:
-		status.S.StatusAccessDenied(c)
-		c.Abort()
-		return
+		return false, status.S.StatusAccessDenied, nil
 	default:
 		for _, v := range data {
 			docs_with_access[v.(map[string]interface{})["root_id"].(string)] = v.(map[string]interface{})["value"].(string)
@@ -64,26 +41,21 @@ func Access(c *gin.Context) {
 	/* 获得文档路径 */
 	id := c.GetString("id")
 	if id == "" {
-		status.S.StatusParamsError(c)
-		c.Abort()
-		return
+		return false, status.S.StatusParamsError, nil
 	}
 	r, err = client.GetBlockByID(client.C.R(), id)
-	r = client.Response(c, r, err)
+	r, err_msg = client.Response(r, err)
 	if r == nil {
-		status.S.StatusSiyuanServerError(c)
-		c.Abort()
-		return
+		return false, func(c *gin.Context) { status.S.StatusInternalServerError(c, err_msg) }, nil
 	}
 	data = r.Data.([]interface{})
 	switch {
 	case len(data) == 0:
-		status.S.StatusBlockNotFound(c)
-		c.Abort()
-		return
+		return false, status.S.StatusBlockNotFound, nil
 	default:
 		block := data[0].(map[string]interface{})
 		path = block["path"].(string)
+		c.Set("root_id", block["root_id"].(string))
 	}
 
 	/* 将文档路径分割为文档 ID 列表, 按照层级从深到浅排列 */
@@ -95,17 +67,16 @@ func Access(c *gin.Context) {
 	for _, doc_id := range docs {
 		switch docs_with_access[doc_id] {
 		case config.C.Siyuan.Publish.Access.Public.Value:
-			c.Next()
-			return
+			c.Set("access", config.C.Siyuan.Publish.Access.Public.Value)
+			return true, nil, nil
 		case config.C.Siyuan.Publish.Access.Protected.Value:
+			c.Set("access", config.C.Siyuan.Publish.Access.Protected.Value)
 			// TODO
 			fallthrough
 		case config.C.Siyuan.Publish.Access.Private.Value:
-			status.S.StatusAccessDenied(c)
-			c.Abort()
-			return
+			c.Set("access", config.C.Siyuan.Publish.Access.Private.Value)
+			return false, status.S.StatusAccessDenied, nil
 		}
 	}
-	status.S.StatusAccessDenied(c)
-	c.Abort()
+	return false, status.S.StatusAccessDenied, nil
 }

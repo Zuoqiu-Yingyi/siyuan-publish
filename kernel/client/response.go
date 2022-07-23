@@ -1,12 +1,5 @@
 package client
 
-import (
-	"fmt"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
-)
-
 type ResponseBody struct {
 	Code int         `json:"code"`
 	Msg  string      `json:"msg"`
@@ -20,17 +13,16 @@ type ResponseBody struct {
 	@params err error: 错误
 
 	@return *ResponseBody: 响应体
+	@return string: 错误描述
 */
-func Response(c *gin.Context, r *ResponseBody, err error) *ResponseBody {
+func Response(r *ResponseBody, err error) (*ResponseBody, string) {
 	if err != nil {
-		fmt.Println(err)
-		c.String(http.StatusInternalServerError, err.Error())
-		return nil
+		// fmt.Println(err)
+		return nil, err.Error()
 	}
 	if r.Code != 0 {
-		fmt.Println(r.Msg)
-		c.String(http.StatusInternalServerError, r.Msg)
-		return nil
+		// fmt.Println(r.Msg)
+		return nil, r.Msg
 	}
-	return r
+	return r, ""
 }

@@ -8,10 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"publish/auth"
 	"publish/config"
-	"publish/server/mode/cache"
-	"publish/server/mode/dynamic"
+	"publish/server/controller/cache"
+	"publish/server/controller/dynamic"
+	"publish/server/middleware/auth/access"
+	"publish/server/middleware/parser"
 
 	"github.com/gin-gonic/gin"
 )
@@ -47,6 +48,7 @@ func Server() (router *gin.Engine) {
 	/* 注册自定义模板函数 */
 	// REF [Gin框架Gin渲染 - RandySun - 博客园](https://www.cnblogs.com/randysun/p/15626537.html)
 	router.SetFuncMap(template.FuncMap{
+		/* 渲染 HTML 原文(不转义) */
 		"html": func(str string) template.HTML {
 			return template.HTML(str)
 		},
@@ -113,11 +115,21 @@ func Server() (router *gin.Engine) {
 		case "dynamic": // 动态加载
 			// 使用 URL 参数 id 跳转到指定的块
 			// REF [Query 和 post form | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/query-and-post-form/)
-			router_block.GET("/", auth.QueryID, auth.Access, dynamic.P.ID)
+			router_block.GET(
+				"/",
+				parser.QueryID,
+				access.Access,
+				dynamic.P.ID,
+			)
 
 			// 请求指定的文档
 			// REF [绑定 Uri | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/bind-uri/)
-			router_block.GET("/:id", auth.ParamID, auth.Access, dynamic.P.Block)
+			router_block.GET(
+				"/:id",
+				parser.ParamID,
+				access.Access,
+				dynamic.P.Block,
+			)
 		case "cache": // 动态缓存
 			// TODO
 		case "static": // 静态加载

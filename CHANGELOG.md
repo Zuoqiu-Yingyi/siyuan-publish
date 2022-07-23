@@ -21,3 +21,4 @@
 - 资源文件动态加载模式响应转发切换为 `DataFromReader` 方法 | Resource file dynamic loading mode response forwarding switch to `DataFromReader` method.
 - 设计数据模型 | Design data model.
 - 输出日志文件 | Output log file.
+- 使用 MVC 框架重构项目结构 | Use MVC framework to rebuild project structure.

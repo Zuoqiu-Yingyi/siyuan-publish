@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>{{.Title}}</title>
+    <title>{{.StatusCode}}</title>
 </head>
 
 <style>
@@ -23,9 +23,26 @@
         background-position: center;
     }
 
+    #container {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        left: 0;
+        bottom: 0;
+    }
+
+    #message {
+        color: white;
+        text-align: center;
+        font-size: 4vh;
+    }
+
 </style>
 
 <body>
+    <div id="container">
+        <p id="message">{{.Message}}</p>
+    </div>
 </body>
 
 </html>
