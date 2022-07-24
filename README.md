@@ -18,7 +18,7 @@
 
 ## 文档 | DOCUMENTATION
 
-[简体中文](./docs/README-zh_CN.md) | [English](./docs/README-en_US.md)
+[简体中文](./docs/README-zh_SC.md) | [English](./docs/README-en.md)
 
 ## 贡献者介绍 | CONTRIBUTOR INTRODUCTION
 
@@ -50,6 +50,7 @@ PS: The table is generated automatically using [All Contributors · GitHub](http
 | [imroc/req](https://github.com/imroc/req)             | [req.cool](https://req.cool/)                    | *[MIT license](https://github.com/imroc/req/blob/master/LICENSE)*          |
 | [go-gorm/gorm](https://github.com/go-gorm/gorm)       | [gorm.io](https://gorm.io/)                      | *[MIT license](https://github.com/go-gorm/gorm/blob/master/License)*       |
 | [88250/lute](https://github.com/88250/lute)           | [ld246.com/tag/lute](https://ld246.com/tag/lute) | *[MulanPSL2 license](https://github.com/88250/lute/blob/master/LICENSE)*   |
+| [glebarez/sqlite](https://github.com/glebarez/sqlite) |                                                  | *[MIT license](https://github.com/glebarez/sqlite/blob/master/License)*    |
 
 注: 按引入时间排序
 ps: Sort by introduction time.

@@ -4,12 +4,12 @@ Debug = false # 调试模式(控制台打印配置文件信息)
 [Database]
 Debug = false                # 调试模式
 Reset = true                 # 是否在启动时重置数据库
-SQLite = "./temp/publish.db" # 数据库文件
+SQLite = "./temp/publish.db" # 数据库文件, 可使用内存数据库模式 ":memory:"
 
 # 服务器配置
 [Server]
 Debug = false                        # 调试模式
-Port = 8080                          # 发布服务端口                      
+Port = 8080                          # 发布服务端口
 Logs = "./temp/logs/"                # 日志目录
 Templates = "./app/templates/*.html" # 模板目录
 
@@ -95,6 +95,7 @@ CodeBlockThemeDark = "atom-one-dark"   # 暗黑模式代码块配色方案
 # 编辑器设置
 [Render.Editor]
 FontSize = 16                                                  # 编辑器字体大小(单位: px)
+FontFamily = ["霞鹜文楷等宽"]                                        # 编辑器字体列表
 CodeLineWrap = true                                            # 代码行是否启用自动换行
 CodeLigatures = true                                           # 代码是否启用连字符
 CodeSyntaxHighlightLineNum = true                              # 代码块是否显示行号

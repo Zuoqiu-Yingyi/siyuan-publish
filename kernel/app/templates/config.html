@@ -9,6 +9,7 @@
             },
             editor: {
                 fontSize: parseInt("{{.Render.Editor.FontSize}}"), // 编辑器字体大小
+                fontFamily: `{{ range $v := .Render.Editor.FontFamily}}"{{ $v }}", {{end}}`, // 编辑器字体
                 codeLineWrap: "{{.Render.Editor.CodeLineWrap}}" === "true", // 代码行是否启用自动换行
                 codeLigatures: "{{.Render.Editor.CodeLigatures}}" === "true", // 代码是否启用连字符
                 codeSyntaxHighlightLineNum: "{{.Render.Editor.CodeSyntaxHighlightLineNum}}" === "true", // 代码块是否显示行号
@@ -36,7 +37,7 @@
                 },
             },
             title: {
-                img:"{{.TitleImg}}", // 题头图
+                img: "{{.TitleImg}}", // 题头图
                 height: "{{.TitleHeight}}", // 题头高度
             },
         },

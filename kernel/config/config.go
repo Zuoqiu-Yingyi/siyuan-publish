@@ -3,8 +3,13 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/BurntSushi/toml"
+)
+
+const (
+	DEFAULT_DIR_MODE = os.ModeDir | 0764 // 默认目录权限
 )
 
 var (
@@ -34,7 +39,7 @@ func Init(path string) {
 }
 
 func LoadConfigFile(path string) error {
-	C = &Config{}
+	LoadDefaultConfig()
 	if _, err := toml.DecodeFile(path, C); err != nil {
 		return err
 	}
@@ -124,6 +129,7 @@ func LoadDefaultConfig() {
 			},
 			Editor: Editor{
 				FontSize:                   16,
+				FontFamily:                 []string{},
 				CodeLineWrap:               true,
 				CodeLigatures:              true,
 				CodeSyntaxHighlightLineNum: true,

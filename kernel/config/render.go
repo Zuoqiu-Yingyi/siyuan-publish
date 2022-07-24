@@ -14,11 +14,12 @@ type Appearance struct {
 }
 
 type Editor struct {
-	FontSize                   int    `json:"fontSize"`
-	CodeLineWrap               bool   `json:"codeLineWrap"`
-	CodeLigatures              bool   `json:"codeLigatures"`
-	CodeSyntaxHighlightLineNum bool   `json:"codeSyntaxHighlightLineNum"`
-	PlantUMLServePath          string `json:"plantUMLServePath"`
+	FontSize                   int      `json:"fontSize"`
+	FontFamily                 []string `json:"fontFamily"`
+	CodeLineWrap               bool     `json:"codeLineWrap"`
+	CodeLigatures              bool     `json:"codeLigatures"`
+	CodeSyntaxHighlightLineNum bool     `json:"codeSyntaxHighlightLineNum"`
+	PlantUMLServePath          string   `json:"plantUMLServePath"`
 }
 
 type File struct {

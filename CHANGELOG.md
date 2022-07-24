@@ -31,3 +31,5 @@
 - 添加 CI/CD 工具配置 | Add CI/CD tool configuration.
 - 文档页面静态加载模式初始化时同时加载受保护的文档 | Document page static loading mode initialization time loads protected document at the same time.
 - 内核启动时创建日志目录 | Kernel booting time create log directory.
+- 使用 `github.com/glebarez/sqlite` 作为 GROM 的 SQLite 驱动 | Use `github.com/glebarez/sqlite` as GROM SQLite driver.
+- 添加字体列表配置选项 | Add font list configuration option.

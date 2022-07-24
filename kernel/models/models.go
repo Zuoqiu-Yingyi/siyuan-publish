@@ -7,7 +7,9 @@ import (
 	"publish/client"
 	"publish/config"
 
-	"gorm.io/driver/sqlite"
+	// "gorm.io/driver/sqlite"
+	// REF [GitHub - glebarez/sqlite: The pure-Go SQLite driver for GORM](https://github.com/glebarez/sqlite)
+	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
@@ -18,7 +20,7 @@ var (
 
 func Init() {
 	/* 创建数据库所在目录 */
-	if err := os.MkdirAll(path.Dir(config.C.Database.SQLite), os.ModeDir); err != nil {
+	if err := os.MkdirAll(path.Dir(config.C.Database.SQLite), config.DEFAULT_DIR_MODE); err != nil {
 		panic(err)
 	}
 

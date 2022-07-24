@@ -43,7 +43,7 @@ func Init() {
 	log_file_path := path.Join(config.C.Server.Logs, log_file_name)
 
 	/* 创建日志目录 */
-	if err := os.MkdirAll(config.C.Server.Logs, os.ModeDir); err != nil {
+	if err := os.MkdirAll(config.C.Server.Logs, config.DEFAULT_DIR_MODE); err != nil {
 		panic(err)
 	}
 
