@@ -29,3 +29,4 @@
 - 移动目录 `/app/` 至 `/kernel/app/` | Move directory `/app/` to `/kernel/app/`.
 - 添加文档图标, 文档标签与文档题头图 | Add document icon, document tags and document title image.
 - 添加 CI/CD 工具配置 | Add CI/CD tool configuration.
+- 文档页面静态加载模式初始化时同时加载受保护的文档 | Document page static loading mode initialization time loads protected document at the same time.

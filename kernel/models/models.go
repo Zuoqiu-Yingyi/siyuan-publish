@@ -146,6 +146,7 @@ func loadData() {
 			Access: record["value"].(string),
 		})
 	}
+	// TODO protected
 	DB.Create(&acls) // 插入记录
 
 	/* 按照顺序查询每条 ACL 记录对应的文档及其子文档并构建 Access 表 */
@@ -184,7 +185,10 @@ func loadData() {
 	/* 为可访问的 Access 记录构建 Doc 表 */
 	for _, acl := range acls {
 		/* 获得可访问文档关联的 ACL 项 */
-		if acl.Access == config.C.Siyuan.Publish.Access.Public.Value {
+		switch acl.Access {
+		case config.C.Siyuan.Publish.Access.Public.Value:
+			fallthrough
+		case config.C.Siyuan.Publish.Access.Protected.Value:
 			accesses := make([]Access, 0, 0)
 			/* 获得绑定某个可访问 ACL 项的所有文档 */
 			DB.Where(&Access{ACL_ID: acl.ID}).Find(&accesses)
@@ -198,6 +202,10 @@ func loadData() {
 					}).Create(doc)
 				}
 			}
+		case config.C.Siyuan.Publish.Access.Private.Value:
+			fallthrough
+		default:
+			continue
 		}
 	}
 
