@@ -41,6 +41,12 @@ func Init() {
 	now := time.Now()
 	log_file_name := now.Format("2006-01-02") + ".log"
 	log_file_path := path.Join(config.C.Server.Logs, log_file_name)
+
+	/* 创建日志目录 */
+	if err := os.MkdirAll(config.C.Server.Logs, os.ModeDir); err != nil {
+		panic(err)
+	}
+
 	// REF [打开或新建一个文件](https://blog.csdn.net/weixin_45193103/article/details/123479196)
 	// REF [os - Constants](https://studygolang.com/static/pkgdoc/pkg/os.htm#pkg-index)
 	if log_file, err := os.OpenFile(log_file_path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666); err != nil {

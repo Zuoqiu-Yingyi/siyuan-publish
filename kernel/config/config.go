@@ -53,7 +53,7 @@ func LoadDefaultConfig() {
 			Debug:     false,
 			Port:      8080,
 			Logs:      "./temp/logs/",
-			Templates: "./../app/templates/*.html",
+			Templates: "./app/templates/*.html",
 			Mode: Mode{
 				Page: "dynamic",
 				File: "dynamic",
@@ -93,11 +93,11 @@ func LoadDefaultConfig() {
 				},
 				JavaScript: StaticPath{
 					Path:     "/js",
-					FilePath: "./../app/src/js/",
+					FilePath: "./app/src/js/",
 				},
 				CSS: StaticPath{
 					Path:     "/css",
-					FilePath: "./../app/src/css/",
+					FilePath: "./app/src/css/",
 				},
 			},
 		},

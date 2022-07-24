@@ -2,6 +2,8 @@ package models
 
 import (
 	"fmt"
+	"os"
+	"path"
 	"publish/client"
 	"publish/config"
 
@@ -15,6 +17,11 @@ var (
 )
 
 func Init() {
+	/* 创建数据库所在目录 */
+	if err := os.MkdirAll(path.Dir(config.C.Database.SQLite), os.ModeDir); err != nil {
+		panic(err)
+	}
+
 	/* 链接数据库 */
 	// REF [连接到数据库 | GORM](https://gorm.io/zh_CN/docs/connecting_to_the_database.html#SQLite)
 	// file::memory:?cache=shared
