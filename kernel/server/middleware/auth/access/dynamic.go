@@ -5,7 +5,7 @@ import (
 
 	"publish/client"
 	"publish/config"
-	"publish/server/status"
+	"publish/server/view/status"
 
 	"github.com/gin-gonic/gin"
 )
@@ -60,7 +60,7 @@ func Dynamic(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) 
 			case config.C.Siyuan.Publish.Access.Public.Value:
 				return true, nil, nil
 			case config.C.Siyuan.Publish.Access.Protected.Value:
-				// TODO
+				// TODO protected
 				fallthrough
 			case config.C.Siyuan.Publish.Access.Private.Value:
 				fallthrough

@@ -3,6 +3,22 @@
     {
         const url = new URL(window.location.href);
 
+        /* 设置题头 */
+        document.getElementById('title').style.minHeight = window.publish.config.title.height;
+        const title_img = window.publish.config.title.img
+        if (title_img) {
+            const img = document.getElementById('title-img');
+            const reg = /background-image:url\((.*)\);/
+            if (reg.test(title_img)) { // 使用了自定义背景图片
+                const src = reg.exec(title_img)[1];
+                const style = title_img.replace(/background-image:url\((.*)\);/, "");
+                img.src = src;
+                img.style = style;
+            } else { // 使用了随机背景图片
+                img.style = title_img;
+            }
+        }
+
         /* 设置主题模式 */
         function setThemeMode(mode) {
             switch (mode) {

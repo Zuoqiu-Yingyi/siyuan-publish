@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"publish/client"
+	"publish/utils"
 	"time"
 
 	"gorm.io/gorm"
@@ -78,9 +79,9 @@ func GetDoc(id string) (*Doc, error) {
 		doc.Title = record["content"].(string)
 		doc.Tag = record["tag"].(string)
 
-		// TODO 解析 IAL
-		// block.Doc.Icon
-		// block.Doc.TitleImg
+		ial := utils.IAL2Map(record["ial"].(string))
+		doc.Icon = ial["icon"]
+		doc.TitleImg = ial["title-img"]
 	}
 
 	/* 查询文档 DOM */

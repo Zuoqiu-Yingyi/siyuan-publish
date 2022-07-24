@@ -3,7 +3,7 @@ package access
 import (
 	"publish/config"
 	"publish/models"
-	"publish/server/status"
+	"publish/server/view/status"
 
 	"github.com/gin-gonic/gin"
 )

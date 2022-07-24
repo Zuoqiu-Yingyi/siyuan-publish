@@ -6,7 +6,7 @@ import (
 	"publish/client"
 	"publish/config"
 	"publish/models"
-	"publish/server/status"
+	"publish/server/view/status"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/clause"
@@ -68,7 +68,7 @@ func Cache(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 				} else { // 数据库逻辑错误
 					return false, status.S.StatusPublishServerError, nil
 				}
-				for j := 0; j < i-1; j++ {
+				for j := 0; j < i; j++ {
 					records = append(records, models.Access{
 						ID:     docs[j],
 						ACL_ID: access.ACL_ID, // 从上级文档继承 ACL 项

@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 	"time"
 
@@ -60,6 +61,19 @@ func Server() (router *gin.Engine) {
 		/* 渲染 HTML 原文(不转义) */
 		"html": func(str string) template.HTML {
 			return template.HTML(str)
+		},
+		/* 判断字符串是否为 16 进制字符串 */
+		"hex": func(str string) bool {
+			// REF
+			if _, err := strconv.ParseUint(str, 16, 64); err != nil {
+				return false
+			} else {
+				return true
+			}
+		},
+		/* 取模 */
+		"mod": func(a, mod int) int {
+			return a % mod
 		},
 	})
 

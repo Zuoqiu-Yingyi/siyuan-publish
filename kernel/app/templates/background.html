@@ -1,7 +1,11 @@
-<div class="protyle-background" data-node-id="20200812220555-lj3enxa" style="min-height: 30vh;">
+<div id="title" class="protyle-background" data-node-id>
     <!-- 题头图 -->
     <div class="protyle-background__img">
-        <img class="" style="background-color:#556;background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a),linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);background-size:80px 140px;background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+        {{ if ne .TitleImg "" }}
+        <img id="title-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
+        {{ else }}
+        <img class="fn__none" />
+        {{ end }}
         <!-- <div class="protyle-icons">
             <span class="protyle-icon protyle-icon--first b3-tooltips b3-tooltips__sw" style="position: relative" aria-label="上传">
                 <input type="file" style="position: absolute;width: 22px;height: 100%;top: 0;left: 0;opacity: .001;overflow: hidden;cursor: pointer;">
@@ -40,20 +44,10 @@
     </div>
     <!-- 标签 -->
     <div class="protyle-background__tags">
+        {{ range $i, $v := .Tag }}
+            <div class="item item--{{mod $i 4}}" data-type="open-search">{{$v}}</div>
+        {{ end }}
         <!-- <div class="item item--0" data-type="open-search">标签0
-            <svg data-type="remove-tag">
-                <use xlink:href="#iconClose"></use>
-            </svg></div>
-        <div class="item item--1" data-type="open-search">标签1
-            <svg data-type="remove-tag">
-                <use xlink:href="#iconClose"></use>
-            </svg></div>
-        <div class="item item--2" data-type="open-search">标签2
-            <svg data-type="remove-tag">
-                <use xlink:href="#iconClose"></use>
-            </svg>
-        </div>
-        <div class="item item--3" data-type="open-search">标签3
             <svg data-type="remove-tag">
                 <use xlink:href="#iconClose"></use>
             </svg>
@@ -61,12 +55,19 @@
     </div>
     <!-- 文档图标 -->
     <div class="protyle-background__iconw" style="left:96px">
+        {{ if ne .Icon "" }}
         <div class="protyle-background__icon" data-menu="true" data-type="open-emoji">
+            {{ if hex .Icon }}
             <svg class="custom-icon">
-                <use xlink:href="#icon-1f389"></use>
+                <use xlink:href="#icon-{{.Icon}}"></use>
             </svg>
-            <!-- <img src="/emojis/material/console.svg"> -->
+            {{ else }}
+            <img src="/emojis/{{.Icon}}">
+            {{ end }}
         </div>
+        {{ else }}
+        <div class="protyle-background__icon fn__none" data-menu="true" data-type="open-emoji"></div>
+        {{ end }}
         <!-- <div class="protyle-icons fn__flex-center">
             <span class="protyle-icon protyle-icon--first b3-tooltips b3-tooltips__s" data-menu="true" data-type="tag" aria-label="添加标签">
                 <svg>

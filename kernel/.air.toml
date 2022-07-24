@@ -4,10 +4,10 @@ tmp_dir = "temp"
 
 [build]
 args_bin = ["--config ./custom.config.toml"]
-bin = "temp\\main.exe"
+bin = "./temp/main.exe"
 cmd = "go build -o ./temp/main.exe ."
 delay = 1000
-exclude_dir = ["assets", "temp", "vendor", "testdata"]
+exclude_dir = ["assets", "temp", "vendor", "testdata", "app\\src"]
 exclude_file = []
 exclude_regex = ["_test.go"]
 exclude_unchanged = false

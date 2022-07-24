@@ -1,10 +1,9 @@
 package static
 
 import (
-	"net/http"
-	"publish/config"
 	"publish/models"
-	"publish/server/status"
+	"publish/server/view"
+	"publish/server/view/status"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,14 +17,5 @@ func Block(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "block.html", gin.H{
-		"Path":     doc.Path,
-		"Hpath":    doc.Hpath,
-		"Tag":      doc.Tag,
-		"Icon":     doc.Icon,
-		"Title":    doc.Title,
-		"TitleImg": doc.TitleImg,
-		"Content":  doc.Dom,
-		"Render":   config.C.Render,
-	})
+	view.Block(c, doc)
 }
