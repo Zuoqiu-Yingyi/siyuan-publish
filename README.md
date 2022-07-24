@@ -42,14 +42,15 @@ PS: The table is generated automatically using [All Contributors · GitHub](http
 
 ## 依赖 | DEPENDENCIES
 
-| 仓库 \| Repository                                    | 主页 \| Home                            | 许可证 \| License                                                          |
-| :---------------------------------------------------- | :-------------------------------------- | :------------------------------------------------------------------------- |
-| [golang/go](https://github.com/golang/go)             | [go.dev](https://go.dev/)               | *[BSD-3-Clause license](https://github.com/golang/go/blob/master/LICENSE)* |
-| [cosmtrek/air](https://github.com/cosmtrek/air)       |                                         | *[GPL-3.0 license](https://github.com/cosmtrek/air/blob/master/LICENSE)*   |
-| [gin-gonic/gin](https://github.com/gin-gonic/gin)     | [gin-gonic.com](https://gin-gonic.com/) | *[MIT license](https://github.com/gin-gonic/gin/blob/master/LICENSE)*      |
-| [BurntSushi/toml](https://github.com/BurntSushi/toml) |                                         | *[MIT license](https://github.com/BurntSushi/toml/blob/master/COPYING)*    |
-| [imroc/req](https://github.com/imroc/req)             | [req.cool](https://req.cool/)           | *[MIT license](https://github.com/imroc/req/blob/master/LICENSE)*          |
-| [go-gorm/gorm](https://github.com/go-gorm/gorm)       | [gorm.io](https://gorm.io/)             | *[MIT license](https://github.com/go-gorm/gorm/blob/master/License)*       |
+| 仓库 \| Repository                                    | 主页 \| Home                                     | 许可证 \| License                                                          |
+| :---------------------------------------------------- | :----------------------------------------------- | :------------------------------------------------------------------------- |
+| [golang/go](https://github.com/golang/go)             | [go.dev](https://go.dev/)                        | *[BSD-3-Clause license](https://github.com/golang/go/blob/master/LICENSE)* |
+| [cosmtrek/air](https://github.com/cosmtrek/air)       |                                                  | *[GPL-3.0 license](https://github.com/cosmtrek/air/blob/master/LICENSE)*   |
+| [gin-gonic/gin](https://github.com/gin-gonic/gin)     | [gin-gonic.com](https://gin-gonic.com/)          | *[MIT license](https://github.com/gin-gonic/gin/blob/master/LICENSE)*      |
+| [BurntSushi/toml](https://github.com/BurntSushi/toml) |                                                  | *[MIT license](https://github.com/BurntSushi/toml/blob/master/COPYING)*    |
+| [imroc/req](https://github.com/imroc/req)             | [req.cool](https://req.cool/)                    | *[MIT license](https://github.com/imroc/req/blob/master/LICENSE)*          |
+| [go-gorm/gorm](https://github.com/go-gorm/gorm)       | [gorm.io](https://gorm.io/)                      | *[MIT license](https://github.com/go-gorm/gorm/blob/master/License)*       |
+| [88250/lute](https://github.com/88250/lute)           | [ld246.com/tag/lute](https://ld246.com/tag/lute) | *[MulanPSL2 license](https://github.com/88250/lute/blob/master/LICENSE)*   |
 
 注: 按引入时间排序
 ps: Sort by introduction time.

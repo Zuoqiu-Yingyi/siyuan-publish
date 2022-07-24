@@ -8,10 +8,10 @@ SQLite = "./temp/publish.db" # 数据库文件
 
 # 服务器配置
 [Server]
-Debug = false                           # 调试模式
-Port = 8080                             # 发布服务端口                      
-Logs = "./temp/logs/"                   # 日志目录
-Templates = "./../app/templates/*.html" # 模板目录
+Debug = false                        # 调试模式
+Port = 8080                          # 发布服务端口                      
+Logs = "./temp/logs/"                # 日志目录
+Templates = "./app/templates/*.html" # 模板目录
 
 # 服务模式
 [Server.Mode]
@@ -56,12 +56,12 @@ Stage.Path = "/stage"                   # 访问目录
 Stage.FilePath = "./temp/static/stage/" # 文件目录
 
 # 前端 JavaScript 文件目录, 存放异步加载的 JavaScript 文件
-JavaScript.Path = "/js"                  # 访问目录
-JavaScript.FilePath = "./../app/src/js/" # 文件目录
+JavaScript.Path = "/js"               # 访问目录
+JavaScript.FilePath = "./app/src/js/" # 文件目录
 
 # 前端 CSS 文件目录, 存放异步加载的 CSS 文件
-CSS.Path = "/css"                  # 访问目录
-CSS.FilePath = "./../app/src/css/" # 文件目录
+CSS.Path = "/css"               # 访问目录
+CSS.FilePath = "./app/src/css/" # 文件目录
 
 
 # 思源适配器配置

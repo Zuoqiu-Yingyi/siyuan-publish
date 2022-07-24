@@ -26,3 +26,4 @@
 - 实现文档页面加载的静态加载模式 | Implement document page loading static mode.
 - 添加启动时重置静态资源目录配置选项 | Add reset static resource directory configuration option when booting.
 - 添加文档标题 | Add document title.
+- 移动目录 `/app/` 至 `/kernel/app/` | Move directory `/app/` to `/kernel/app/`.
