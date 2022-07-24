@@ -1,0 +1,120 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    # - go mod tidy
+    # you may remove this if you don't need go generate
+    - go generate ./...
+# REF [Dist folder - GoReleaser](https://goreleaser.com/customization/dist/)
+dist: ./release/
+# REF [Builds - GoReleaser](https://goreleaser.com/customization/build/)
+builds:
+  - # Path to project's (sub)directory containing Go code.
+    # This is the working directory for the Go build command(s).
+    # Default is `.`.
+    dir: ./kernel/
+
+    # Path to main.go file or main package.
+    # Notice: when used with `gomod.proxy`, this must be a package.
+    #
+    # Default is `.`.
+    # main: ./kernel/
+
+    # Binary name.
+    # Can be a path (e.g. `bin/app`) to wrap the binary in a directory.
+    # Default is the name of the project directory.
+    binary: publish
+
+    # Custom environment variables to be set during the builds.
+    # Default is empty.
+    env:
+      - CGO_ENABLED=0
+
+    # GOOS list to build for.
+    # For more info refer to: https://golang.org/doc/install/source#environment
+    # Defaults are darwin and linux.
+    goos:
+      - windows
+      - linux
+      - darwin
+
+    # GOARCH to build for.
+    # For more info refer to: https://golang.org/doc/install/source#environment
+    # Defaults are 386, amd64 and arm64.
+    goarch:
+      - amd64
+      # - arm64
+
+# [Archives - GoReleaser](https://goreleaser.com/customization/archive/)
+archives:
+  - replacements:
+      windows: Windows
+      linux: Linux
+      darwin: macOS
+      # 386: i386
+      # amd64: x86_64
+
+    # Archive format. Valid options are `tar.gz`, `tar.xz`, `tar`, `gz`, `zip` and `binary`.
+    # If format is `binary`, no archives are created and the binaries are instead
+    # uploaded directly.
+    # Default is `tar.gz`.
+    format: zip
+
+    # Archive name template.
+    # Defaults:
+    # - if format is `tar.gz`, `tar.xz`, `gz` or `zip`:
+    #   - `{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}`
+    # - if format is `binary`:
+    #   - `{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}`
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+    # Set to true, if you want all files in the archive to be in a single directory.
+    # If set to true and you extract the archive 'goreleaser_Linux_arm64.tar.gz',
+    # you get a folder 'goreleaser_Linux_arm64'.
+    # If set to false, all files are extracted separately.
+    # You can also set it to a custom folder name (templating is supported).
+    # Default is false.
+    wrap_in_directory: true
+
+    # Additional files/template/globs you want to add to the archive.
+    # Defaults are any files matching `LICENSE*`, `README*`, `CHANGELOG*`,
+    #  `license*`, `readme*` and `changelog*`.
+    files:
+      - ./docs/
+      - ./LICENSE
+      - ./README.md
+      - ./CHANGELOG.md
+      - src: ./kernel/default.config.toml
+        dst: ./
+        # Strip parent folders when adding files to the archive.
+        # Default: false
+        strip_parent: true
+      - src: ./kernel/app/templates/*
+        dst: ./app/templates/
+        strip_parent: true
+      - src: ./kernel/app/src/css/*
+        dst: ./app/src/css/
+        strip_parent: true
+      - src: ./kernel/app/src/js/*
+        dst: ./app/src/js/
+        strip_parent: true
+
+# [Release - GoReleaser](https://goreleaser.com/customization/release/)
+release:
+  # If set to true, will not auto-publish the release.
+  # Default is false.
+  draft: true
+
+checksum:
+  name_template: '{{ .ProjectName }}_sha256_checksums.txt'
+  algorithm: sha256
+
+snapshot:
+  name_template: "{{ incpatch .Version }}"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"

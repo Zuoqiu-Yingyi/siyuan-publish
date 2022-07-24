@@ -20,6 +20,12 @@
 # 数据库文件
 *.db
 
+# 发行文件目录
+/release/*
+
+# 示例文件目录
+/examples/*
+
 # 自定义配置文件
 /kernel/custom.config.toml
 
@@ -35,5 +41,4 @@
 /kernel/temp/static/stage/protyle/*
 /kernel/temp/static/widgets/*
 
-# 示例文件目录
-/examples
+# 其他文件

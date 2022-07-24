@@ -9,7 +9,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Zuoqiu-Yingyi/siyuan-publish?style=flat-square)
 ![hits](https://hits.b3log.org/Zuoqiu-Yingyi/siyuan-publish.svg)
 [![GitHub all releases](https://img.shields.io/github/downloads/Zuoqiu-Yingyi/siyuan-publish/total?style=flat-square)](https://github.com/Zuoqiu-Yingyi/siyuan-publish/releases)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#贡献者介绍--contributor-introduction)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </center>
@@ -19,7 +18,7 @@
 
 ## 文档 | DOCUMENTATION
 
-[简体中文](./doc/README-zh_CN.md) | [English](./doc/README-en_US.md)
+[简体中文](./docs/README-zh_CN.md) | [English](./docs/README-en_US.md)
 
 ## 贡献者介绍 | CONTRIBUTOR INTRODUCTION
 

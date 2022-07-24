@@ -3,24 +3,26 @@ module publish
 go 1.18
 
 require (
-	github.com/88250/lute v1.7.3 // indirect
-	github.com/BurntSushi/toml v1.1.0 // indirect
-	github.com/alecthomas/chroma v0.10.0 // indirect
+	github.com/88250/lute v1.7.3
+	github.com/BurntSushi/toml v1.1.0
+	github.com/gin-gonic/gin v1.8.1
+	github.com/imroc/req/v3 v3.14.0
+	gorm.io/driver/sqlite v1.3.6
+	gorm.io/gorm v1.23.8
+)
+
+require (
 	github.com/cheekybits/genny v1.0.0 // indirect
-	github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964 // indirect
-	github.com/dlclark/regexp2 v1.7.0 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.8.1 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0 // indirect
 	github.com/goccy/go-json v0.9.10 // indirect
-	github.com/gopherjs/gopherjs v1.17.2 // indirect
+	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
-	github.com/imroc/req/v3 v3.14.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -48,6 +50,4 @@ require (
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gorm.io/driver/sqlite v1.3.6 // indirect
-	gorm.io/gorm v1.23.8 // indirect
 )
