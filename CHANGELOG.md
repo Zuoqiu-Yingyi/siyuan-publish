@@ -1,5 +1,7 @@
 # 更改日志 | CHANGE LOG
 
+## v0.1.0 / 2022-07-25
+
 - 初始化项目 | Initialize project.
 - 添加主题基础配色文件路径配置选项 | Add theme base color file path configuration option.
 - 支持使用 URL 参数 `theme` 指定主题模式 | Support use URL parameter `theme` to specify theme mode.
