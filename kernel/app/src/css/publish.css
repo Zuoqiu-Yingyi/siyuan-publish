@@ -2,11 +2,24 @@
   overflow: auto;
   height: 100%;
 }
-#editor #preview a {
+#editor #preview [data-node-id] > .copy-link {
+  display: none;
+  position: absolute;
+  top: 0.375rem;
+  left: -1.5rem;
+  width: 1.5rem;
+}
+#editor #preview [data-node-id] > .copy-link > svg {
+  color: var(--b3-theme-on-surface-light);
+}
+#editor #preview [data-node-id]:hover > .copy-link {
+  display: block;
+}
+#editor #preview [data-node-id] a {
   outline: 0;
   text-decoration: none;
   color: transparent;
 }
-#editor #preview a:hover {
+#editor #preview [data-node-id] a:hover {
   text-decoration: none;
 }

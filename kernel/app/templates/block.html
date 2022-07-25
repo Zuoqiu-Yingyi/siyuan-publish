@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>{{.Title}}</title>
+    <title>{{ .Title }}</title>
 
     <style id="editorFontSize"></style>
     <link id="stylesheet" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
@@ -29,7 +29,9 @@
         <div class="protyle-content">
             {{ template "background.html" . }}
             {{ template "title.html" . }}
-            <div id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">{{html .Content}}</div>
+            <div id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">
+                {{ html .Content }}
+            </div>
         </div>
     </div>
     {{ template "config.html" . }}

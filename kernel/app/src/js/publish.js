@@ -3,6 +3,36 @@
     const REG = {
         url: /^siyuan:\/\/blocks\/(\d{14}\-[0-9a-z]{7})/,
     };
+    const TYPE_ICON_MAP = {
+        NodeAudio: "#iconRecord",
+        NodeBlockQueryEmbed: "#iconSQL",
+        NodeBlockquote: "#iconQuote",
+        NodeCodeBlock: "#iconCode",
+        NodeDocument: "#iconFile",
+        NodeHTMLBlock: "#iconHTML5",
+        NodeHeading: {
+            h1: "#iconH1",
+            h2: "#iconH2",
+            h3: "#iconH3",
+            h4: "#iconH4",
+            h5: "#iconH5",
+            h6: "#iconH6",
+        },
+        NodeIFrame: "#iconLanguage",
+        NodeList: {
+            o: "#iconList",
+            u: "#iconOrderedList",
+            t: "#iconCheck",
+        },
+        NodeListItem: "#iconListItem",
+        NodeMathBlock: "#iconMath",
+        NodeParagraph: "#iconParagraph",
+        NodeSuperBlock: "#iconSuper",
+        NodeTable: "#iconTable",
+        NodeThematicBreak: "#iconLine",
+        NodeVideo: "#iconVideo",
+        NodeWidget: "#iconBoth",
+    }
 
     /* 将块引用转化为超链接 */
     const publish_url = new URL(url);
@@ -32,10 +62,19 @@
         a.appendChild(item);
     });
 
-    /* 修改块超链接的 href */
-    document.querySelectorAll(`#preview a[href ^="siyuan:"]`).forEach(item => {
-        const href = item.href;
-        item.href;
+    /* 为所有块添加悬浮复制超链接 */
+    document.querySelectorAll(`#preview [data-node-id]`).forEach(item => {
+        publish_url.searchParams.set("id", item.dataset.nodeId);
+        const icon = typeof TYPE_ICON_MAP[item.dataset.type] === 'string'
+            ? TYPE_ICON_MAP[item.dataset.type]
+            : TYPE_ICON_MAP[item.dataset.type][item.dataset.subtype];
+        const a = document.createElement("a");
+        a.classList.add("copy-link");
+        a.href = publish_url.href;
+        a.title = publish_url.href;
+        a.innerHTML = `<svg style="height: 1rem; width: 1rem"><use xlink:href="${icon}"></use></svg>`
+        item.appendChild(a);
+        // item.parentElement.insertBefore(a, item);
     });
 
     /* 定位到指定的块并高亮 */
