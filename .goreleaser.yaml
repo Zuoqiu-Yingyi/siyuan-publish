@@ -99,6 +99,9 @@ archives:
       - src: ./kernel/app/src/js/*
         dst: ./app/src/js/
         strip_parent: true
+      - src: ./kernel/app/src/favicon.ico
+        dst: ./app/src/
+        strip_parent: true
 
 # [Release - GoReleaser](https://goreleaser.com/customization/release/)
 release:

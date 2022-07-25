@@ -6,6 +6,7 @@ Debug = false                # 调试模式
 Reset = true                 # 是否在启动时重置数据库
 SQLite = "./temp/publish.db" # 数据库文件, 可使用内存数据库模式 ":memory:"
 
+
 # 服务器配置
 [Server]
 Debug = false                        # 调试模式
@@ -87,12 +88,13 @@ Public.Value = "public"        # 可公开访问的文档的属性值(白名单)
 Protected.Value = "protected"  # 鉴权后可公开访问的文档的属性值
 Private.Value = "private"      # 不可公开访问的文档的属性值(黑名单)
 
+
 # 渲染器配置
 [Render]
 
 # 外观设置
 [Render.Appearance]
-Mode = 0                               # 主题模式, 0: 明亮模式, 1: 暗黑模式, 2: 自动模式
+Mode = 2                               # 主题模式, 0: 明亮模式, 1: 暗黑模式, 2: 自动模式
 CodeBlockThemeLight = "atom-one-light" # 明亮模式代码块配色方案
 CodeBlockThemeDark = "atom-one-dark"   # 暗黑模式代码块配色方案
 

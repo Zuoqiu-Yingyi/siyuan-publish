@@ -29,16 +29,15 @@
 # 自定义配置文件
 /kernel/custom.config.toml
 
+# 测试目录
+/kernel/temp/logs/*
+
 # 静态资源文件目录
-/kernel/temp/static/appearance/emojis/*
-/kernel/temp/static/appearance/icons/*
-/kernel/temp/static/appearance/themes/*
+/kernel/temp/static/appearance/*
 /kernel/temp/static/assets/*
 /kernel/temp/static/emojis/*
 /kernel/temp/static/export/*
-/kernel/temp/static/stage/build/*
-/kernel/temp/static/stage/fonts/*
-/kernel/temp/static/stage/protyle/*
+/kernel/temp/static/stage/*
 /kernel/temp/static/widgets/*
 
 # 其他文件
