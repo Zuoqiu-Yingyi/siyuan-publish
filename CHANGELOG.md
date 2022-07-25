@@ -33,3 +33,4 @@
 - 内核启动时创建日志目录 | Kernel booting time create log directory.
 - 使用 `github.com/glebarez/sqlite` 作为 GROM 的 SQLite 驱动 | Use `github.com/glebarez/sqlite` as GROM SQLite driver.
 - 添加字体列表配置选项 | Add font list configuration option.
+- 添加 `favicon.ico` 文件 | Add `favicon.ico` file.

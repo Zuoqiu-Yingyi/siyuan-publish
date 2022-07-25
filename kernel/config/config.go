@@ -96,6 +96,10 @@ func LoadDefaultConfig() {
 					Path:     "/widgets",
 					FilePath: "./temp/static/widgets/",
 				},
+				Favicon: StaticPath{
+					Path:     "/facicon.ico",
+					FilePath: "./app/src/facicon.ico",
+				},
 				JavaScript: StaticPath{
 					Path:     "/js",
 					FilePath: "./app/src/js/",

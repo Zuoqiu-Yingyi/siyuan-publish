@@ -30,6 +30,7 @@ type Static struct {
 	Export     StaticPath `json:"export"`     // 思源 export 目录
 	Stage      StaticPath `json:"stage"`      // 思源 stage 目录
 	Widgets    StaticPath `json:"widgets"`    // 思源 widgets 目录
+	Favicon    StaticPath `json:"favicon"`    // favicon.ico 文件路径
 	JavaScript StaticPath `json:"javascript"` // javascript 目录
 	CSS        StaticPath `json:"css"`        // css 目录
 }

@@ -55,6 +55,10 @@ Export.FilePath = "./temp/static/export/" # 文件目录
 Stage.Path = "/stage"                   # 访问目录
 Stage.FilePath = "./temp/static/stage/" # 文件目录
 
+# 站点图标文件目录, 存放 favicon.ico 文件
+Favicon.Path = "/favicon.ico"              # 访问路径
+Favicon.FilePath = "./app/src/favicon.ico" # 文件路径
+
 # 前端 JavaScript 文件目录, 存放异步加载的 JavaScript 文件
 JavaScript.Path = "/js"               # 访问目录
 JavaScript.FilePath = "./app/src/js/" # 文件目录

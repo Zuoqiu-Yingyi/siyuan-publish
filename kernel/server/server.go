@@ -94,6 +94,7 @@ func Server() (router *gin.Engine) {
 	/* 静态文件服务 */
 	router.Static(config.C.Server.Static.JavaScript.Path, config.C.Server.Static.JavaScript.FilePath)
 	router.Static(config.C.Server.Static.CSS.Path, config.C.Server.Static.CSS.FilePath)
+	router.StaticFile(config.C.Server.Static.Favicon.Path, config.C.Server.Static.Favicon.FilePath)
 
 	/* 资源文件加载模式 */
 	switch config.C.Server.Mode.File {
