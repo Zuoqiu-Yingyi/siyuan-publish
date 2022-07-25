@@ -35,3 +35,4 @@
 - 添加字体列表配置选项 | Add font list configuration option.
 - 添加 `favicon.ico` 文件 | Add `favicon.ico` file.
 - 添加中文文档 | Add Chinese document.
+- 解析文档内嵌入的思源链接(`siyuan://`) | Parse embedded siyuan links (`siyuan://`) in document.
