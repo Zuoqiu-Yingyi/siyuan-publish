@@ -4,6 +4,7 @@
 - 文档内超链接支持鼠标悬浮小窗预览 | Hyperlinks within the document support popover preview.
 - 修复悬浮预览窗口拖拽失效问题 | Fixed the issue that dragging and dropping feature on the popover preview window failed.
 - 抽象并封装拖动功能 | Abstract and encapsulate the dragfeature.
+- 悬浮预览窗口支持使用鼠标拖动调整尺寸 | Popover preview window supports using the mouse to drag to adjust the size.
 
 ## v0.1.0 / 2022-07-25
 

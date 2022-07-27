@@ -6,14 +6,13 @@
  * @params {function} mousemoveHandler: 鼠标移动事件的处理器
  */
 function dragMousedown(e, target, satge, mousemoveHandler) {
-    console.log("dragMousedown");
     e.stopPropagation(); // 阻止冒泡
     target.removeEventListener("mousedown", dragMousedown); // 避免重复触发
-    
+
     /* 避免 mousemove 事件在 iframe 中无法触发 */
     // REF [在 iframe 上无法捕获 mousemove](https://blog.csdn.net/DongFuPanda/article/details/109533365)
     satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
-    
+
     satge.addEventListener("mousemove", mousemoveHandler, true);
 }
 
@@ -144,9 +143,13 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
         });
         window.publish.popover = {
             drag: { // 拖拽
-                position: { // 相对位置
+                position: { // 拖动点相对于拖拽元素的位置
                     x: 0,
                     y: 0,
+                },
+                size: { // 拖拽前的尺寸
+                    width: 0,
+                    height: 0,
                 },
             },
             timeout: null, // 定时器
@@ -200,6 +203,18 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
                 block__popover.innerHTML = `
                     <div class="block__icons block__icons--border">
                         <span class="fn__space fn__flex-1"></span>
+                        <span data-type="open-page" class="block__icon b3-tooltips b3-tooltips__sw" title="新标签页打开">
+                            <svg>
+                                <use xlink:href="#iconExport"></use>
+                            </svg>
+                        </span>
+                        <span class="fn__space"></span>
+                        <span data-type="open-window" class="block__icon b3-tooltips b3-tooltips__sw" title="新窗口打开">
+                            <svg class="ft__secondary">
+                                <use xlink:href="#iconExport"></use>
+                            </svg>
+                        </span>
+                        <span class="fn__space"></span>
                         <span data-type="pin" class="block__icon b3-tooltips b3-tooltips__sw" title="钉住">
                             <svg>
                                 <use xlink:href="#iconPin"></use>
@@ -219,48 +234,101 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
                     <div class="block__ew"></div>
                     <div class="block__ns"></div>`;
 
-                /* 标题栏可以拖动 */
-                // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
-                // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
+                /* 拖动功能 */
                 const border = block__popover.querySelector(".block__icons--border");
                 const iframe = block__popover.querySelector("iframe");
-                // 鼠标移动时
-                var gragging = false;
+                const width_handle = block__popover.querySelector(".block__ew");
+                const height_handle = block__popover.querySelector(".block__ns");
+                const size_handle = block__popover.querySelector(".block__nwse");
+
+                // 鼠标移动时状态
+                var flag_popover_dragging = false; // 悬浮预览窗口是否正在拖动
 
                 /* 标题栏拖动功能 */
+                /* 窗口拖动注册 */
+                function dragRegister(element, mousemoveHandler) {
+                    element.addEventListener("mousedown", e => {
+                        flag_popover_dragging = true; // 正在拖拽
+                        block__popover.style.zIndex = popover.z_index++; // 将当前窗口置顶
+                        /* 记录鼠标与窗口的相对位置 */
+                        popover.drag.position.x = e.clientX - block__popover.offsetLeft; // 鼠标相对于子窗口左上角的横向偏移量(鼠标横坐标 - popover 的 左侧偏移量)
+                        popover.drag.position.y = e.clientY - block__popover.offsetTop; // 鼠标相对于子窗口左上角的纵向偏移量(鼠标纵坐标 - popover 的 上侧偏移量)
+                        popover.drag.size.width = block__popover.offsetWidth; // 窗口宽度
+                        popover.drag.size.height = block__popover.offsetHeight; // 窗口高度
+
+                        dragMousedown(e, element, doc, mousemoveHandler);
+                    });
+                    element.addEventListener("mouseup", e => {
+                        flag_popover_dragging = false;
+                        dragMouseup(e, element, doc, mousemoveHandler);
+                    });
+                }
+                // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
+                // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
                 function borderDrag(e) {
                     // console.log(e);
+                    /* 子窗口左上角将要移动到的位置坐标 */
                     let x = e.clientX - popover.drag.position.x;
                     let y = e.clientY - popover.drag.position.y;
+
+                    /* 子窗口左上角可以可以移动到区域边缘 */
                     let window_width = doc.documentElement.clientWidth - block__popover.offsetWidth;
                     let window_height = doc.documentElement.clientHeight - block__popover.offsetHeight;
 
-                    x = (x < 0) ? 0 : x;                          // 当div1到窗口最左边时
-                    x = (x > window_width) ? window_width : x;    // 当div1到窗口最右边时
-                    y = (y < 0) ? 0 : y;                          // 当div1到窗口最上边时
-                    y = (y > window_height) ? window_height : y;  // 当div1到窗口最下边时
+                    x = (x < 0) ? 0 : x;                          // 当子窗口移动到主窗口最左边时
+                    x = (x > window_width) ? window_width : x;    // 当子窗口移动到主窗口最右边时
+                    y = (y < 0) ? 0 : y;                          // 当子窗口移动到主窗口最上边时
+                    y = (y > window_height) ? window_height : y;  // 当子窗口移动到主窗口最下边时
 
                     block__popover.style.left = `${x}px`;
                     block__popover.style.top = `${y}px`;
                 }
-                border.addEventListener("mousedown", e => {
-                    gragging = true; // 正在拖拽
-                    block__popover.style.zIndex = popover.z_index++; // 将当前窗口置顶
-                    /* 记录鼠标相对于小窗标题栏的位置 */
-                    popover.drag.position.x = e.clientX - block__popover.offsetLeft; // 鼠标相对于预览左上角的横向偏移量(鼠标横坐标 - popover 的 左侧偏移量)
-                    popover.drag.position.y = e.clientY - block__popover.offsetTop; // 鼠标相对于预览左上角的纵向偏移量(鼠标纵坐标 - popover 的 上侧偏移量)
 
-                    dragMousedown(e, border, doc, borderDrag);
-                });
-                border.addEventListener("mouseup", e => {
-                    grabging = false;
-                    dragMouseup(e, border, doc, borderDrag);
-                });
+                /* 子窗口尺寸拖动调整功能 */
+                function calcSize(e) { // 计算子窗口应该调整到的尺寸
+                    /** 计算窗口将要调整到的宽度
+                     *  鼠标当前位置(应优化为控件的中轴) - 窗口左边位置
+                     *      = 鼠标相对于窗口左边的横向偏移量
+                     *  鼠标相对于窗口左边的横向偏移量 - 拖动前鼠标相对于窗口左边的横向偏移量
+                     *      = 鼠标宽度变化量
+                     *  原宽度 - 鼠标宽度变化量
+                     *      = 当前应当设置的宽度
+                     */
+                    let width = popover.drag.size.width + (e.clientX - block__popover.offsetLeft - popover.drag.position.x);
+                    /* 窗口宽度上限: 页面可视宽度 - 窗口左边位置 */
+                    let max_width = doc.documentElement.clientWidth - block__popover.offsetLeft;
+                    width = (width < 0) ? 0 : width; // 当子窗口移动到主窗口最左边时
+                    width = (width > max_width) ? max_width : width; // 当子窗口移动到主窗口最右边时
+
+                    let height = popover.drag.size.height + (e.clientY - block__popover.offsetTop - popover.drag.position.y);
+                    let max_height = doc.documentElement.clientHeight - block__popover.offsetTop;
+                    height = (height < 0) ? 0 : height; // 当子窗口移动到主窗口最上边时
+                    height = (height > max_height) ? max_height : height; // 当子窗口移动到主窗口最下边时
+                    return {
+                        width: width,
+                        height: height,
+                    };
+                }
+                function widthDrag(e) {
+                    block__popover.style.width = `${calcSize(e).width}px`;
+                }
+                function heightDrag(e) {
+                    block__popover.style.height = `${calcSize(e).height}px`;
+                }
+                function sizeDrag(e) {
+                    const size = calcSize(e);
+                    block__popover.style.width = `${size.width}px`;
+                    block__popover.style.height = `${size.height}px`;
+                }
+                dragRegister(border, borderDrag);
+                dragRegister(width_handle, widthDrag);
+                dragRegister(height_handle, heightDrag);
+                dragRegister(size_handle, sizeDrag);
 
                 /* 鼠标移出预览时关闭预览 */
                 const icon_pin = block__popover.querySelector('[data-type="pin"]');
                 function close(_) {
-                    if (!gragging && !icon_pin.classList.contains("block__icon--active")) {
+                    if (!flag_popover_dragging && !icon_pin.classList.contains("block__icon--active")) {
                         setTimeout(() => block__popover.remove(), TIMEOUT.CLOSE);
                     }
                 }
@@ -282,7 +350,25 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
                 block__popover.querySelector('[data-type="close"]').addEventListener("click", _ => block__popover.remove());
                 /* 鼠标移出元素后自动关闭 */
                 setTimeout(() => block__popover.addEventListener("mouseleave", close), TIMEOUT.SHOW_MIN);
-                // TODO 子窗口支持拖动边缘调整大小
+
+                /* 在新窗口打开 */
+                // REF [Window.open() - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
+                // REF [Window open() 方法 | 菜鸟教程](https://www.runoob.com/jsref/met-win-open.html)
+                const icon_open_page = block__popover.querySelector('[data-type="open-page"]');
+                const icon_open_window = block__popover.querySelector('[data-type="open-window"]');
+                icon_open_page.addEventListener("click", _ => window.top.open(iframe.src));
+                icon_open_window.addEventListener("click", _ => window.top.open(
+                    iframe.src,
+                    iframe.src,
+                    `
+                        popup = true,
+                        left = ${window.top.screenX + block__popover.offsetLeft},
+                        top = ${window.top.screenY + block__popover.offsetTop},
+                        width = ${block__popover.offsetWidth},
+                        height = ${block__popover.offsetHeight},
+                    `,
+                ));
+
                 doc.body.append(block__popover);
             }
         }
