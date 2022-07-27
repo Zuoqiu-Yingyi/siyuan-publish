@@ -53,7 +53,7 @@ func Cache(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 	c.Set("root_id", block.RootId)
 
 	/* 判断数据库中是否有该块所在文档的访问权限信息 */
-	right := "?" // 初始化访问权限为未知权限
+	permission := "?" // 初始化访问权限为未知权限
 	access := &models.Access{}
 	if a := access.One(block.RootId); a == nil { // 数据库中没有该块所在文档访问权限信息, 通过 API 查询并写入数据库
 		docs := strings.Split(block.Path, "/")
@@ -64,7 +64,7 @@ func Cache(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 		for i, id := range docs {
 			if a := access.One(id); a != nil { // Access 表中有 ID 为 id 的记录
 				if ac := acl.One(access.ACL_ID); ac != nil { // ACL 表中有 ID 为 acl.ACL_ID 的记录
-					right = acl.Access
+					permission = acl.Access
 				} else { // 数据库逻辑错误
 					return false, status.S.StatusPublishServerError, nil
 				}
@@ -77,8 +77,8 @@ func Cache(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 				break
 			}
 		}
-		if len(records) == 0 { // 没有插入新的访问权限信息
-			right = "?"
+		if len(records) == 0 { // 没有便插入新的访问权限信息
+			permission = config.C.Siyuan.Publish.Access.Default
 			for _, id := range docs {
 				records = append(records, models.Access{
 					ID:     id,
@@ -92,16 +92,16 @@ func Cache(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) {
 		}).Create(&records) // 插入或更新
 	} else { // 在数据库中查询到了文档的访问权限信息
 		if a := acl.One(access.ACL_ID); a != nil { // ACL 表中有 ID 为 acl.ACL_ID 的记录
-			right = acl.Access
+			permission = acl.Access
 		} else { // 数据库逻辑错误
 			return false, status.S.StatusPublishServerError, nil
 		}
 	}
 
-	c.Set("access", right)
+	c.Set("access", permission)
 
 	/* 根据访问权限判断是否继续或终止 */
-	switch right {
+	switch permission {
 	case config.C.Siyuan.Publish.Access.Public.Value:
 		return true, nil, nil
 	case config.C.Siyuan.Publish.Access.Protected.Value:

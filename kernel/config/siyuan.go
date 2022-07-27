@@ -18,6 +18,7 @@ type Publish struct {
 /* 思源发布内容访问权限控制属性 */
 type Access struct {
 	Name      string    `json:"name"`      // 用于文档访问控制的属性名
+	Default   string    `json:"default"`   // 默认访问权限
 	Public    Attribute `json:"public"`    // 可公开访问的文档的属性(白名单)
 	Protected Attribute `json:"protected"` // 鉴权后可公开访问的文档的属性
 	Private   Attribute `json:"private"`   // 不可公开访问的文档的属性(黑名单)

@@ -119,6 +119,7 @@ func LoadDefaultConfig() {
 			Publish: Publish{
 				Access: Access{
 					Name:      "custom-publish-access",
+					Default:   "private",
 					Public:    Attribute{Value: "public"},
 					Protected: Attribute{Value: "protected"},
 					Private:   Attribute{Value: "private"},
@@ -138,6 +139,11 @@ func LoadDefaultConfig() {
 				CodeLigatures:              true,
 				CodeSyntaxHighlightLineNum: true,
 				PlantUMLServePath:          "https://www.plantuml.com/plantuml/svg/~1",
+			},
+			Popover: Popover{
+				Timeout: 500,
+				Width:   "33vw",
+				Height:  "50vh",
 			},
 			Path: Path{
 				Protyle: "/stage/protyle",

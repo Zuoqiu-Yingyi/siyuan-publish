@@ -82,11 +82,12 @@ Retry = 3                        # 向思源内核发起 HTTP 请求的重试次
 
 # 思源发布内容访问权限控制属性
 [Siyuan.Publish.Access]
-# 请保持下列字段的 Name 值一致
 Name = "custom-publish-access" # 属性名称
-Public.Value = "public"        # 可公开访问的文档的属性值(白名单)
-Protected.Value = "protected"  # 鉴权后可公开访问的文档的属性值
-Private.Value = "private"      # 不可公开访问的文档的属性值(黑名单)
+Default = "private"            # 默认的文档访问权限默认值(文档页面设置为静态加载模式时无效)
+
+Public.Value = "public"       # 可公开访问的文档的属性值(白名单)
+Protected.Value = "protected" # 鉴权后可公开访问的文档的属性值
+Private.Value = "private"     # 不可公开访问的文档的属性值(黑名单)
 
 
 # 渲染器配置
@@ -106,6 +107,12 @@ CodeLineWrap = true                                            # 代码行是否
 CodeLigatures = true                                           # 代码是否启用连字符
 CodeSyntaxHighlightLineNum = true                              # 代码块是否显示行号
 PlantUMLServePath = "https://www.plantuml.com/plantuml/svg/~1" # plant UML 渲染服务 URL
+
+# 鼠标悬浮预览超链接
+[Render.Popover]
+Timeout = 500   # 鼠标悬浮触发时间(单位: ms)
+Width = "33vw"  # 超链接预览子窗口默认宽度
+Height = "50vh" # 超链接预览子窗口默认高度
 
 # 渲染器资源文件目录
 [Render.Path]

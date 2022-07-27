@@ -37,19 +37,6 @@ func Init() {
 	// REF [迁移 | GORM](https://gorm.io/zh_CN/docs/migration.html)
 	DB.AutoMigrate(&ACL{}, &Access{}, &Block{}, &Doc{})
 
-	if config.C.Database.Reset {
-		/* 删除数据库中所有记录 */
-		// REF [全局删除](https://gorm.io/zh_CN/docs/delete.html#%E9%98%BB%E6%AD%A2%E5%85%A8%E5%B1%80%E5%88%A0%E9%99%A4)
-		global := DB.Session(&gorm.Session{AllowGlobalUpdate: true})
-		global.Delete(&ACL{})
-		global.Delete(&Access{})
-		global.Delete(&Block{})
-		global.Delete(&Doc{})
-
-		/* 初始化 ACL */
-		initACL()
-	}
-
 	switch config.C.Server.Mode.Page {
 	case "dynamic":
 		fallthrough
@@ -76,6 +63,7 @@ func clearDB() {
 	global.Delete(&Access{})
 	global.Delete(&Block{})
 	global.Delete(&Doc{})
+	fmt.Println("Clear database successfully.")
 }
 
 /* 初始化 ACL*/
@@ -90,7 +78,7 @@ func initACL() {
 	acls := make([]ACL, 0, len(acl)+1)
 	accesses := make([]Access, 0, len(acl))
 
-	acls = append(acls, ACL{ID: "", Access: "?"}) // 空记录表示未设置访问权限
+	acls = append(acls, ACL{ID: "", Access: config.C.Siyuan.Publish.Access.Default}) // ID 为空字符串的记录表示默认权限
 	for root_id, access := range acl {
 		acls = append(acls, ACL{
 			ID:     root_id,
@@ -111,6 +99,7 @@ func initACL() {
 	// 	Columns:   []clause.Column{{Name: "id"}},
 	// 	DoUpdates: clause.AssignmentColumns([]string{"access", "updated_at"}),
 	// }).Create(&ACLs) // 插入或更新
+	fmt.Println("Initrialize ACL successfully.")
 }
 
 /* 载入数据 */
@@ -198,7 +187,7 @@ func loadData() {
 		case config.C.Siyuan.Publish.Access.Public.Value:
 			fallthrough
 		case config.C.Siyuan.Publish.Access.Protected.Value:
-			accesses := make([]Access, 0, 0)
+			accesses := make([]Access, 0)
 			/* 获得绑定某个可访问 ACL 项的所有文档 */
 			DB.Where(&Access{ACL_ID: acl.ID}).Find(&accesses)
 			for _, access := range accesses {
@@ -219,7 +208,7 @@ func loadData() {
 	}
 
 	/* 为可访问的 Access 记录构建 Block 表 */
-	docs := make([]Doc, 0, 0)
+	docs := make([]Doc, 0)
 	DB.Select("id", "path").Find(&docs)
 	for _, doc := range docs {
 		r, err = client.SQL(client.C.R(), fmt.Sprintf(`
@@ -251,4 +240,5 @@ func loadData() {
 			UpdateAll: true,
 		}).Create(&blocks)
 	}
+	fmt.Println("Loaded all data successfully.")
 }

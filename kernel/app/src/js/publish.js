@@ -36,10 +36,9 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
         url: /^siyuan:\/\/blocks\/(\d{14}\-[0-9a-z]{7})/,
     };
     const POPOVER_TRIGGER = "popover-trigger"; // 可悬浮预览元素的类名
-    const POPOVER_TIMEOUT = 1000; // 悬浮预览元素的触发延时
     const POPOVER_SIZE = { // 悬浮预览元素的尺寸
-        width: window.top.document.documentElement.clientWidth / 3,
-        height: window.top.document.documentElement.clientHeight / 2,
+        width: window.top.publish.config.popover.width,
+        height: window.top.publish.config.popover.height,
     };
     const TYPE_ICON_MAP = {
         NodeAudio: "#iconRecord",
@@ -167,8 +166,8 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
                 const block__popover = doc.createElement("div"); // 悬浮预览显示元素
                 block__popover.classList.add("block__popover", "block__popover--move", "block__popover--open");
                 block__popover.style.zIndex = popover.z_index++;
-                block__popover.style.width = `${POPOVER_SIZE.width}px`;
-                block__popover.style.height = `${POPOVER_SIZE.height}px`;
+                block__popover.style.width = POPOVER_SIZE.width;
+                block__popover.style.height = POPOVER_SIZE.height;
                 const midline = { // 窗口中线
                     x: doc.documentElement.clientWidth / 2,
                     y: doc.documentElement.clientHeight / 2,
@@ -184,20 +183,24 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
                     case position.x > midline.x
                         && position.y < midline.y:
                         // 右上象限
-                        block__popover.style.left = `${position.x - POPOVER_SIZE.width}px`;
+                        // block__popover.style.left = `${position.x - POPOVER_SIZE.width}px`;
+                        block__popover.style.left = `calc(${position.x}px - ${POPOVER_SIZE.width})`;
                         block__popover.style.top = `${position.y}px`;
                         break;
                     case position.x < midline.x
                         && position.y > midline.y:
                         // 左下象限
                         block__popover.style.left = `${position.x}px`;
-                        block__popover.style.top = `${position.y - POPOVER_SIZE.height}px`;
+                        // block__popover.style.top = `${position.y - POPOVER_SIZE.height}px`;
+                        block__popover.style.top = `calc(${position.y}px - ${POPOVER_SIZE.height})`;
                         break;
                     case position.x >= midline.x
                         && position.y >= midline.y:
                         // 右下象限
-                        block__popover.style.left = `${position.x - POPOVER_SIZE.width}px`;
-                        block__popover.style.top = `${position.y - POPOVER_SIZE.height}px`;
+                        // block__popover.style.left = `${position.x - POPOVER_SIZE.width}px`;
+                        // block__popover.style.top = `${position.y - POPOVER_SIZE.height}px`;
+                        block__popover.style.left = `calc(${position.x}px - ${POPOVER_SIZE.width})`;
+                        block__popover.style.top = `calc(${position.y}px - ${POPOVER_SIZE.height})`;
                         break;
                 }
                 block__popover.innerHTML = `
@@ -380,7 +383,10 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
             if (window.top.publish.popover.timeout) {
                 clearTimeout(window.top.publish.popover.timeout);
             }
-            window.top.publish.popover.timeout = setTimeout(() => window.top.publish.popover.handler(item), POPOVER_TIMEOUT);
+            window.top.publish.popover.timeout = setTimeout(
+                () => window.top.publish.popover.handler(item),
+                window.top.publish.config.popover.timeout,
+            );
         });
         item.addEventListener("mouseleave", function () {
             if (window.top.publish.popover.timeout) {

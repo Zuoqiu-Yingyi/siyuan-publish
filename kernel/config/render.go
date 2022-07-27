@@ -3,6 +3,7 @@ package config
 type Render struct {
 	Appearance Appearance `json:"appearance"`
 	Editor     Editor     `json:"editor"`
+	Popover    Popover    `json:"popover"`
 	Path       Path       `json:"path"`
 	File       File       `json:"file"`
 }
@@ -20,6 +21,12 @@ type Editor struct {
 	CodeLigatures              bool     `json:"codeLigatures"`
 	CodeSyntaxHighlightLineNum bool     `json:"codeSyntaxHighlightLineNum"`
 	PlantUMLServePath          string   `json:"plantUMLServePath"`
+}
+
+type Popover struct {
+	Timeout int    `json:"timeout"`
+	Width   string `json:"width"`
+	Height  string `json:"height"`
 }
 
 type File struct {

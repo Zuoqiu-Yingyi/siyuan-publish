@@ -1,4 +1,4 @@
-/* 覆盖 *.config.toml 配置文件中定义的字段 */
+/* 覆盖 ./app/templates/config.html 配置文件中定义的字段 */
 // window.siyuan = {
 //     config: {
 //         appearance: { mode: 0, codeBlockThemeDark: "atom-one-dark", codeBlockThemeLight: "atom-one-light" },
@@ -60,7 +60,10 @@ window.publish.setFontSize = (fontSize, fontFamily, codeLigatures) => {
     );
 
     /* 设置题头 */
-    document.getElementById('title').style.minHeight = window.publish.config.title.height;
+    const background = document.querySelector(".protyle-background");
+    if (background) {
+        background.style.minHeight = window.publish.config.title.height;
+    }
     const title_img = window.publish.config.title.img
     if (title_img) {
         const img = document.getElementById('title-img');

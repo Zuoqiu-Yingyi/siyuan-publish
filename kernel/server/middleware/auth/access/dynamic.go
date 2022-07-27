@@ -53,22 +53,29 @@ func Dynamic(c *gin.Context) (bool, func(c *gin.Context), func(c *gin.Context)) 
 	// fmt.Printf("%#v\n%#v\n", acl, docs)
 
 	/* 根据访问权限判断是否继续或终止 */
+	var (
+		permission string // 访问权限值
+		ok         bool   // 是否查询到访问权限
+	)
 	for _, root_id := range docs {
-		if right, ok := acl[root_id]; ok {
-			c.Set("access", right)
-			switch right {
-			case config.C.Siyuan.Publish.Access.Public.Value:
-				return true, nil, nil
-			case config.C.Siyuan.Publish.Access.Protected.Value:
-				// TODO protected
-				fallthrough
-			case config.C.Siyuan.Publish.Access.Private.Value:
-				fallthrough
-			default:
-				return false, status.S.StatusAccessDenied, nil
-			}
+		if permission, ok = acl[root_id]; ok {
+			break
 		}
 	}
-	c.Set("access", "?")
-	return false, status.S.StatusAccessDenied, nil
+	if !ok { // 没有查询到访问权限, 设置为默认权限
+		permission = config.C.Siyuan.Publish.Access.Default
+	}
+	c.Set("access", permission)
+
+	switch permission {
+	case config.C.Siyuan.Publish.Access.Public.Value:
+		return true, nil, nil
+	case config.C.Siyuan.Publish.Access.Protected.Value:
+		// TODO protected
+		fallthrough
+	case config.C.Siyuan.Publish.Access.Private.Value:
+		fallthrough
+	default:
+		return false, status.S.StatusAccessDenied, nil
+	}
 }
