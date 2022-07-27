@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"html/template"
 	"io"
 	"os"
@@ -33,6 +34,8 @@ func Init() {
 	if config.C.Server.Static.Reset {
 		if err := os.RemoveAll(config.C.Server.Static.Path); err != nil {
 			panic(err)
+		} else {
+			fmt.Println("Removing static directory successfully.")
 		}
 	}
 

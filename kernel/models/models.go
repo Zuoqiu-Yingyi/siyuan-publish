@@ -63,7 +63,7 @@ func clearDB() {
 	global.Delete(&Access{})
 	global.Delete(&Block{})
 	global.Delete(&Doc{})
-	fmt.Println("Clear database successfully.")
+	fmt.Println("Clearing the database successfully.")
 }
 
 /* 初始化 ACL*/
@@ -99,7 +99,7 @@ func initACL() {
 	// 	Columns:   []clause.Column{{Name: "id"}},
 	// 	DoUpdates: clause.AssignmentColumns([]string{"access", "updated_at"}),
 	// }).Create(&ACLs) // 插入或更新
-	fmt.Println("Initrialize ACL successfully.")
+	fmt.Println("Initrializing the ACL successfully.")
 }
 
 /* 载入数据 */
@@ -240,5 +240,5 @@ func loadData() {
 			UpdateAll: true,
 		}).Create(&blocks)
 	}
-	fmt.Println("Loaded all data successfully.")
+	fmt.Println("Loading all data successfully.")
 }

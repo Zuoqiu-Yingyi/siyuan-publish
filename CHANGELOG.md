@@ -1,5 +1,8 @@
 # 更改日志 | CHANGE LOG
 
+## v0.1.1 / 2022-07-25
+
+- [v0.1.0 ... v0.1.1](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.0...v1.1.1)
 - 为每个块添加跳转超链接 | Add a link to each block to jump to it.
 - 文档内超链接支持鼠标悬浮小窗预览 | Hyperlinks within the document support popover preview.
 - 修复悬浮预览窗口拖拽失效问题 | Fixed the issue that dragging and dropping feature on the popover preview window failed.
