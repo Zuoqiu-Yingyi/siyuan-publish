@@ -1,3 +1,36 @@
+/**
+ * 拖动功能鼠标按下时的处理器
+ * @params {Event} e: 鼠标事件
+ * @params {HTMLElement} target: 拖拽的目标元素
+ * @params {HTMLElement} satge: 在哪个元素内拖拽
+ * @params {function} mousemoveHandler: 鼠标移动事件的处理器
+ */
+function dragMousedown(e, target, satge, mousemoveHandler) {
+    console.log("dragMousedown");
+    e.stopPropagation(); // 阻止冒泡
+    target.removeEventListener("mousedown", dragMousedown); // 避免重复触发
+    
+    /* 避免 mousemove 事件在 iframe 中无法触发 */
+    // REF [在 iframe 上无法捕获 mousemove](https://blog.csdn.net/DongFuPanda/article/details/109533365)
+    satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
+    
+    satge.addEventListener("mousemove", mousemoveHandler, true);
+}
+
+/**
+ * 拖动功能鼠标抬起时的处理器
+ * @params {Event} e: 鼠标事件
+ * @params {HTMLElement} target: 拖拽的目标元素
+ * @params {HTMLElement} satge: 在哪个元素内拖拽
+ * @params {function} mousemoveHandler: 鼠标移动事件的处理器
+ */
+function dragMouseup(e, target, satge, mousemoveHandler) {
+    e.stopPropagation(); // 阻止冒泡
+    satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
+    satge.removeEventListener("mousemove", mousemoveHandler, true);
+    target.addEventListener("mousedown", dragMousedown);
+}
+
 (() => {
     const url = new URL(window.location.href);
     const REG = {
@@ -5,6 +38,10 @@
     };
     const POPOVER_TRIGGER = "popover-trigger"; // 可悬浮预览元素的类名
     const POPOVER_TIMEOUT = 1000; // 悬浮预览元素的触发延时
+    const POPOVER_SIZE = { // 悬浮预览元素的尺寸
+        width: window.top.document.documentElement.clientWidth / 3,
+        height: window.top.document.documentElement.clientHeight / 2,
+    };
     const TYPE_ICON_MAP = {
         NodeAudio: "#iconRecord",
         NodeBlockQueryEmbed: "#iconSQL",
@@ -125,14 +162,10 @@
                 }
                 // console.log(element);
                 const block__popover = doc.createElement("div"); // 悬浮预览显示元素
-                const popover_size = { // 悬浮预览显示元素的尺寸
-                    width: doc.documentElement.clientWidth / 2,
-                    height: doc.documentElement.clientHeight / 2,
-                };
                 block__popover.classList.add("block__popover", "block__popover--move", "block__popover--open");
                 block__popover.style.zIndex = popover.z_index++;
-                block__popover.style.width = `${popover_size.width}px`;
-                block__popover.style.height = `${popover_size.height}px`;
+                block__popover.style.width = `${POPOVER_SIZE.width}px`;
+                block__popover.style.height = `${POPOVER_SIZE.height}px`;
                 const midline = { // 窗口中线
                     x: doc.documentElement.clientWidth / 2,
                     y: doc.documentElement.clientHeight / 2,
@@ -148,20 +181,20 @@
                     case position.x > midline.x
                         && position.y < midline.y:
                         // 右上象限
-                        block__popover.style.left = `${position.x - popover_size.width}px`;
+                        block__popover.style.left = `${position.x - POPOVER_SIZE.width}px`;
                         block__popover.style.top = `${position.y}px`;
                         break;
                     case position.x < midline.x
                         && position.y > midline.y:
                         // 左下象限
                         block__popover.style.left = `${position.x}px`;
-                        block__popover.style.top = `${position.y - popover_size.height}px`;
+                        block__popover.style.top = `${position.y - POPOVER_SIZE.height}px`;
                         break;
                     case position.x >= midline.x
                         && position.y >= midline.y:
                         // 右下象限
-                        block__popover.style.left = `${position.x - popover_size.width}px`;
-                        block__popover.style.top = `${position.y - popover_size.height}px`;
+                        block__popover.style.left = `${position.x - POPOVER_SIZE.width}px`;
+                        block__popover.style.top = `${position.y - POPOVER_SIZE.height}px`;
                         break;
                 }
                 block__popover.innerHTML = `
@@ -185,13 +218,17 @@
                     <div class="block__nwse"></div>
                     <div class="block__ew"></div>
                     <div class="block__ns"></div>`;
+
                 /* 标题栏可以拖动 */
                 // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
                 // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
                 const border = block__popover.querySelector(".block__icons--border");
+                const iframe = block__popover.querySelector("iframe");
                 // 鼠标移动时
                 var gragging = false;
-                function dragMousemove(e) {
+
+                /* 标题栏拖动功能 */
+                function borderDrag(e) {
                     // console.log(e);
                     let x = e.clientX - popover.drag.position.x;
                     let y = e.clientY - popover.drag.position.y;
@@ -206,27 +243,20 @@
                     block__popover.style.left = `${x}px`;
                     block__popover.style.top = `${y}px`;
                 }
-                function dragMousedown(e) {
+                border.addEventListener("mousedown", e => {
                     gragging = true; // 正在拖拽
-                    border.removeEventListener("mousedown", dragMousedown); // 避免重复触发
-
-                    /* 避免 mousemove 事件在 iframe 中无法触发 */
-                    doc.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
-
+                    block__popover.style.zIndex = popover.z_index++; // 将当前窗口置顶
                     /* 记录鼠标相对于小窗标题栏的位置 */
                     popover.drag.position.x = e.clientX - block__popover.offsetLeft; // 鼠标相对于预览左上角的横向偏移量(鼠标横坐标 - popover 的 左侧偏移量)
                     popover.drag.position.y = e.clientY - block__popover.offsetTop; // 鼠标相对于预览左上角的纵向偏移量(鼠标纵坐标 - popover 的 上侧偏移量)
 
-                    doc.addEventListener("mousemove", dragMousemove);
-                }
-                function dragMouseup() {
-                    gragging = false;
-                    doc.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
-                    doc.removeEventListener("mousemove", dragMousemove);
-                    border.addEventListener("mousedown", dragMousedown);
-                }
-                border.addEventListener("mousedown", dragMousedown);
-                border.addEventListener("mouseup", dragMouseup);
+                    dragMousedown(e, border, doc, borderDrag);
+                });
+                border.addEventListener("mouseup", e => {
+                    grabging = false;
+                    dragMouseup(e, border, doc, borderDrag);
+                });
+
                 /* 鼠标移出预览时关闭预览 */
                 const icon_pin = block__popover.querySelector('[data-type="pin"]');
                 function close(_) {
@@ -247,9 +277,6 @@
                 }
                 icon_pin.addEventListener("click", pin); // 钉住按钮
                 border.addEventListener("dblclick", pin); // 标题栏双击
-
-                /* 单击标题栏时置顶 */
-                border.addEventListener("mousedown", () => { block__popover.style.zIndex = popover.z_index++ }, true);
 
                 /* 关闭按钮单击 */
                 block__popover.querySelector('[data-type="close"]').addEventListener("click", _ => block__popover.remove());
