@@ -94,12 +94,31 @@
     /* 超链接鼠标悬浮预览 */
     if (window.top === window) { // 只在顶层窗口执行
         /* 注册多窗口共用的属性与方法 */
+        window.publish.mouse = {
+            position: { // 当前鼠标位置
+                x: 0,
+                y: 0,
+            },
+        };
+        /* 获得鼠标位置 */
+        document.addEventListener("mousemove", e => {
+            window.publish.mouse.position.x = e.pageX;
+            window.publish.mouse.position.y = e.pageY;
+        });
         window.publish.popover = {
+            drag: { // 拖拽
+                position: { // 相对位置
+                    x: 0,
+                    y: 0,
+                },
+            },
             timeout: null, // 定时器
             mouse_position: { x: 0, y: 0 }, // 鼠标位置
             z_index: 0, // 当前最高层级
             handler: (element) => { // 鼠标悬浮事件处理
                 const doc = window.top.document; // 顶层窗口的 document
+                const popover = window.top.publish.popover;
+                const position = window.top.publish.mouse.position;
                 const TIMEOUT = {
                     SHOW_MIN: 125, // 悬浮预览元素的显示最小时间
                     CLOSE: 0, // 悬浮预览元素的关闭延时
@@ -111,95 +130,107 @@
                     height: doc.documentElement.clientHeight / 2,
                 };
                 block__popover.classList.add("block__popover", "block__popover--move", "block__popover--open");
-                block__popover.style.zIndex = window.top.publish.popover.z_index++;
+                block__popover.style.zIndex = popover.z_index++;
                 block__popover.style.width = `${popover_size.width}px`;
                 block__popover.style.height = `${popover_size.height}px`;
                 const midline = { // 窗口中线
                     x: doc.documentElement.clientWidth / 2,
                     y: doc.documentElement.clientHeight / 2,
                 };
-                // console.log(window.top.publish.popover.mouse_position, midline);
+                // console.log(position, midline);
                 switch (true) { // 判断当前鼠标在屏幕哪个象限中
-                    case window.top.publish.popover.mouse_position.x <= midline.x
-                        && window.top.publish.popover.mouse_position.y <= midline.y:
+                    case position.x <= midline.x
+                        && position.y <= midline.y:
                         // 左上象限
-                        block__popover.style.left = `${window.top.publish.popover.mouse_position.x}px`;
-                        block__popover.style.top = `${window.top.publish.popover.mouse_position.y}px`;
+                        block__popover.style.left = `${position.x}px`;
+                        block__popover.style.top = `${position.y}px`;
                         break;
-                    case window.top.publish.popover.mouse_position.x > midline.x
-                        && window.top.publish.popover.mouse_position.y < midline.y:
+                    case position.x > midline.x
+                        && position.y < midline.y:
                         // 右上象限
-                        block__popover.style.left = `${window.top.publish.popover.mouse_position.x - popover_size.width}px`;
-                        block__popover.style.top = `${window.top.publish.popover.mouse_position.y}px`;
+                        block__popover.style.left = `${position.x - popover_size.width}px`;
+                        block__popover.style.top = `${position.y}px`;
                         break;
-                    case window.top.publish.popover.mouse_position.x < midline.x
-                        && window.top.publish.popover.mouse_position.y > midline.y:
+                    case position.x < midline.x
+                        && position.y > midline.y:
                         // 左下象限
-                        block__popover.style.left = `${window.top.publish.popover.mouse_position.x}px`;
-                        block__popover.style.top = `${window.top.publish.popover.mouse_position.y - popover_size.height}px`;
+                        block__popover.style.left = `${position.x}px`;
+                        block__popover.style.top = `${position.y - popover_size.height}px`;
                         break;
-                    case window.top.publish.popover.mouse_position.x >= midline.x
-                        && window.top.publish.popover.mouse_position.y >= midline.y:
+                    case position.x >= midline.x
+                        && position.y >= midline.y:
                         // 右下象限
-                        block__popover.style.left = `${window.top.publish.popover.mouse_position.x - popover_size.width}px`;
-                        block__popover.style.top = `${window.top.publish.popover.mouse_position.y - popover_size.height}px`;
+                        block__popover.style.left = `${position.x - popover_size.width}px`;
+                        block__popover.style.top = `${position.y - popover_size.height}px`;
                         break;
                 }
                 block__popover.innerHTML = `
-            <div class="block__icons block__icons--border">
-                <span class="fn__space fn__flex-1"></span>
-                <span data-type="pin" class="block__icon b3-tooltips b3-tooltips__sw" title="钉住">
-                    <svg>
-                        <use xlink:href="#iconPin"></use>
-                    </svg>
-                </span>
-                <span class="fn__space"></span>
-                <span data-type="close" class="block__icon b3-tooltips b3-tooltips__sw" title="关闭">
-                    <svg style="width: 10px">
-                        <use xlink:href="#iconClose"></use>
-                    </svg>
-                </span>
-            </div>
-            <div class="block__content">
-                <iframe src="${element.href}" data-src="" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="fn__flex-1"></iframe>
-            </div>
-            <div class="block__nwse"></div>
-            <div class="block__ew"></div>
-            <div class="block__ns"></div>`;
+                    <div class="block__icons block__icons--border">
+                        <span class="fn__space fn__flex-1"></span>
+                        <span data-type="pin" class="block__icon b3-tooltips b3-tooltips__sw" title="钉住">
+                            <svg>
+                                <use xlink:href="#iconPin"></use>
+                            </svg>
+                        </span>
+                        <span class="fn__space"></span>
+                        <span data-type="close" class="block__icon b3-tooltips b3-tooltips__sw" title="关闭">
+                            <svg style="width: 10px">
+                                <use xlink:href="#iconClose"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="block__content">
+                        <iframe src="${element.href}" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="fn__flex-1"></iframe>
+                    </div>
+                    <div class="block__nwse"></div>
+                    <div class="block__ew"></div>
+                    <div class="block__ns"></div>`;
                 /* 标题栏可以拖动 */
                 // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
+                // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
                 const border = block__popover.querySelector(".block__icons--border");
-                border.addEventListener("mousedown", e => {
-                    disX = e.clientX - block__popover.offsetLeft; // 鼠标相对于预览左上角的横向偏移量(鼠标横坐标 - popover 的 左侧偏移量)
-                    disY = e.clientY - block__popover.offsetTop; // 鼠标相对于预览左上角的纵向偏移量(鼠标纵坐标 - popover 的 上侧偏移量)
+                // 鼠标移动时
+                var gragging = false;
+                function dragMousemove(e) {
+                    // console.log(e);
+                    let x = e.clientX - popover.drag.position.x;
+                    let y = e.clientY - popover.drag.position.y;
+                    let window_width = doc.documentElement.clientWidth - block__popover.offsetWidth;
+                    let window_height = doc.documentElement.clientHeight - block__popover.offsetHeight;
 
-                    // 鼠标移动时
-                    doc.onmousemove = function (e) {
-                        let x = e.clientX - disX;
-                        let y = e.clientY - disY;
-                        let window_width = doc.documentElement.clientWidth - block__popover.offsetWidth;
-                        let window_height = doc.documentElement.clientHeight - block__popover.offsetHeight;
+                    x = (x < 0) ? 0 : x;                          // 当div1到窗口最左边时
+                    x = (x > window_width) ? window_width : x;    // 当div1到窗口最右边时
+                    y = (y < 0) ? 0 : y;                          // 当div1到窗口最上边时
+                    y = (y > window_height) ? window_height : y;  // 当div1到窗口最下边时
 
-                        x = (x < 0) ? 0 : x;                          // 当div1到窗口最左边时
-                        x = (x > window_width) ? window_width : x;    // 当div1到窗口最右边时
-                        y = (y < 0) ? 0 : y;                          // 当div1到窗口最上边时
-                        y = (y > window_height) ? window_height : y;  // 当div1到窗口最下边时
+                    block__popover.style.left = `${x}px`;
+                    block__popover.style.top = `${y}px`;
+                }
+                function dragMousedown(e) {
+                    gragging = true; // 正在拖拽
+                    border.removeEventListener("mousedown", dragMousedown); // 避免重复触发
 
-                        block__popover.style.left = `${x}px`;
-                        block__popover.style.top = `${y}px`;
-                    };
+                    /* 避免 mousemove 事件在 iframe 中无法触发 */
+                    doc.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
 
-                    // 鼠标抬起时
-                    doc.onmouseup = function () {
-                        doc.onmousemove = null;
-                        doc.onmouseup = null;
-                    };
-                });
+                    /* 记录鼠标相对于小窗标题栏的位置 */
+                    popover.drag.position.x = e.clientX - block__popover.offsetLeft; // 鼠标相对于预览左上角的横向偏移量(鼠标横坐标 - popover 的 左侧偏移量)
+                    popover.drag.position.y = e.clientY - block__popover.offsetTop; // 鼠标相对于预览左上角的纵向偏移量(鼠标纵坐标 - popover 的 上侧偏移量)
+
+                    doc.addEventListener("mousemove", dragMousemove);
+                }
+                function dragMouseup() {
+                    gragging = false;
+                    doc.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
+                    doc.removeEventListener("mousemove", dragMousemove);
+                    border.addEventListener("mousedown", dragMousedown);
+                }
+                border.addEventListener("mousedown", dragMousedown);
+                border.addEventListener("mouseup", dragMouseup);
                 /* 鼠标移出预览时关闭预览 */
                 const icon_pin = block__popover.querySelector('[data-type="pin"]');
                 function close(_) {
-                    if (!icon_pin.classList.contains("block__icon--active")) {
-                        // 如果钉住按钮未被激活，则关闭
+                    if (!gragging && !icon_pin.classList.contains("block__icon--active")) {
                         setTimeout(() => block__popover.remove(), TIMEOUT.CLOSE);
                     }
                 }
@@ -218,7 +249,7 @@
                 border.addEventListener("dblclick", pin); // 标题栏双击
 
                 /* 单击标题栏时置顶 */
-                border.addEventListener("click", () => { block__popover.style.zIndex = window.top.publish.popover.z_index++ }, true);
+                border.addEventListener("mousedown", () => { block__popover.style.zIndex = popover.z_index++ }, true);
 
                 /* 关闭按钮单击 */
                 block__popover.querySelector('[data-type="close"]').addEventListener("click", _ => block__popover.remove());
@@ -228,11 +259,6 @@
                 doc.body.append(block__popover);
             }
         }
-        /* 获得鼠标位置 */
-        document.addEventListener("mousemove", e => {
-            window.top.publish.popover.mouse_position.x = e.pageX;
-            window.top.publish.popover.mouse_position.y = e.pageY;
-        });
     }
     /* 鼠标悬浮在某个元素内一段时间后触发 */
     // REF [javascript - Iterating over result of getElementsByClassName using Array.forEach - Stack Overflow](https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach)
