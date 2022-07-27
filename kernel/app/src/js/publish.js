@@ -153,7 +153,7 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
             },
             timeout: null, // 定时器
             mouse_position: { x: 0, y: 0 }, // 鼠标位置
-            z_index: 0, // 当前最高层级
+            z_index: 1024, // 当前最高层级
             handler: (element) => { // 鼠标悬浮事件处理
                 const doc = window.top.document; // 顶层窗口的 document
                 const popover = window.top.publish.popover;

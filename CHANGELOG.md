@@ -1,5 +1,7 @@
 # 更改日志 | CHANGE LOG
 
+- 提高块跳转超链接与子窗口的 `z-index` 层级 | Raise the 'z-index' level of block jump hyperlinks and popover windows.
+
 ## v0.1.1 / 2022-07-25
 
 - [v0.1.0 ... v0.1.1](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.0...v1.1.1)
