@@ -10,7 +10,7 @@ SQLite = "./temp/publish.db" # 数据库文件, 可使用内存数据库模式 "
 # 服务器配置
 [Server]
 Debug = false                        # 调试模式
-Port = 8080                          # 发布服务端口
+Port = 80                            # 发布服务端口
 Logs = "./temp/logs/"                # 日志目录
 Templates = "./app/templates/*.html" # 模板目录
 
@@ -110,7 +110,7 @@ PlantUMLServePath = "https://www.plantuml.com/plantuml/svg/~1" # plant UML 渲�
 
 # 鼠标悬浮预览超链接
 [Render.Popover]
-Timeout = 500   # 鼠标悬浮触发时间(单位: ms)
+Timeout = 1000  # 鼠标悬浮触发时间(单位: ms)
 Width = "33vw"  # 超链接预览子窗口默认宽度
 Height = "50vh" # 超链接预览子窗口默认高度
 

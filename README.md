@@ -35,9 +35,10 @@ PS: The table is generated automatically using [All Contributors · GitHub](http
 
 ## 参考 & 感谢 | REFERENCE & THANKS
 
-| 作者 \| Author                                    | 项目 \| Project                                             | 许可证 \| License                                                               |
-| :------------------------------------------------ | :---------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| **[siyuan-note](https://github.com/siyuan-note)** | [siyuan-note/siyuan](https://github.com/siyuan-note/siyuan) | *[AGPL-3.0 license](https://github.com/siyuan-note/siyuan/blob/master/LICENSE)* |
+| 作者 \| Author                                    | 项目 \| Project                                                                 | 许可证 \| License                                                                    |
+| :------------------------------------------------ | :------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------- |
+| **[siyuan-note](https://github.com/siyuan-note)** | [siyuan-note/siyuan](https://github.com/siyuan-note/siyuan)                     | *[AGPL-3.0 license](https://github.com/siyuan-note/siyuan/blob/master/LICENSE)*      |
+| **[goreleaser](https://github.com/goreleaser)**   | [goreleaser/goreleaser-action](https://github.com/goreleaser/goreleaser-action) | *[MIT license](https://github.com/goreleaser/goreleaser-action/blob/master/LICENSE)* |
 
 ## 依赖 | DEPENDENCIES
 
