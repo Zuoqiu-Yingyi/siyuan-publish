@@ -13,6 +13,9 @@
 #editor #preview [data-node-id] > .copy-link > svg {
   color: var(--b3-theme-on-surface-light);
 }
+#editor #preview [data-node-id].hr > .copy-link {
+  top: -0.25rem;
+}
 #editor #preview [data-node-id]:hover > .copy-link {
   display: block;
 }
