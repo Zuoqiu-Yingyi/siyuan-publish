@@ -2,9 +2,11 @@ package models
 
 import (
 	"errors"
+	"math"
+	"time"
+
 	"publish/client"
 	"publish/utils"
-	"time"
 
 	"gorm.io/gorm"
 )
@@ -85,20 +87,31 @@ func GetDoc(id string) (*Doc, error) {
 	}
 
 	/* 查询文档 DOM */
-	r, err = client.GetBlockDomByID(client.C.R(), id, 0)
+
+	// 使用嵌入块查询 API
+	// r, err = client.GetBlockDomByID(client.C.R(), id, 0)
+	// r, err_msg = client.Response(r, err)
+	// if r == nil {
+	// 	return nil, errors.New(err_msg)
+	// }
+
+	// blocks := r.Data.(map[string]interface{})["blocks"].([]interface{})
+	// switch {
+	// case len(blocks) == 0:
+	// 	return nil, errors.New("document not found")
+	// default:
+	// 	record := blocks[0].(map[string]interface{})
+	// 	doc.Dom = record["content"].(string)
+	// }
+
+	// 使用文档加载 API
+	r, err = client.GetDoc(client.C.R(), id, "", 0, math.MaxInt32)
 	r, err_msg = client.Response(r, err)
 	if r == nil {
 		return nil, errors.New(err_msg)
-
 	}
-	blocks := r.Data.(map[string]interface{})["blocks"].([]interface{})
-	switch {
-	case len(blocks) == 0:
-		return nil, errors.New("document not found")
 
-	default:
-		record := blocks[0].(map[string]interface{})
-		doc.Dom = record["content"].(string)
-	}
+	data := r.Data.(map[string]interface{})
+	doc.Dom = data["content"].(string)
 	return doc, nil
 }
