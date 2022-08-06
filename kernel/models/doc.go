@@ -77,7 +77,7 @@ func GetDoc(id string) (*Doc, error) {
 
 		doc.ID = id
 		doc.Path = path[1 : len(path)-3]
-		doc.Hpath = hpath
+		doc.Hpath = hpath[1:]
 		doc.Title = record["content"].(string)
 		doc.Tag = record["tag"].(string)
 

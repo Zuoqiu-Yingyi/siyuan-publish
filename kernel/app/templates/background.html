@@ -44,8 +44,8 @@
     </div>
     <!-- 标签 -->
     <div class="protyle-background__tags">
-        {{ range $i, $v := .Tag }}
-        <div class="item item--{{mod $i 4}}" data-type="open-search">{{$v}}</div>
+        {{ range $i, $tag := .Tags }}
+        <div class="item item--{{mod $i 4}}" data-type="open-search">{{$tag}}</div>
         {{ end }}
         <!-- <div class="item item--0" data-type="open-search">标签0
             <svg data-type="remove-tag">

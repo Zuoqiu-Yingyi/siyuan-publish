@@ -19,11 +19,13 @@
 #editor #preview [data-node-id]:hover > .copy-link {
   display: block;
 }
-#editor #preview [data-node-id] a {
+#editor #preview a,
+#editor #breadcrumb a {
   outline: 0;
   text-decoration: none;
   color: transparent;
 }
-#editor #preview [data-node-id] a:hover {
+#editor #preview a:hover,
+#editor #breadcrumb a:hover {
   text-decoration: none;
 }

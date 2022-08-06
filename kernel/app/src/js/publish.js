@@ -33,6 +33,7 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
 (() => {
     const url = new URL(window.location.href);
     const REG = {
+        id: /^\d{14}\-[0-9a-z]{7}$/,
         url: /^siyuan:\/\/blocks\/(\d{14}\-[0-9a-z]{7})/,
     };
     const POPOVER_TRIGGER = "popover-trigger"; // 可悬浮预览元素的类名
@@ -111,6 +112,21 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
         a.appendChild(item);
     });
 
+    /* 将面包屑转化为超链接 */
+    document.querySelectorAll(`#breadcrumb .protyle-breadcrumb__item[data-node-id]`).forEach(item => {
+        const id = item.dataset.nodeId;
+        const a = document.createElement("a");
+        publish_url.searchParams.set("id", id);
+        a.href = publish_url.href;
+
+        /* 为图标设置鼠标悬浮预览属性 */
+        const icon = item.querySelector(".popover__block");
+        if (icon) icon.classList.add(POPOVER_TRIGGER);
+
+        item.parentElement.replaceChild(a, item);
+        a.appendChild(item);
+    });
+
     /* 为所有块添加悬浮复制超链接 */
     document.querySelectorAll(`#preview [data-node-id]`).forEach(item => {
         publish_url.searchParams.set("id", item.dataset.nodeId);
@@ -155,6 +171,10 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
             mouse_position: { x: 0, y: 0 }, // 鼠标位置
             z_index: 1024, // 当前最高层级
             handler: (element) => { // 鼠标悬浮事件处理
+                const href = element.href
+                    || element.dataset.nodeId
+                    ? (publish_url.searchParams.set("id", element.dataset.nodeId), publish_url.href)
+                    : '#';
                 const doc = window.top.document; // 顶层窗口的 document
                 const popover = window.top.publish.popover;
                 const position = window.top.publish.mouse.position;
@@ -231,7 +251,7 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
                         </span>
                     </div>
                     <div class="block__content">
-                        <iframe src="${element.href}" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="fn__flex-1"></iframe>
+                        <iframe src="${href}" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="fn__flex-1"></iframe>
                     </div>
                     <div class="block__nwse"></div>
                     <div class="block__ew"></div>

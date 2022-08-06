@@ -35,7 +35,7 @@ func Block(c *gin.Context, doc *models.Doc) {
 	c.HTML(http.StatusOK, "block.html", gin.H{
 		"Path":        doc.Path,
 		"Hpath":       doc.Hpath,
-		"Tag":         tags,
+		"Tags":        tags,
 		"Icon":        doc.Icon,
 		"Title":       doc.Title,
 		"TitleImg":    doc.TitleImg,

@@ -26,6 +26,16 @@
 
 <body class="fn__flex-column">
     <div id="editor">
+        <div class="protyle-breadcrumb">
+            <div id="breadcrumb" class="protyle-breadcrumb__bar protyle-breadcrumb__bar--nowrap">
+                <!-- 笔记本 -->
+                <span class="protyle-breadcrumb__item">
+                    <svg class="custom-icon">
+                        <use xlink:href="#icon-1f4d4"></use>
+                    </svg>
+                </span>
+            </div>
+        </div>
         <div class="protyle-content">
             {{ template "background.html" . }}
             {{ template "title.html" . }}

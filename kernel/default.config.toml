@@ -110,9 +110,9 @@ PlantUMLServePath = "https://www.plantuml.com/plantuml/svg/~1" # plant UML 渲�
 
 # 鼠标悬浮预览超链接
 [Render.Popover]
-Timeout = 1000  # 鼠标悬浮触发时间(单位: ms)
-Width = "33vw"  # 超链接预览子窗口默认宽度
-Height = "50vh" # 超链接预览子窗口默认高度
+Timeout = 1000    # 鼠标悬浮触发时间(单位: ms)
+Width = "33vmax"  # 超链接预览子窗口默认宽度
+Height = "50vmin" # 超链接预览子窗口默认高度
 
 # 渲染器资源文件目录
 [Render.Path]
