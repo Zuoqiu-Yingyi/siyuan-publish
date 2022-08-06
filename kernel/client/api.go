@@ -83,6 +83,38 @@ func SearchEmbedBlock(request *req.Request, stmt string, headingMode int, exclud
 }
 
 /*
+查询文档
+	@params request *req.Request: HTTP 客户端请求对象
+	@params id string: 文档块/文档内顶级块 ID
+	@params k string: 需要标记(高亮)的文本
+	@params mode int: 查询模式
+		REF https://github.com/siyuan-note/siyuan/blob/b94267be291ec0f2700c92ec210b4bde2462522f/kernel/model/file.go#L701
+		0: 仅加载当前 ID 指定的块
+		1: 加载上文
+		2: 加载下文
+		3: 加载上下文
+		4: 从文档末尾加载上文
+	@params size int: 查询的块数量
+
+	@return *ResponseBody: 响应体
+	@return error: 错误
+*/
+func GetDoc(request *req.Request, id, k string, mode, size int) (r *ResponseBody, err error) {
+	body := struct {
+		ID   string `json:"id"`
+		K    string `json:"k"`
+		Mode int    `json:"mode"`
+		Size int    `json:"size"`
+	}{
+		ID:   id,
+		K:    k,
+		Mode: mode,
+		Size: size,
+	}
+	return Request(request, "/api/filetree/getDoc", body)
+}
+
+/*
 通过 ID 获得指定块的 DOM
 	@params request *req.Request: HTTP 客户端请求对象
 	@params id string: 块 ID
