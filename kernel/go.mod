@@ -1,13 +1,13 @@
 module publish
 
-go 1.18
+go 1.19
 
 require (
 	github.com/88250/lute v1.7.4
 	github.com/BurntSushi/toml v1.2.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/glebarez/sqlite v1.4.6
-	github.com/imroc/req/v3 v3.14.4
+	github.com/imroc/req/v3 v3.16.0
 	gorm.io/gorm v1.23.8
 )
 

@@ -21,6 +21,7 @@
 }
 #editor #preview a,
 #editor #breadcrumb a {
+  /* 取消附加的超链接样式 */
   outline: 0;
   text-decoration: none;
   color: transparent;
@@ -28,4 +29,11 @@
 #editor #preview a:hover,
 #editor #breadcrumb a:hover {
   text-decoration: none;
+}
+#editor .protyle-breadcrumb {
+  /* 面包屑栏 */
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  box-shadow: 0 0.125em 0.5em 0 var(--b3-theme-on-surface-light);
 }
