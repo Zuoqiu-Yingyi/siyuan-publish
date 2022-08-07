@@ -2,7 +2,8 @@
 
 ## v0.1.2 / 2022-08-08
 
-- [v0.1.1 ... v0.1.2](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.1...v1.1.2)
+- [v0.1.1 ... v0.1.2](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.1...v0.1.2)
+- 配置文件 [kernel/default.config.toml](https://github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.1...v0.1.2#diff-a2009bcf0ab7d03e622ce6e64f71a7cf631de7f47db071364f2f41a93544c098) 有变更 | There are changes to the configuration file [kernel/default.config.toml](https://github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.1...v0.1.2#diff-a2009bcf0ab7d03e622ce6e64f71a7cf631de7f47db071364f2f41a93544c098).
 - 提高块跳转超链接与子窗口的 `z-index` 层级 | Raise the 'z-index' level of block jump hyperlinks and popover windows.
 - 将子窗口预览功能默认触发时间调整为 `1000ms` | Adjust the time of the default trigger time of the popover preview window to `1000ms`.
 - 使用 `getDoc` API 查询文档的 DOM | Use the `getDoc` API to query the DOM of the document.
@@ -16,7 +17,8 @@
 
 ## v0.1.1 / 2022-07-28
 
-- [v0.1.0 ... v0.1.1](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.0...v1.1.1)
+- [v0.1.0 ... v0.1.1](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.0...v0.1.1)
+- 配置文件 [kernel/default.config.toml](https://github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.0...v0.1.1#diff-a2009bcf0ab7d03e622ce6e64f71a7cf631de7f47db071364f2f41a93544c098) 有变更 | There are changes to the configuration file [kernel/default.config.toml](https://github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.0...v0.1.1#diff-a2009bcf0ab7d03e622ce6e64f71a7cf631de7f47db071364f2f41a93544c098).
 - 为每个块添加跳转超链接 | Add a link to each block to jump to it.
 - 文档内超链接支持鼠标悬浮小窗预览 | Hyperlinks within the document support popover preview.
 - 修复悬浮预览窗口拖拽失效问题 | Fixed the issue that dragging and dropping feature on the popover preview window failed.
