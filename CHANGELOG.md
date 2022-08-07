@@ -4,6 +4,7 @@
 - 将子窗口预览功能默认触发时间调整为 `1000ms` | Adjust the time of the default trigger time of the popover preview window to `1000ms`.
 - 使用 `getDoc` API 查询文档的 DOM | Use the `getDoc` API to query the DOM of the document.
 - 为文档添加面包屑 | Add a breadcrumb for the document.
+- 鼠标悬浮块超链接时高亮对应的块 | Highlight the block when the mouse is hovering over the block hyperlink.
 
 ## v0.1.1 / 2022-07-28
 

@@ -1,35 +1,3 @@
-/**
- * 拖动功能鼠标按下时的处理器
- * @params {Event} e: 鼠标事件
- * @params {HTMLElement} target: 拖拽的目标元素
- * @params {HTMLElement} satge: 在哪个元素内拖拽
- * @params {function} mousemoveHandler: 鼠标移动事件的处理器
- */
-function dragMousedown(e, target, satge, mousemoveHandler) {
-    e.stopPropagation(); // 阻止冒泡
-    target.removeEventListener("mousedown", dragMousedown); // 避免重复触发
-
-    /* 避免 mousemove 事件在 iframe 中无法触发 */
-    // REF [在 iframe 上无法捕获 mousemove](https://blog.csdn.net/DongFuPanda/article/details/109533365)
-    satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
-
-    satge.addEventListener("mousemove", mousemoveHandler, true);
-}
-
-/**
- * 拖动功能鼠标抬起时的处理器
- * @params {Event} e: 鼠标事件
- * @params {HTMLElement} target: 拖拽的目标元素
- * @params {HTMLElement} satge: 在哪个元素内拖拽
- * @params {function} mousemoveHandler: 鼠标移动事件的处理器
- */
-function dragMouseup(e, target, satge, mousemoveHandler) {
-    e.stopPropagation(); // 阻止冒泡
-    satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
-    satge.removeEventListener("mousemove", mousemoveHandler, true);
-    target.addEventListener("mousedown", dragMousedown);
-}
-
 (() => {
     const url = new URL(window.location.href);
     const REG = {
@@ -37,6 +5,7 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
         url: /^siyuan:\/\/blocks\/(\d{14}\-[0-9a-z]{7})/,
     };
     const POPOVER_TRIGGER = "popover-trigger"; // 可悬浮预览元素的类名
+    const BLOCKS_SELECTED = "protyle-wysiwyg--select"; // 选中的块的类名
     const POPOVER_SIZE = { // 悬浮预览元素的尺寸
         width: window.top.publish.config.popover.width,
         height: window.top.publish.config.popover.height,
@@ -72,12 +41,51 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
         NodeWidget: "#iconBoth",
     }
 
+    /**
+     * 拖动功能鼠标按下时的处理器
+     * @params {Event} e: 鼠标事件
+     * @params {HTMLElement} target: 拖拽的目标元素
+     * @params {HTMLElement} satge: 在哪个元素内拖拽
+     * @params {function} mousemoveHandler: 鼠标移动事件的处理器
+     */
+    function dragMousedown(e, target, satge, mousemoveHandler) {
+        e.stopPropagation(); // 阻止冒泡
+        target.removeEventListener("mousedown", dragMousedown); // 避免重复触发
+
+        /* 避免 mousemove 事件在 iframe 中无法触发 */
+        // REF [在 iframe 上无法捕获 mousemove](https://blog.csdn.net/DongFuPanda/article/details/109533365)
+        satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
+
+        satge.addEventListener("mousemove", mousemoveHandler, true);
+    }
+
+    /**
+     * 拖动功能鼠标抬起时的处理器
+     * @params {Event} e: 鼠标事件
+     * @params {HTMLElement} target: 拖拽的目标元素
+     * @params {HTMLElement} satge: 在哪个元素内拖拽
+     * @params {function} mousemoveHandler: 鼠标移动事件的处理器
+     */
+    function dragMouseup(e, target, satge, mousemoveHandler) {
+        e.stopPropagation(); // 阻止冒泡
+        satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
+        satge.removeEventListener("mousemove", mousemoveHandler, true);
+        target.addEventListener("mousedown", dragMousedown);
+    }
+
+    /**
+     * 取消所有块的选中状态
+     */
+    function clearSelected() {
+        Array.from(document.getElementsByClassName(BLOCKS_SELECTED)).forEach(item => item.classList.remove(BLOCKS_SELECTED));
+    }
+
     /* 定位到指定的块并高亮 */
     const id = url.searchParams.get("id");
     if (id) {
         const block = document.querySelector(`[data-node-id="${id}"]`);
         if (block) {
-            block.classList.add("protyle-wysiwyg--select"); // 高亮指定的块
+            block.classList.add(BLOCKS_SELECTED); // 高亮指定的块
             block.scrollIntoView(true); // 滚动到指定的块
         }
     }
@@ -138,6 +146,14 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
         a.href = publish_url.href;
         a.title = publish_url.href;
         a.innerHTML = `<svg style="height: 1rem; width: 1rem"><use xlink:href="${icon}"></use></svg>`
+
+        /* 鼠标悬浮超链接时高亮对应的块 */
+        a.addEventListener("mouseenter", () => {
+            clearSelected(); // 取消所有块的高亮
+            item.classList.add(BLOCKS_SELECTED); // 高亮当前块
+        });
+        a.addEventListener("mouseleave", clearSelected);
+
         item.appendChild(a);
         // item.parentElement.insertBefore(a, item);
     });
@@ -399,7 +415,7 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
     /* 鼠标悬浮在某个元素内一段时间后触发 */
     // REF [javascript - Iterating over result of getElementsByClassName using Array.forEach - Stack Overflow](https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach)
     Array.from(document.getElementsByClassName(POPOVER_TRIGGER)).forEach(item => {
-        item.addEventListener("mouseenter", function () {
+        item.addEventListener("mouseenter", () => {
             if (window.top.publish.popover.timeout) {
                 clearTimeout(window.top.publish.popover.timeout);
             }
@@ -408,7 +424,7 @@ function dragMouseup(e, target, satge, mousemoveHandler) {
                 window.top.publish.config.popover.timeout,
             );
         });
-        item.addEventListener("mouseleave", function () {
+        item.addEventListener("mouseleave", () => {
             if (window.top.publish.popover.timeout) {
                 clearTimeout(window.top.publish.popover.timeout);
             }
