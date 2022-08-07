@@ -188,9 +188,9 @@
             z_index: 1024, // 当前最高层级
             handler: (element) => { // 鼠标悬浮事件处理
                 const href = element.href
-                    || element.dataset.nodeId
-                    ? (publish_url.searchParams.set("id", element.dataset.nodeId), publish_url.href)
-                    : '#';
+                    || (element.dataset.nodeId
+                        ? (publish_url.searchParams.set("id", element.dataset.nodeId), publish_url.href)
+                        : '#');
                 const doc = window.top.document; // 顶层窗口的 document
                 const popover = window.top.publish.popover;
                 const position = window.top.publish.mouse.position;

@@ -5,6 +5,7 @@
 - 使用 `getDoc` API 查询文档的 DOM | Use the `getDoc` API to query the DOM of the document.
 - 为文档添加面包屑 | Add a breadcrumb for the document.
 - 鼠标悬浮块超链接时高亮对应的块 | Highlight the block when the mouse is hovering over the block hyperlink.
+- 修复跨域超链接预览功能 | Fix the cross-domain hyperlink preview function.
 
 ## v0.1.1 / 2022-07-28
 
