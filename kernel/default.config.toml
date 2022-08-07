@@ -25,7 +25,8 @@ File = "cache" # 资源文件加载模式
 # Web 服务首页配置
 [Server.Index]
 Paths = ["/"]                            # 首页路径
-URL = "/block?id=20200812220555-lj3enxa" # 首页重定向至的
+URL = "/block?id=20200812220555-lj3enxa" # 首页重定向目标
+Icon = "#icon-1f4d4"                     # 首页图标
 
 # 静态 Web 文件服务目录配置
 [Server.Static]

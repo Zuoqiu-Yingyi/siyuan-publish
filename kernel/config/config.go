@@ -67,7 +67,8 @@ func LoadDefaultConfig() {
 				Paths: []string{
 					"/",
 				},
-				URL: "/block?id=20200812220555-lj3enxa",
+				URL:  "/block?id=20200812220555-lj3enxa",
+				Icon: "#icon-1f4d4",
 			},
 			Static: Static{
 				Reset: false,

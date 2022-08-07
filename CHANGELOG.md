@@ -1,5 +1,7 @@
 # 更改日志 | CHANGE LOG
 
+- 为面包屑添加主页项 | Add the home page item to the breadcrumbs.
+
 ## v0.1.2 / 2022-08-08
 
 - [v0.1.1 ... v0.1.2](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.1...v0.1.2)

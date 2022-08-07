@@ -120,6 +120,21 @@
         a.appendChild(item);
     });
 
+    /* 文档首页转化为超链接 */
+    const home = document.getElementById("home");
+    if (home) {
+        const a = document.createElement("a");
+        a.href = window.publish.home.url;
+        a.title = "主页";
+
+        /* 为图标设置鼠标悬浮预览属性 */
+        const icon = home.querySelector(".popover__block");
+        if (icon) icon.classList.add(POPOVER_TRIGGER);
+
+        home.parentElement.replaceChild(a, home);
+        a.appendChild(home);
+    }
+
     /* 将面包屑转化为超链接 */
     document.querySelectorAll(`#breadcrumb .protyle-breadcrumb__item[data-node-id]`).forEach(item => {
         const id = item.dataset.nodeId;

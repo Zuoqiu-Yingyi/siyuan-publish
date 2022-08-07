@@ -33,6 +33,10 @@ func Block(c *gin.Context, doc *models.Doc) {
 	}
 
 	c.HTML(http.StatusOK, "block.html", gin.H{
+		"Home": gin.H{
+			"URL":  config.C.Server.Index.URL,
+			"Icon": config.C.Server.Index.Icon,
+		},
 		"Path":        doc.Path,
 		"Hpath":       doc.Hpath,
 		"Tags":        tags,

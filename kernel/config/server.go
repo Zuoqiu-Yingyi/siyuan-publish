@@ -19,6 +19,7 @@ type Mode struct {
 type Index struct {
 	Paths []string `json:"path"` // 首页路径
 	URL   string   `json:"url"`  // 首页重定向至的 URL
+	Icon  string   `json:"icon"` // 首页图标
 }
 
 type Static struct {
