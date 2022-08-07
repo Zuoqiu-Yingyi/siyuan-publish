@@ -21,6 +21,9 @@ type Editor struct {
 	CodeLigatures              bool     `json:"codeLigatures"`
 	CodeSyntaxHighlightLineNum bool     `json:"codeSyntaxHighlightLineNum"`
 	PlantUMLServePath          string   `json:"plantUMLServePath"`
+
+	Contenteditable bool `json:"contenteditable"` // 文档内容是否可编辑
+	Spellcheck      bool `json:"spellcheck"`      // 文档内容是否开启拼写检查
 }
 
 type Popover struct {

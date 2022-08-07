@@ -48,7 +48,7 @@ func LoadConfigFile(path string) error {
 
 func LoadDefaultConfig() {
 	C = &Config{
-		Debug: true,
+		Debug: false,
 		Database: Database{
 			Debug:  false,
 			Reset:  true,
@@ -56,7 +56,7 @@ func LoadDefaultConfig() {
 		},
 		Server: Server{
 			Debug:     false,
-			Port:      8080,
+			Port:      80,
 			Logs:      "./temp/logs/",
 			Templates: "./app/templates/*.html",
 			Mode: Mode{
@@ -128,7 +128,7 @@ func LoadDefaultConfig() {
 		},
 		Render: Render{
 			Appearance: Appearance{
-				Mode:                0,
+				Mode:                2,
 				CodeBlockThemeLight: "atom-one-light",
 				CodeBlockThemeDark:  "atom-one-dark",
 			},
@@ -139,11 +139,14 @@ func LoadDefaultConfig() {
 				CodeLigatures:              true,
 				CodeSyntaxHighlightLineNum: true,
 				PlantUMLServePath:          "https://www.plantuml.com/plantuml/svg/~1",
+
+				Contenteditable: false,
+				Spellcheck:      false,
 			},
 			Popover: Popover{
-				Timeout: 500,
-				Width:   "33vw",
-				Height:  "50vh",
+				Timeout: 1000,
+				Width:   "33vmax",
+				Height:  "50vmin",
 			},
 			Path: Path{
 				Protyle: "/stage/protyle",

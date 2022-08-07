@@ -6,6 +6,7 @@
 - 为文档添加面包屑 | Add a breadcrumb for the document.
 - 鼠标悬浮块超链接时高亮对应的块 | Highlight the block when the mouse is hovering over the block hyperlink.
 - 修复跨域超链接预览功能 | Fix the cross-domain hyperlink preview function.
+- 支持在配置文件中设置文档页面是否可编辑 & 是否开启拼写检查 | Support setting whether the document page is editable and whether to enable the spelling check in the configuration file.
 
 ## v0.1.1 / 2022-07-28
 

@@ -72,7 +72,7 @@ window.publish.createIcon = (icon, className, id = null) => {
  * @params {string} text: 面包屑项的文本
  * @params {string} id: 面包屑项的 ID
  * @params {string} icon: 面包屑项的图标
- * @params {bool} active: 面包屑项是否激活
+ * @params {boolean} active: 面包屑项是否激活
  * @returns {HTMLElement} 面包屑项
  */
 window.publish.createBreadcrumbItem = (text, id = null, icon = '#iconFile', active = false) => {
@@ -93,6 +93,23 @@ window.publish.createBreadcrumbItem = (text, id = null, icon = '#iconFile', acti
     breadcrumb__item.appendChild(breadcrumb__icon);
     breadcrumb__item.appendChild(breadcrumb__text);
     return breadcrumb__item;
+}
+
+/**
+ * 设置文档内容编辑状态
+ * @params {boolean} contenteditable: 是否可编辑
+ * @params {boolean} spellcheck: 是否开启拼写检查
+ */
+window.publish.setDocEditState = (contenteditable = false, spellcheck = false) => {
+    document.querySelectorAll('[contenteditable][spellcheck]').forEach(item => {
+        item.contentEditable = contenteditable;
+        switch (true) {
+            case item.classList.contains('hljs'): // 代码块禁用拼写检查
+                break;
+            default:
+                item.spellcheck = spellcheck;
+        }
+    });
 }
 
 (() => {
@@ -197,4 +214,10 @@ window.publish.createBreadcrumbItem = (text, id = null, icon = '#iconFile', acti
             ));
         }
     }
+
+    /* 设置文档编辑状态 */
+    window.publish.setDocEditState(
+        window.siyuan.config.editor.contenteditable,
+        window.siyuan.config.editor.spellcheck,
+    );
 })()
