@@ -14,7 +14,17 @@
   color: var(--b3-theme-on-surface-light);
 }
 #editor #preview [data-node-id].hr > .copy-link {
+  /* 调整分割线块的块超连接标志位置 */
   top: -0.25rem;
+}
+#editor #preview [data-node-id].sb > .copy-link,
+#editor #preview [data-node-id].bq > .copy-link {
+  /* 调整容器块的块超连接标志位置 */
+  top: -0.25rem;
+}
+#editor #preview [data-node-id].list > .copy-link {
+  /* 调整列表块的块超连接标志位置 */
+  top: -0.625rem;
 }
 #editor #preview [data-node-id]:hover > .copy-link {
   display: block;
