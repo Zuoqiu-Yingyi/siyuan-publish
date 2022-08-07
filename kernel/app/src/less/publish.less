@@ -42,6 +42,15 @@
                 }
             }
 
+            &.li {
+                >[data-node-id][data-type="NodeHeading"] {
+                    >.copy-link {
+                        /* 调整列表项内标题块的块超连接标志位置 */
+                        top: 0;
+                    }
+                }
+            }
+
             &:hover>.copy-link {
                 display: block;
             }

@@ -26,6 +26,10 @@
   /* 调整列表块的块超连接标志位置 */
   top: -0.625rem;
 }
+#editor #preview [data-node-id].li > [data-node-id][data-type="NodeHeading"] > .copy-link {
+  /* 调整列表项内标题块的块超连接标志位置 */
+  top: 0;
+}
 #editor #preview [data-node-id]:hover > .copy-link {
   display: block;
 }

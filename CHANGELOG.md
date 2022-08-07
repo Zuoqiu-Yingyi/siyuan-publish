@@ -9,6 +9,7 @@
 - 支持在配置文件中设置文档页面是否可编辑 & 是否开启拼写检查 | Support setting whether the document page is editable and whether to enable the spelling check in the configuration file.
 - 面包屑采用粘性定位 | Breadcrumb uses sticky positioning.
 - 调整容器块超连接标志位置 | Adjust the position of the container block hyperlink flag.
+- 调整列表项内子标题块超链接标志位置 | Adjust the position of the sub-title block hyperlink flag in the list item.
 
 ## v0.1.1 / 2022-07-28
 
