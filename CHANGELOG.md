@@ -1,5 +1,8 @@
 # 更改日志 | CHANGE LOG
 
+## v0.1.2 / 2022-08-08
+
+- [v0.1.1 ... v0.1.2](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.1...v1.1.2)
 - 提高块跳转超链接与子窗口的 `z-index` 层级 | Raise the 'z-index' level of block jump hyperlinks and popover windows.
 - 将子窗口预览功能默认触发时间调整为 `1000ms` | Adjust the time of the default trigger time of the popover preview window to `1000ms`.
 - 使用 `getDoc` API 查询文档的 DOM | Use the `getDoc` API to query the DOM of the document.
