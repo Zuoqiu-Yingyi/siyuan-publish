@@ -3,9 +3,16 @@ package config
 type Render struct {
 	Appearance Appearance `json:"appearance"`
 	Editor     Editor     `json:"editor"`
+	Plugin     Plugin     `json:"plugin"`
 	Popover    Popover    `json:"popover"`
 	Path       Path       `json:"path"`
 	File       File       `json:"file"`
+}
+
+type Plugin struct {
+	Before    []string   `json:"before"`
+	After     []string   `json:"after"`
+	Directory StaticPath `json:"directory"`
 }
 
 type Appearance struct {
@@ -56,8 +63,8 @@ type Script struct {
 	Lute    string `json:"lute"`
 	HTML    string `json:"html"`
 	Protyle string `json:"protyle"`
-	Config  string `json:"config"`
-	Publish string `json:"publish"`
+	Before  string `json:"before"`
+	After   string `json:"after"`
 }
 
 type Path struct {

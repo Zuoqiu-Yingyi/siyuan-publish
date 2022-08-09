@@ -31,8 +31,8 @@ func main() {
 
 	/* 初始化 Web 服务 */
 	server.Init()
-	router := server.Server()
 
 	/* 运行 Web 服务 */
+	router := server.Server()
 	router.Run(fmt.Sprintf(":%d", config.C.Server.Port))
 }

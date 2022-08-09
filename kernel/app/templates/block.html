@@ -37,14 +37,14 @@
         </div>
     </div>
     {{ template "config.html" . }}
-    <script id="configScript" src="{{.Render.File.Script.Config}}"></script>
+    <script id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
     <script id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
     <script id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
     <script id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
     <script id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
     <script id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
     {{ template "render.html" . }}
-    <script id="publishScript" src="{{.Render.File.Script.Publish}}"></script>
+    <script id="afterScript" type="module" src="{{.Render.File.Script.After}}"></script>
 </body>
 
 </html>
