@@ -3,6 +3,7 @@
 - 为面包屑添加主页项 | Add the home page item to the breadcrumbs.
 - 移除浮窗预览其他文档时的背景图片与背景颜色 | Remove the background image and background color of popover preview window.
 - 插件化字体设置 | Plugin font settings.
+- 将配置项添加到插件上下文 | Add the configuration items to the plugin context.
 
 ## v0.1.2 / 2022-08-08
 
