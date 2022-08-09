@@ -1,6 +1,7 @@
 # 更改日志 | CHANGE LOG
 
 - 为面包屑添加主页项 | Add the home page item to the breadcrumbs.
+- 移除浮窗预览其他文档时的背景图片与背景颜色 | Remove the background image and background color of popover preview window.
 
 ## v0.1.2 / 2022-08-08
 

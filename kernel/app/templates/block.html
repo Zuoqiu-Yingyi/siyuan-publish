@@ -31,9 +31,9 @@
         <div class="protyle-content">
             {{ template "background.html" . }}
             {{ template "title.html" . }}
-            <div id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">
+            <article id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">
                 {{ html .Content }}
-            </div>
+            </article>
         </div>
     </div>
     {{ template "config.html" . }}

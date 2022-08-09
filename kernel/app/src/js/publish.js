@@ -427,6 +427,10 @@
             }
         }
     }
+    else {
+        document.body.style.backgroundImage = "none";
+        document.body.style.backgroundColor = "transparent";
+    }
     /* 鼠标悬浮在某个元素内一段时间后触发 */
     // REF [javascript - Iterating over result of getElementsByClassName using Array.forEach - Stack Overflow](https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach)
     Array.from(document.getElementsByClassName(POPOVER_TRIGGER)).forEach(item => {
