@@ -85,22 +85,42 @@ archives:
       - ./LICENSE
       - ./README.md
       - ./CHANGELOG.md
+      # 配置文件
       - src: ./kernel/default.config.toml
         dst: ./
         # Strip parent folders when adding files to the archive.
         # Default: false
         strip_parent: true
+
+      # 渲染模板文件
       - src: ./kernel/app/templates/*
         dst: ./app/templates/
         strip_parent: true
+
+      # 站点图标文件
+      - src: ./kernel/app/src/favicon.ico
+        dst: ./app/src/
+        strip_parent: true
+
+      # 样式文件
       - src: ./kernel/app/src/css/*
         dst: ./app/src/css/
         strip_parent: true
-      - src: ./kernel/app/src/js/*
+
+      # 脚本文件
+      - src: ./kernel/app/src/js/*.js
         dst: ./app/src/js/
         strip_parent: true
-      - src: ./kernel/app/src/favicon.ico
-        dst: ./app/src/
+
+      # 插件
+      - src: ./kernel/app/src/js/plugins/base/*
+        dst: ./app/src/js/plugins/base/
+        strip_parent: true
+      - src: ./kernel/app/src/js/plugins/font/*
+        dst: ./app/src/js/plugins/font/
+        strip_parent: true
+      - src: ./kernel/app/src/js/plugins/theme/*
+        dst: ./app/src/js/plugins/theme/
         strip_parent: true
 
 # [Release - GoReleaser](https://goreleaser.com/customization/release/)
@@ -110,7 +130,7 @@ release:
   draft: true
 
 checksum:
-  name_template: '{{ .ProjectName }}_sha256_checksums.txt'
+  name_template: "{{ .ProjectName }}_sha256_checksums.txt"
   algorithm: sha256
 
 snapshot:

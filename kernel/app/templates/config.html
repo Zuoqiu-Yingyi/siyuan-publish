@@ -49,6 +49,12 @@
                 height: "{{.Render.Popover.Height}}",
             },
         },
+        plugin: { // 插件配置
+            path: "{{.Render.Plugin.Directory.Path}}", // 插件目录访问路径
+            plugins: new Map(), // 插件名 => 插件对象
+            before: eval(`[{{ range $plugin := .Render.Plugin.Before }}"{{$plugin}}", {{ end }}]`), // 渲染前启用的插件
+            after: eval(`[{{ range $plugin := .Render.Plugin.After }}"{{$plugin}}", {{ end }}]`), // 渲染后启用的插件
+        },
         document: { // 文档信息
             home: "{{.Home}}", // 文档主页
             path: "{{.Path}}", // 文档路径

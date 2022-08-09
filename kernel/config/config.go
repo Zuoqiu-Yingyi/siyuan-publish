@@ -144,6 +144,14 @@ func LoadDefaultConfig() {
 				Contenteditable: false,
 				Spellcheck:      false,
 			},
+			Plugin: Plugin{
+				Before: []string{},
+				After:  []string{},
+				Directory: StaticPath{
+					Path:     "/js/plugins",
+					FilePath: "./app/src/js/plugins/",
+				},
+			},
 			Popover: Popover{
 				Timeout: 1000,
 				Width:   "33vmax",
@@ -173,8 +181,8 @@ func LoadDefaultConfig() {
 					Lute:    "/stage/protyle/js/lute/lute.min.js",
 					HTML:    "/stage/protyle/js/protyle-html.js",
 					Protyle: "/stage/build/export/protyle-method.js",
-					Config:  "/js/config.js",
-					Publish: "/js/publish.js",
+					Before:  "/js/before.js",
+					After:   "/js/after.js",
 				},
 			},
 		},

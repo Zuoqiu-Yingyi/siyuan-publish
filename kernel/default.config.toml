@@ -112,6 +112,17 @@ PlantUMLServePath = "https://www.plantuml.com/plantuml/svg/~1" # plant UML 渲�
 Contenteditable = false # 文档内容是否可编辑
 Spellcheck = false      # 文档内容是否开启拼写检查
 
+# 插件设置
+[Render.Plugin]
+Before = [ # 渲染前启用的插件列表
+    "font",
+]
+After = [ # 渲染后启用的插件列表
+
+]
+Directory.Path = "/js/plugins" # 插件目录访问路径
+Directory.FilePath = "./app/src/js/plugins/" # 插件目录文件路径
+
 # 鼠标悬浮预览超链接
 [Render.Popover]
 Timeout = 1000    # 鼠标悬浮触发时间(单位: ms)
@@ -149,5 +160,5 @@ Emoji = "/appearance/emojis/twitter-emoji.js"     # 表情脚本 URL
 Lute = "/stage/protyle/js/lute/lute.min.js"       # 解析器脚本 URL
 HTML = "/stage/protyle/js/protyle-html.js"        # HTML 解析脚本 URL
 Protyle = "/stage/build/export/protyle-method.js" # 渲染器脚本 URL
-Config = "/js/config.js"                          # 配置脚本 URL
-Publish = "/js/publish.js"                        # 发布脚本 URL
+Before = "/js/before.js"                          # 渲染前处理脚本 URL
+After = "/js/after.js"                            # 渲染后处理脚本 URL
