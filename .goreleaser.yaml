@@ -6,8 +6,11 @@ before:
     # - go mod tidy
     # you may remove this if you don't need go generate
     - go generate ./...
+    - cp -r ./kernel/app ./app
+
 # REF [Dist folder - GoReleaser](https://goreleaser.com/customization/dist/)
 dist: ./release/
+
 # REF [Builds - GoReleaser](https://goreleaser.com/customization/build/)
 builds:
   - # Path to project's (sub)directory containing Go code.
@@ -82,6 +85,7 @@ archives:
     #  `license*`, `readme*` and `changelog*`.
     files:
       - ./docs/
+      - ./app/
       - ./LICENSE
       - ./README.md
       - ./CHANGELOG.md
@@ -90,37 +94,6 @@ archives:
         dst: ./
         # Strip parent folders when adding files to the archive.
         # Default: false
-        strip_parent: true
-
-      # 渲染模板文件
-      - src: ./kernel/app/templates/*
-        dst: ./app/templates/
-        strip_parent: true
-
-      # 站点图标文件
-      - src: ./kernel/app/src/favicon.ico
-        dst: ./app/src/
-        strip_parent: true
-
-      # 样式文件
-      - src: ./kernel/app/src/css/*
-        dst: ./app/src/css/
-        strip_parent: true
-
-      # 脚本文件
-      - src: ./kernel/app/src/js/*.js
-        dst: ./app/src/js/
-        strip_parent: true
-
-      # 插件
-      - src: ./kernel/app/src/js/plugins/base/*
-        dst: ./app/src/js/plugins/base/
-        strip_parent: true
-      - src: ./kernel/app/src/js/plugins/font/*
-        dst: ./app/src/js/plugins/font/
-        strip_parent: true
-      - src: ./kernel/app/src/js/plugins/theme/*
-        dst: ./app/src/js/plugins/theme/
         strip_parent: true
 
 # [Release - GoReleaser](https://goreleaser.com/customization/release/)

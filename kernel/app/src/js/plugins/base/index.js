@@ -10,7 +10,7 @@ class Base {
         AUTHOR: 'siyuan-publish', // 插件作者
         VERSION: '0.0.1', // 插件版本
         DESCRIPTION: '基础插件', // 插件描述
-
+        DEPENDENCY: [], // 插件依赖(插件名称列表)
         BEFORE: { // 渲染前配置
             enable: false, // 是否开启
             async: false, // 是否异步执行

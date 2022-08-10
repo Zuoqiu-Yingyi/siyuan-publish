@@ -44,7 +44,7 @@
         </div> -->
     </div>
     <!-- 标签 -->
-    <div class="protyle-background__tags">
+    <div id="title-tags" class="protyle-background__tags">
         {{ range $i, $tag := .Tags }}
         <div class="item item--{{mod $i 4}}" data-type="open-search">{{$tag}}</div>
         {{ end }}
@@ -57,7 +57,7 @@
     <!-- 文档图标 -->
     <div class="protyle-background__iconw" style="left:96px">
         {{ if ne .Icon "" }}
-        <div class="protyle-background__icon" data-menu="true" data-type="open-emoji">
+        <div id="title-icon" class="protyle-background__icon" data-menu="true" data-type="open-emoji">
             {{ if hex .Icon }}
             <svg class="custom-icon">
                 <use xlink:href="#icon-{{.Icon}}"></use>

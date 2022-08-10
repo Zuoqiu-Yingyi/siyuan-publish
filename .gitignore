@@ -26,6 +26,9 @@
 # 示例文件目录
 /examples/*
 
+# 打包时复制的目录
+/app
+
 # 自定义配置文件
 /kernel/custom.config.toml
 

@@ -12,6 +12,7 @@ class Font extends Base {
         AUTHOR: 'siyuan-publish',
         VERSION: '0.0.1',
         DESCRIPTION: '字体设置(字体族, 字号)',
+        DEPENDENCY: [],
         BEFORE: {
             async: true,
             defer: false,

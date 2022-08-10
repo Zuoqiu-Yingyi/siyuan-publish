@@ -4,6 +4,7 @@
 - 移除浮窗预览其他文档时的背景图片与背景颜色 | Remove the background image and background color of popover preview window.
 - 插件化字体设置 | Plugin font settings.
 - 将配置项添加到插件上下文 | Add the configuration items to the plugin context.
+- 渲染插件支持配置依赖项 | Render plugins support to configure dependencies.
 
 ## v0.1.2 / 2022-08-08
 

@@ -10,9 +10,9 @@ type Render struct {
 }
 
 type Plugin struct {
-	Before    []string   `json:"before"`
-	After     []string   `json:"after"`
-	Directory StaticPath `json:"directory"`
+	Load   []string `json:"load"`
+	Before []string `json:"before"`
+	After  []string `json:"after"`
 }
 
 type Appearance struct {
@@ -63,10 +63,13 @@ type Script struct {
 	Lute    string `json:"lute"`
 	HTML    string `json:"html"`
 	Protyle string `json:"protyle"`
+	Plugin  string `json:"plugin"`
 	Before  string `json:"before"`
+	Render  string `json:"render"`
 	After   string `json:"after"`
 }
 
 type Path struct {
 	Protyle string `json:"protyle"`
+	Plugins string `json:"plugins"`
 }

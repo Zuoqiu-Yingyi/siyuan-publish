@@ -1,32 +1,38 @@
 import { merge } from './utils.js';
-import { Context } from './context.js';
+import { plugins } from './plugin.js';
 
 /* 覆盖 ./app/templates/config.html 配置文件中定义的字段 */
 merge(window.siyuan, {});
 merge(window.publish, {});
 
-/* 加载插件 */
-const context = new Context();
-for (const plugin of [...window.publish.plugin.before, ...window.publish.plugin.after]) {
-    try {
-        // 合并配置文件 custom.js
-        const module = await import(`${window.publish.plugin.path}/${plugin}/index.js`);
-        if (plugin) {
-            const plugin_obj = new module.Plugin(context);
-            window.publish.plugin.plugins.set(plugin, plugin_obj)
+/* 注册一组插件 */
+async function registerPluginGroup(arr) {
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+        const url = `${window.publish.plugin.path}/${arr[i]}/index.js`;
+        try {
+            const module = await import(url);
+            if (module) {
+                plugins.register(module.Plugin);
+                result.push(module.Plugin.META.NAME)
+            }
+        } catch (err) {
+            console.error(`plugin file ${url} can't load.`);
         }
-    } catch (err) {
-        console.warn(err);
     }
+    return result;
 }
+window.publish.plugin.load = await registerPluginGroup(window.publish.plugin.load);
+window.publish.plugin.before = await registerPluginGroup(window.publish.plugin.before);
+window.publish.plugin.after = await registerPluginGroup(window.publish.plugin.after);
+
+plugins.resolve(); // 解析插件依赖
+plugins.load(); // 加载插件
 
 /* 激活渲染前处理插件 */
-for (const plugin of window.publish.plugin.before) {
-    if (window.publish.plugin.plugins.has(plugin)) {
-        const plugin_obj = window.publish.plugin.plugins.get(plugin);
-        await Context.activate(plugin_obj, 'before');
-    }
-}
+plugins.activate(window.publish.plugin.before, 'before');
+
+window.publish.plugin.plugins = plugins;
 
 /**
  * 创建图标
@@ -111,60 +117,6 @@ window.publish.setDocEditState = (contenteditable = false, spellcheck = false) =
         } else { // 使用了随机背景图片
             img.style = title_img;
         }
-    }
-
-    /* 设置主题模式 */
-    function setThemeMode(mode) {
-        switch (mode) {
-            case 0:
-                document.getElementById('themeDefaultStyle').href = window.publish.config.theme.light.default;
-                document.getElementById('themeStyle').href = window.publish.config.theme.light.theme;
-                document.getElementById('themeCustomStyle').href = window.publish.config.theme.light.custom;
-                window.siyuan.config.appearance.mode = 0;
-                break;
-            case 1:
-                document.getElementById('themeDefaultStyle').href = window.publish.config.theme.dark.default;
-                document.getElementById('themeStyle').href = window.publish.config.theme.dark.theme;
-                document.getElementById('themeCustomStyle').href = window.publish.config.theme.dark.custom;
-                window.siyuan.config.appearance.mode = 1;
-                break;
-        }
-    }
-
-    /* 使用 URL 参数 theme 设置主题模式 */
-    switch (url.searchParams.get('theme')) {
-        case 'light':
-            setThemeMode(0);
-            break;
-        case 'dark':
-            setThemeMode(1);
-            break;
-        case 'auto':
-        default:
-            /* 使用服务器配置设置主题模式 */
-            switch (window.siyuan.config.appearance.mode) {
-                case 0:
-                default:
-                    setThemeMode(0);
-                    break;
-                case 1:
-                    setThemeMode(1);
-                    break;
-                case 2:
-                    /* 使用浏览器配置设置主题模式 */
-                    switch (true) {
-                        case window.matchMedia('(prefers-color-scheme: light)').matches:
-                            setThemeMode(0);
-                            break;
-                        case window.matchMedia('(prefers-color-scheme: dark)').matches:
-                            setThemeMode(1);
-                            break;
-                        default:
-                            setThemeMode(0);
-                            break;
-                    }
-                    break;
-            }
     }
 
     /* 添加面包屑 */

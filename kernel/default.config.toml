@@ -114,14 +114,17 @@ Spellcheck = false      # 文档内容是否开启拼写检查
 
 # 插件设置
 [Render.Plugin]
-Before = [ # 渲染前启用的插件列表
-    "font",
+Load = [ # 只加载不调用的插件
+    "url", # URL 解析插件
+    "dom", # DOM 相关插件
 ]
-After = [ # 渲染后启用的插件列表
+Before = [ # 渲染前调用的插件
+    "theme", # 主题插件
+    "font",  # 字体插件
+]
+After = [ # 渲染后调用的插件
 
 ]
-Directory.Path = "/js/plugins" # 插件目录访问路径
-Directory.FilePath = "./app/src/js/plugins/" # 插件目录文件路径
 
 # 鼠标悬浮预览超链接
 [Render.Popover]
@@ -132,6 +135,7 @@ Height = "50vmin" # 超链接预览子窗口默认高度
 # 渲染器资源文件目录
 [Render.Path]
 Protyle = "/stage/protyle" # 渲染器 protyle 资源目录
+Plugins = "/js/plugins"    # 插件目录访问路径
 
 # 渲染器资源文件 URL
 [Render.File]
@@ -161,4 +165,5 @@ Lute = "/stage/protyle/js/lute/lute.min.js"       # 解析器脚本 URL
 HTML = "/stage/protyle/js/protyle-html.js"        # HTML 解析脚本 URL
 Protyle = "/stage/build/export/protyle-method.js" # 渲染器脚本 URL
 Before = "/js/before.js"                          # 渲染前处理脚本 URL
+Render = "/js/render.js"                          # 渲染脚本 URL
 After = "/js/after.js"                            # 渲染后处理脚本 URL

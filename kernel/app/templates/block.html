@@ -12,7 +12,7 @@
     <title>{{ .Title }}</title>
 
     <style id="editorFontSize"></style>
-    <link id="stylesheet" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
+    <link id="baseStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
     {{ if eq .Render.Appearance.Mode 1 }}
     <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Default}}" />
     <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Theme}}" />
@@ -23,6 +23,16 @@
     <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Light.Custom}}" />
     {{ end }}
     <link id="publishStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Publish}}" />
+
+    {{ template "config.html" . }}
+    <script defer id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
+    <script defer id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
+    <script defer id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
+    <script defer id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
+    <script defer id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
+    <script defer id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
+    <script defer id="renderScript" type="module" src="{{.Render.File.Script.Render}}"></script>
+    <script defer id="afterScript" type="module" src="{{.Render.File.Script.After}}"></script>
 </head>
 
 <body class="fn__flex-column">
@@ -36,15 +46,6 @@
             </article>
         </div>
     </div>
-    {{ template "config.html" . }}
-    <script id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
-    <script id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
-    <script id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
-    <script id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
-    <script id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
-    <script id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
-    {{ template "render.html" . }}
-    <script id="afterScript" type="module" src="{{.Render.File.Script.After}}"></script>
 </body>
 
 </html>

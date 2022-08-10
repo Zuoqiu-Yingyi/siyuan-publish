@@ -28,7 +28,7 @@ runner = "green"
 watcher = "cyan"
 
 [log]
-time = false
+time = true
 
 [misc]
 clean_on_exit = false
