@@ -4,9 +4,10 @@ export {
 };
 
 class Context {
-    constructor(meta = new Map(), data = new Map()) {
+    constructor(meta = new Map(), data = new Map(), hand = new Map()) {
         this.meta = meta;
         this.data = data;
+        this.hand = hand;
 
         this.window = window;
 

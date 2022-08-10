@@ -11,7 +11,7 @@ class Font extends Base {
         REPO: '',
         AUTHOR: 'siyuan-publish',
         VERSION: '0.0.1',
-        DESCRIPTION: '字体设置(字体族, 字号)',
+        DESCRIPTION: '字体渲染(字体族, 字号)',
         DEPENDENCY: [],
         BEFORE: {
             async: true,

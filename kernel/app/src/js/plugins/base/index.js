@@ -12,12 +12,10 @@ class Base {
         DESCRIPTION: '基础插件', // 插件描述
         DEPENDENCY: [], // 插件依赖(插件名称列表)
         BEFORE: { // 渲染前配置
-            enable: false, // 是否开启
             async: false, // 是否异步执行
             defer: false, // 是否延迟执行
         },
         AFTER: { // 渲染后配置
-            enable: false, // 是否开启
             async: false, // 是否异步执行
             defer: false, // 是否延迟执行
         },

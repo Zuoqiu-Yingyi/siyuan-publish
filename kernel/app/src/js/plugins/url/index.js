@@ -10,7 +10,7 @@ class Url extends Base {
         UUID: '6FF7DD8E-AAC9-4521-88F2-45E997E29992',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.1',
+        VERSION: '0.0.2',
         DESCRIPTION: 'URL 参数解析',
         DEPENDENCY: [],
     };
@@ -18,6 +18,12 @@ class Url extends Base {
     constructor(context) {
         super(context);
         this.url = new URL(this.context.location.href);
-        this.context.meta.set('url', this.url);
+        this.root = new URL(this.url);
+        this.root.pathname = "/block";
+
+        this.context.meta.set('URL', {
+            url: this.url,
+            root: this.root,
+        });
     }
 }

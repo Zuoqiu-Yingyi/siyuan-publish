@@ -115,15 +115,23 @@ Spellcheck = false      # 文档内容是否开启拼写检查
 # 插件设置
 [Render.Plugin]
 Load = [ # 只加载不调用的插件
-    "url", # URL 解析插件
-    "dom", # DOM 相关插件
+    "url",      # URL 解析插件
+    "dom",      # DOM 相关插件
+    "selected", # 选中插件
+    "icon",     # 图标插件
+    "reg",      # 正则表达式插件
 ]
 Before = [ # 渲染前调用的插件
-    "theme", # 主题插件
-    "font",  # 字体插件
+    "theme",      # 主题插件
+    "font",       # 字体插件
+    "title",      # 题头插件
+    "breadcrumb", # 面包屑插件
+    "edit-state", # 编辑状态插件
 ]
 After = [ # 渲染后调用的插件
-
+    "link",    # 超链接插件
+    "locate",  # 定位插件
+    "popover", # 悬浮预览插件
 ]
 
 # 鼠标悬浮预览超链接

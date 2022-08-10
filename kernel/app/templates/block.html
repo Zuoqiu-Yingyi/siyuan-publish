@@ -11,6 +11,19 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>{{ .Title }}</title>
 
+    <script async id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
+    <script async id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
+    
+    {{ template "config.html" . }}
+    <script defer id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
+    
+    <script defer id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
+    <script defer id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
+    <script defer id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
+    <script defer id="renderScript" type="module" src="{{.Render.File.Script.Render}}"></script>
+    
+    <script defer id="afterScript" type="module" src="{{.Render.File.Script.After}}"></script>
+
     <style id="editorFontSize"></style>
     <link id="baseStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Base}}" />
     {{ if eq .Render.Appearance.Mode 1 }}
@@ -24,15 +37,6 @@
     {{ end }}
     <link id="publishStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Publish}}" />
 
-    {{ template "config.html" . }}
-    <script defer id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
-    <script defer id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
-    <script defer id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
-    <script defer id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
-    <script defer id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
-    <script defer id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
-    <script defer id="renderScript" type="module" src="{{.Render.File.Script.Render}}"></script>
-    <script defer id="afterScript" type="module" src="{{.Render.File.Script.After}}"></script>
 </head>
 
 <body class="fn__flex-column">
@@ -46,6 +50,7 @@
             </article>
         </div>
     </div>
+
 </body>
 
 </html>

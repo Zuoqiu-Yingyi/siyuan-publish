@@ -11,19 +11,23 @@ class Theme extends Base {
         REPO: '',
         AUTHOR: 'siyuan-publish',
         VERSION: '0.0.1',
-        DESCRIPTION: '页面主题设置',
+        DESCRIPTION: '主题渲染',
         DEPENDENCY: [
             'publish-url',
             'publish-dom',
         ],
+        BEFORE: {
+            async: true,
+            defer: false,
+        },
     };
 
     constructor(context) {
         super(context);
-        this.url = this.context.meta.get('url');
-        this.dom = this.context.meta.get('dom');
+        this.URL = this.context.meta.get('URL');
+        this.DOM = this.context.meta.get('DOM');
 
-        this.theme = this.url.searchParams.get('theme');
+        this.theme = this.URL.url.searchParams.get('theme');
 
         this.context.meta.set('theme', this.theme);
     }
@@ -32,10 +36,10 @@ class Theme extends Base {
         /* 使用 URL 参数 theme 设置主题模式 */
         switch (this.theme) {
             case 'light':
-                setThemeMode(0);
+                this.setThemeMode(0);
                 break;
             case 'dark':
-                setThemeMode(1);
+                this.setThemeMode(1);
                 break;
             case 'auto':
             default:
@@ -43,22 +47,22 @@ class Theme extends Base {
                 switch (this.context.siyuan.config.appearance.mode) {
                     case 0:
                     default:
-                        setThemeMode(0);
+                        this.setThemeMode(0);
                         break;
                     case 1:
-                        setThemeMode(1);
+                        this.setThemeMode(1);
                         break;
                     case 2:
                         /* 使用浏览器配置设置主题模式 */
                         switch (true) {
-                            case window.matchMedia('(prefers-color-scheme: light)').matches:
-                                setThemeMode(0);
+                            case this.context.top.matchMedia('(prefers-color-scheme: light)').matches:
+                                this.setThemeMode(0);
                                 break;
-                            case window.matchMedia('(prefers-color-scheme: dark)').matches:
-                                setThemeMode(1);
+                            case this.context.top.matchMedia('(prefers-color-scheme: dark)').matches:
+                                this.setThemeMode(1);
                                 break;
                             default:
-                                setThemeMode(0);
+                                this.setThemeMode(0);
                                 break;
                         }
                         break;
@@ -70,15 +74,15 @@ class Theme extends Base {
     setThemeMode(mode) {
         switch (mode) {
             case 0:
-                this.dom.themeDefaultStyle.href = this.context.publish.config.theme.light.default;
-                this.dom.themeStyle.href = this.context.publish.config.theme.light.theme;
-                this.dom.themeCustomStyle.href = this.context.publish.config.theme.light.custom;
+                this.DOM.themeDefaultStyle.href = this.context.publish.config.theme.light.default;
+                this.DOM.themeStyle.href = this.context.publish.config.theme.light.theme;
+                this.DOM.themeCustomStyle.href = this.context.publish.config.theme.light.custom;
                 this.context.siyuan.config.appearance.mode = 0;
                 break;
             case 1:
-                this.dom.themeDefaultStyle.href = this.context.publish.config.theme.dark.default;
-                this.dom.themeStyle.href = this.context.publish.config.theme.dark.theme;
-                this.dom.themeCustomStyle.href = this.context.publish.config.theme.dark.custom;
+                this.DOM.themeDefaultStyle.href = this.context.publish.config.theme.dark.default;
+                this.DOM.themeStyle.href = this.context.publish.config.theme.dark.theme;
+                this.DOM.themeCustomStyle.href = this.context.publish.config.theme.dark.custom;
                 this.context.siyuan.config.appearance.mode = 1;
                 break;
         }

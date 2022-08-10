@@ -1,11 +1,11 @@
 <!-- 文章题头 -->
-<div class="protyle-background" data-node-id style="min-height: {{.TitleHeight}};">
+<div id="background" class="protyle-background" data-node-id style="min-height: {{.TitleHeight}};">
     <!-- 题头图 -->
     <div class="protyle-background__img">
         {{ if ne .TitleImg "" }}
         <img id="title-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
         {{ else }}
-        <img class="fn__none" />
+        <img id="title-img" class="fn__none" />
         {{ end }}
         <!-- <div class="protyle-icons">
             <span class="protyle-icon protyle-icon--first b3-tooltips b3-tooltips__sw" style="position: relative" aria-label="上传">

@@ -10,14 +10,14 @@ class DOM extends Base {
         UUID: '0B8E96C8-885B-41E6-BA4D-B24A7C2C7666',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.1',
+        VERSION: '0.0.2',
         DESCRIPTION: '页面 DOM 元素',
         DEPENDENCY: [],
     };
 
     constructor(context) {
         super(context);
-        this.context.meta.set('dom', {
+        this.DOM = {
             editorFontSize: this.context.document.getElementById('editorFontSize'),
 
             baseStyle: this.context.document.getElementById('baseStyle'),
@@ -38,6 +38,7 @@ class DOM extends Base {
             renderScript: this.context.document.getElementById('renderScript'),
             afterScript: this.context.document.getElementById('afterScript'),
 
+            background: this.context.document.getElementById('background'),
             breadcrumb: this.context.document.getElementById('breadcrumb'),
             home: this.context.document.getElementById('home'),
             title: this.context.document.getElementById('title'),
@@ -46,6 +47,8 @@ class DOM extends Base {
             titleIcon: this.context.document.getElementById('title-icon'),
             editor: this.context.document.getElementById('editor'),
             preview: this.context.document.getElementById('preview'),
-        });
+        };
+
+        this.context.meta.set('DOM', this.DOM);
     }
 }

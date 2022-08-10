@@ -5,6 +5,7 @@
 - 插件化字体设置 | Plugin font settings.
 - 将配置项添加到插件上下文 | Add the configuration items to the plugin context.
 - 渲染插件支持配置依赖项 | Render plugins support to configure dependencies.
+- 插件化渲染后处理方法 | Plugin rendering post-processing method.
 
 ## v0.1.2 / 2022-08-08
 

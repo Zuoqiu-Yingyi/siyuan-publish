@@ -1,5 +1,7 @@
 /* 渲染 */
+
 (() => {
+
     const previewElement = document.getElementById('preview');
     Protyle.highlightRender(previewElement, window.publish.render.protyle);
     Protyle.mathRender(previewElement, window.publish.render.protyle, false);
