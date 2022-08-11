@@ -57,18 +57,20 @@ func Init() {
 /* 清空数据库所有记录 */
 func clearDB() {
 	/* 删除数据库中所有记录 */
+	fmt.Print("Clearing the database ... ")
 	// REF [全局删除](https://gorm.io/zh_CN/docs/delete.html#%E9%98%BB%E6%AD%A2%E5%85%A8%E5%B1%80%E5%88%A0%E9%99%A4)
 	global := DB.Session(&gorm.Session{AllowGlobalUpdate: true})
 	global.Delete(&ACL{})
 	global.Delete(&Access{})
 	global.Delete(&Block{})
 	global.Delete(&Doc{})
-	fmt.Println("Clearing the database successfully.")
+	fmt.Println("successfully.")
 }
 
 /* 初始化 ACL*/
 func initACL() {
 	/* 获得访问控制列表 root_id => "public" | "protected" | "private" */
+	fmt.Print("Initrializing the ACL ... ")
 	acl, err_msg := client.GetACL()
 	if acl == nil {
 		panic(err_msg)
@@ -99,11 +101,12 @@ func initACL() {
 	// 	Columns:   []clause.Column{{Name: "id"}},
 	// 	DoUpdates: clause.AssignmentColumns([]string{"access", "updated_at"}),
 	// }).Create(&ACLs) // 插入或更新
-	fmt.Println("Initrializing the ACL successfully.")
+	fmt.Println("successfully.")
 }
 
 /* 载入数据 */
 func loadData() {
+	fmt.Println("Start loading data ...")
 	var (
 		r       *client.ResponseBody
 		err     error
@@ -111,17 +114,18 @@ func loadData() {
 	)
 
 	/* 查询所有 ACL 并按照 path 的长度升序排列 */
+	fmt.Print("Loading Access Control List (ACL) ... ")
 	r, err = client.SQL(client.C.R(), fmt.Sprintf(`
-		SELECT
-			a.root_id,
-			a.value,
+	SELECT
+	a.root_id,
+	a.value,
 			a.path
-		FROM
+			FROM
 			attributes AS a
-		WHERE
+			WHERE
 			a.name = '%s'
 			AND a.root_id = a.block_id
-		ORDER BY LENGTH(a.path);`,
+			ORDER BY LENGTH(a.path);`,
 		config.C.Siyuan.Publish.Access.Name,
 	))
 	r, err_msg = client.Response(r, err)
@@ -146,18 +150,20 @@ func loadData() {
 	}
 	// TODO protected
 	DB.Create(&acls) // 插入记录
+	fmt.Println("successfully.")
 
 	/* 按照顺序查询每条 ACL 记录对应的文档及其子文档并构建 Access 表 */
+	fmt.Print("Loading Access table ... ")
 	for i := 0; i < len(paths); i++ {
 		r, err = client.SQL(client.C.R(), fmt.Sprintf(`
 			SELECT
-				b.root_id
+			b.root_id
 			FROM
-				blocks AS b
+			blocks AS b
 			WHERE
 				b.path LIKE '%s%%'
 				AND b.type = 'd'
-			ORDER BY LENGTH(b.path);`,
+				ORDER BY LENGTH(b.path);`,
 			paths[i],
 		))
 		r, err_msg = client.Response(r, err)
@@ -179,8 +185,10 @@ func loadData() {
 			UpdateAll: true,
 		}).Create(&accesses)
 	}
+	fmt.Println("successfully.")
 
 	/* 为可访问的 Access 记录构建 Doc 表 */
+	fmt.Print("Loading Doc table ... ")
 	for _, acl := range acls {
 		/* 获得可访问文档关联的 ACL 项 */
 		switch acl.Access {
@@ -206,8 +214,10 @@ func loadData() {
 			continue
 		}
 	}
+	fmt.Println("successfully.")
 
 	/* 为可访问的 Access 记录构建 Block 表 */
+	fmt.Print("Loading Block table ... ")
 	docs := make([]Doc, 0)
 	DB.Select("id", "path").Find(&docs)
 	for _, doc := range docs {
@@ -240,5 +250,6 @@ func loadData() {
 			UpdateAll: true,
 		}).Create(&blocks)
 	}
-	fmt.Println("Loading all data successfully.")
+	fmt.Println("successfully.")
+	fmt.Println("Loading data successfully.")
 }

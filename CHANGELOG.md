@@ -8,6 +8,7 @@
 - 插件化渲染后处理方法 | Plugin rendering post-processing method.
 - 将插件对象添加至插件上下文 | Add the plugin object to the plugin context.
 - 新增命令行参数 `--workspace` 设置工作空间目录 | Add the command line argument `--workspace` to set the workspace directory.
+- 新增命令行参数 `-v` 查看版本号 | Add the command line argument `-v` to view the version number.
 
 ## v0.1.2 / 2022-08-08
 
