@@ -127,11 +127,11 @@ Before = [ # 渲染前调用的插件
     "title",      # 题头插件
     "breadcrumb", # 面包屑插件
     "edit-state", # 编辑状态插件
-]
-After = [ # 渲染后调用的插件
     "link",    # 超链接插件
     "locate",  # 定位插件
     "popover", # 悬浮预览插件
+]
+After = [ # 渲染后调用的插件
 ]
 
 # 鼠标悬浮预览超链接

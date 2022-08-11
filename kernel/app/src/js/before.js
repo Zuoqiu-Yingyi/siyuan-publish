@@ -38,6 +38,7 @@ import { plugins } from './plugin.js';
             plugins.register(module.Plugin);
         });
         function then() {
+            // console.log("before-then");
             if (path2plugin.size !== modules.size) setTimeout(then, 0);
             else {
                 window.publish.plugin.loaded = true;
@@ -52,7 +53,7 @@ import { plugins } from './plugin.js';
                 plugins.load(); // 加载插件
 
                 /* 激活渲染前处理插件 */
-                plugins.activate(window.publish.plugin.before, 'before');
+                plugins.activate(window.publish.plugin.before);
             }
         }
         then();

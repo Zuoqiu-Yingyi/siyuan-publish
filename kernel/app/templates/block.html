@@ -10,18 +10,19 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>{{ .Title }}</title>
-
+    {{ template "config.html" . }}
     <script async id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
     <script async id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
     
-    {{ template "config.html" . }}
-    <script defer id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
+    <script async id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
     
     <script defer id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
-    <script defer id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
     <script defer id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
+    <!-- 依赖 luteScript -->
+    <script defer id="htmlScript" src="{{.Render.File.Script.HTML}}"></script>
+    <!-- 依赖 protyleScript -->
     <script defer id="renderScript" type="module" src="{{.Render.File.Script.Render}}"></script>
-    
+
     <script defer id="afterScript" type="module" src="{{.Render.File.Script.After}}"></script>
 
     <style id="editorFontSize"></style>

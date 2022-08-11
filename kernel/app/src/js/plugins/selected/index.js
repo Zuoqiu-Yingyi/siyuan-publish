@@ -18,17 +18,18 @@ class Selected extends Base {
 
     constructor(context) {
         super(context);
+        this.context.obj.set('selected', this);
+
         this.SELECTED = 'protyle-wysiwyg--select';
 
         this.context.meta.set('SELECTED', this.SELECTED);
-        this.context.hand.set('clearSelected', this.clearSelected);
     }
 
     /**
      * 取消所有块的选中状态
      */
     clearSelected() {
-        Array.from(document.getElementsByClassName(this.SELECTED)).forEach(item => item.classList.remove(this.SELECTED));
+        Array.from(this.context.document.getElementsByClassName(this.SELECTED)).forEach(item => item.classList.remove(this.SELECTED));
     }
 
 }

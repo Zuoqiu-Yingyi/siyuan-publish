@@ -15,7 +15,7 @@ class Title extends Base {
         DEPENDENCY: [
             'publish-dom',
         ],
-        BEFORE: {
+        CALL: {
             async: true,
             defer: false,
         },
@@ -36,7 +36,7 @@ class Title extends Base {
         this.context.meta.set('title', this.title);
     }
 
-    async before() {
+    async call() {
         /* 设置题头 */
         if (this.background) {
             this.background.style.minHeight = this.title.height;

@@ -29,7 +29,7 @@ class DOM extends Base {
             themeCustomStyle: this.context.document.getElementById('themeCustomStyle'),
             publishStyle: this.context.document.getElementById('publishStyle'),
 
-            beforeScript: this.context.document.getElementById('beforeScript'),
+            callScript: this.context.document.getElementById('callScript'),
             luteScript: this.context.document.getElementById('luteScript'),
             htmlScript: this.context.document.getElementById('htmlScript'),
             protyleScript: this.context.document.getElementById('protyleScript'),

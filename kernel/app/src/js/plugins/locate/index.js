@@ -16,7 +16,7 @@ class Locate extends Base {
             'publish-url',
             'publish-selected',
         ],
-        AFTER: {
+        CALL: {
             async: true,
             defer: false,
         },
@@ -32,7 +32,7 @@ class Locate extends Base {
         this.context.meta.set('id', this.id);
     }
 
-    async after() {
+    async call() {
         if (this.id) {
             const block = this.context.document.querySelector(`[data-node-id="${this.id}"]`);
             if (block) {

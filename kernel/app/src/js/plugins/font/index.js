@@ -13,7 +13,7 @@ class Font extends Base {
         VERSION: '0.0.1',
         DESCRIPTION: '字体渲染(字体族, 字号)',
         DEPENDENCY: [],
-        BEFORE: {
+        CALL: {
             async: true,
             defer: false,
         },
@@ -23,7 +23,7 @@ class Font extends Base {
         super(context);
     }
 
-    async before() {
+    async call() {
         /* 设置字体配置 */
         this.setFontSize(
             this.context.siyuan.config.editor.fontSize,

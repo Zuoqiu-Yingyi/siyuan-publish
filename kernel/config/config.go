@@ -145,9 +145,24 @@ func LoadDefaultConfig() {
 				Spellcheck:      false,
 			},
 			Plugin: Plugin{
-				Load:   []string{},
-				Before: []string{},
-				After:  []string{},
+				Load: []string{
+					"url",
+					"dom",
+					"selected",
+					"icon",
+					"reg",
+				},
+				Before: []string{
+					"theme",
+					"font",
+					"title",
+					"breadcrumb",
+					"edit-state",
+					"link",
+					"locate",
+					"popover",
+				},
+				After: []string{},
 			},
 			Popover: Popover{
 				Timeout: 1000,

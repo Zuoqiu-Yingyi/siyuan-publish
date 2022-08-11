@@ -49,8 +49,6 @@ class Icon extends Base {
         }
 
         this.context.meta.set('TYPE_ICON_MAP', this.TYPE_ICON_MAP);
-
-        this.context.hand.set('createIcon', this.createIcon);
     }
 
     /**

@@ -15,7 +15,7 @@ class Popover extends Base {
         DEPENDENCY: [
             'publish-url'
         ],
-        AFTER: {
+        CALL: {
             async: false,
             defer: false,
         },
@@ -34,7 +34,7 @@ class Popover extends Base {
         this.context.meta.set('POPOVER_SIZE', this.POPOVER_SIZE);
     }
 
-    async after() {
+    async call() {
         /* 超链接鼠标悬浮预览 */
         if (this.context.top === this.context.window) { // 只在顶层窗口执行
             /* 注册多窗口共用的属性与方法 */

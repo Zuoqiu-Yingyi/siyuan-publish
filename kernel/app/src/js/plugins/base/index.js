@@ -8,10 +8,10 @@ class Base {
         UUID: '073A5F57-40EA-494D-A80A-C12DEAA41150', // 插件唯一标识符
         REPO: '', // 插件仓库地址
         AUTHOR: 'siyuan-publish', // 插件作者
-        VERSION: '0.0.1', // 插件版本
+        VERSION: '0.0.2', // 插件版本
         DESCRIPTION: '基础插件', // 插件描述
         DEPENDENCY: [], // 插件依赖(插件名称列表)
-        BEFORE: { // 渲染前配置
+        CALL: { // 渲染前配置
             async: false, // 是否异步执行
             defer: false, // 是否延迟执行
         },
@@ -28,8 +28,9 @@ class Base {
     constructor(context) {
         this.context = context;
         this.constructor.init();
+        this.context.obj.set(this.constructor.META.NAME, this);
     }
 
-    async before() { }
+    async call() { }
     async after() { }
 }

@@ -14,7 +14,7 @@ class EditState extends Base {
         DESCRIPTION: '编辑状态设置',
         DEPENDENCY: [
         ],
-        BEFORE: {
+        CALL: {
             async: true,
             defer: false,
         },
@@ -22,11 +22,9 @@ class EditState extends Base {
 
     constructor(context) {
         super(context);
-
-        this.context.hand.set('setDocEditState', this.setDocEditState);
     }
 
-    async before() {
+    async call() {
         /* 设置文档编辑状态 */
         this.setDocEditState(
             this.context.siyuan.config.editor.contenteditable,

@@ -47,51 +47,25 @@ class Plugins {
         });
     }
     /* 以指定模式激活插件组 */
-    async activate(plugins, mode) {
+    async activate(plugins) {
         for (let plugin of plugins) {
             plugin = this.object.get(plugin);
-            var config;
-            switch (mode) {
-                case 'before':
-                    config = plugin.constructor.META.BEFORE;
-                    if (config) {
-                        switch (true) {
-                            case config.async === true && config.defer === true:
-                                setTimeout(() => plugin.before(), 0);
-                                break;
-                            case config.async === true && config.defer === false:
-                                plugin.before();
-                                break;
-                            case config.async === false && config.defer === true:
-                                setTimeout(async () => await plugin.before(), 0);
-                                break;
-                            case config.async === false && config.defer === false:
-                                await plugin.before();
-                                break;
-                        }
-                    }
-                    break;
-                case 'after':
-                    config = plugin.constructor.META.AFTER;
-                    if (config) {
-                        switch (true) {
-                            case config.async === true && config.defer === true:
-                                setTimeout(plugin.after, 0);
-                                break;
-                            case config.async === true && config.defer === false:
-                                plugin.after();
-                                break;
-                            case config.async === false && config.defer === true:
-                                setTimeout(async () => await plugin.after(), 0);
-                                break;
-                            case config.async === false && config.defer === false:
-                                await plugin.after();
-                                break;
-                        }
-                    }
-                    break;
-                default:
-                    return;
+            const config = plugin.constructor.META.CALL;
+            if (config) {
+                switch (true) {
+                    case config.async === true && config.defer === true:
+                        setTimeout(() => plugin.call(), 0);
+                        break;
+                    case config.async === true && config.defer === false:
+                        plugin.call();
+                        break;
+                    case config.async === false && config.defer === true:
+                        setTimeout(async () => await plugin.call(), 0);
+                        break;
+                    case config.async === false && config.defer === false:
+                        await plugin.call();
+                        break;
+                }
             }
         }
     }

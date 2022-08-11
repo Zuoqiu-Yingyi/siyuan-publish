@@ -16,7 +16,7 @@ class Theme extends Base {
             'publish-url',
             'publish-dom',
         ],
-        BEFORE: {
+        CALL: {
             async: true,
             defer: false,
         },
@@ -32,7 +32,7 @@ class Theme extends Base {
         this.context.meta.set('theme', this.theme);
     }
 
-    async before() {
+    async call() {
         /* 使用 URL 参数 theme 设置主题模式 */
         switch (this.theme) {
             case 'light':

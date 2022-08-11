@@ -16,7 +16,7 @@ class Breadcrumb extends Base {
             'publish-dom',
             'publish-icon',
         ],
-        BEFORE: {
+        CALL: {
             async: true,
             defer: false,
         },
@@ -25,14 +25,12 @@ class Breadcrumb extends Base {
     constructor(context) {
         super(context);
         this.DOM = this.context.meta.get('DOM');
-        this.createIcon = this.context.hand.get('createIcon');
+        this.createIcon = this.context.obj.get('publish-icon').createIcon;
 
         this.breadcrumb = this.DOM.breadcrumb;
-
-        this.context.hand.set('createBreadcrumbItem', this.createBreadcrumbItem);
     }
 
-    async before() {
+    async call() {
         if (this.breadcrumb) {
             const paths = this.context.publish.document.path.split('/');
             const hpaths = this.context.publish.document.hpath.split('/');

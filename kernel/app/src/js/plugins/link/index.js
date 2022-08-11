@@ -10,7 +10,7 @@ class Link extends Base {
         UUID: 'FF3EE694-A68D-4090-BC24-36A552304EF7',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.1',
+        VERSION: '0.0.2',
         DESCRIPTION: '超链接处理',
         DEPENDENCY: [
             'publish-url',
@@ -19,7 +19,7 @@ class Link extends Base {
             'publish-popover',
             'publish-selected',
         ],
-        AFTER: {
+        CALL: {
             async: false,
             defer: false,
         },
@@ -33,12 +33,13 @@ class Link extends Base {
         this.POPOVER_TRIGGER = this.context.meta.get('POPOVER_TRIGGER');
         this.TYPE_ICON_MAP = this.context.meta.get('TYPE_ICON_MAP');
         this.SELECTED = this.context.meta.get('SELECTED');
-        this.clearSelected = this.context.hand.get('clearSelected');
+
+        this.publish_selected = this.context.obj.get('publish-selected');
 
         this.home = this.DOM.home;
     }
 
-    async after() {
+    async call() {
         this.ref2link();
         this.a2link();
         this.home2link();
@@ -48,9 +49,9 @@ class Link extends Base {
 
     ref2link() {
         /* 将块引用转化为超链接 */
-        document.querySelectorAll(`#preview span[data-type="block-ref"][data-id]`).forEach(item => {
+        this.context.document.querySelectorAll(`#preview span[data-type="block-ref"][data-id]`).forEach(item => {
             const id = item.dataset.id;
-            const a = document.createElement("a");
+            const a = this.context.document.createElement("a");
             a.classList.add(this.POPOVER_TRIGGER);
             this.URL.root.searchParams.set("id", id);
             a.href = this.URL.root.href;
@@ -62,8 +63,8 @@ class Link extends Base {
 
     a2link() {
         /* 将链接转化为超链接 */
-        document.querySelectorAll(`#preview span[data-type="a"][data-href]`).forEach(item => {
-            const a = document.createElement("a");
+        this.context.document.querySelectorAll(`#preview span[data-type="a"][data-href]`).forEach(item => {
+            const a = this.context.document.createElement("a");
             a.classList.add(this.POPOVER_TRIGGER)
             let href = item.dataset.href;
             if (this.REG.url.test(href)) { // 思源块超链接转化为站点超链接
@@ -81,7 +82,7 @@ class Link extends Base {
     home2link() {
         /* 文档首页转化为超链接 */
         if (this.home) {
-            const a = document.createElement("a");
+            const a = this.context.document.createElement("a");
             a.href = window.publish.home.url;
             a.title = "主页";
 
@@ -96,9 +97,9 @@ class Link extends Base {
 
     breadcrumb2link() {
         /* 将面包屑转化为超链接 */
-        document.querySelectorAll(`#breadcrumb .protyle-breadcrumb__item[data-node-id]`).forEach(item => {
+        this.context.document.querySelectorAll(`#breadcrumb .protyle-breadcrumb__item[data-node-id]`).forEach(item => {
             const id = item.dataset.nodeId;
-            const a = document.createElement("a");
+            const a = this.context.document.createElement("a");
             this.URL.root.searchParams.set("id", id);
             a.href = this.URL.root.href;
 
@@ -113,12 +114,12 @@ class Link extends Base {
 
     blockLink() {
         /* 为所有块添加悬浮复制超链接 */
-        document.querySelectorAll(`#preview [data-node-id]`).forEach(item => {
+        this.context.document.querySelectorAll(`#preview [data-node-id]`).forEach(item => {
             this.URL.root.searchParams.set("id", item.dataset.nodeId);
             const icon = typeof this.TYPE_ICON_MAP[item.dataset.type] === 'string'
                 ? this.TYPE_ICON_MAP[item.dataset.type]
                 : this.TYPE_ICON_MAP[item.dataset.type][item.dataset.subtype];
-            const a = document.createElement("a");
+            const a = this.context.document.createElement("a");
             a.classList.add("copy-link");
             a.href = this.URL.root.href;
             a.title = this.URL.root.href;
@@ -126,10 +127,10 @@ class Link extends Base {
 
             /* 鼠标悬浮超链接时高亮对应的块 */
             a.addEventListener("mouseenter", () => {
-                this.clearSelected(); // 取消所有块的高亮
+                this.publish_selected.clearSelected(); // 取消所有块的高亮
                 item.classList.add(this.SELECTED); // 高亮当前块
             });
-            a.addEventListener("mouseleave", this.clearSelected);
+            a.addEventListener("mouseleave", _ => this.publish_selected.clearSelected());
 
             item.appendChild(a);
             // item.parentElement.insertBefore(a, item);
