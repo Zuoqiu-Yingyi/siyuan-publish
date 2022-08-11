@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/88250/lute v1.7.4
 	github.com/BurntSushi/toml v1.2.0
+	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/gin-gonic/gin v1.8.1
 	github.com/glebarez/sqlite v1.4.6
 	github.com/imroc/req/v3 v3.16.0
