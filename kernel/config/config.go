@@ -18,6 +18,7 @@ var (
 
 type Config struct {
 	Debug    bool     `json:"debug"`
+	I18n     I18n     `json:i18n""`
 	Database Database `json:"database"`
 	Server   Server   `json:"server"`
 	Siyuan   Siyuan   `json:"siyuan"`
@@ -49,6 +50,10 @@ func LoadConfigFile(path string) error {
 func LoadDefaultConfig() {
 	C = &Config{
 		Debug: false,
+		I18n: I18n{
+			Directory: "./app/locales",
+			Default:   "zh-Hans",
+		},
 		Database: Database{
 			Debug:  false,
 			Reset:  true,

@@ -1,0 +1,21 @@
+[global]
+success = "successfully"
+complete = "completely"
+
+[config]
+success = "Loading configuration file successfully."
+
+[client]
+success = "Initrializing HTTP client successfully."
+
+[models]
+clear = "Clearing the database ... "
+init-ACL = "Initrializing Access Control List (ACL) ... "
+load-ACL = "Loading Access Control List (ACL) ... "
+load-table = "Loading %s table ... "
+before-load-data = "Start loading data ..."
+after-load-data = "Loading data successfully."
+success = "Initrializing database successfully."
+
+[server]
+success = "Initrializing server successfully."

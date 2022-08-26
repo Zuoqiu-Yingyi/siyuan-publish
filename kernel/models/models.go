@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"os"
 	"path"
+
 	"publish/client"
 	"publish/config"
+	"publish/locale"
 
 	// "gorm.io/driver/sqlite"
 	// REF [GitHub - glebarez/sqlite: The pure-Go SQLite driver for GORM](https://github.com/glebarez/sqlite)
@@ -57,20 +59,20 @@ func Init() {
 /* 清空数据库所有记录 */
 func clearDB() {
 	/* 删除数据库中所有记录 */
-	fmt.Print("Clearing the database ... ")
+	fmt.Print(locale.T("models.clear"))
 	// REF [全局删除](https://gorm.io/zh_CN/docs/delete.html#%E9%98%BB%E6%AD%A2%E5%85%A8%E5%B1%80%E5%88%A0%E9%99%A4)
 	global := DB.Session(&gorm.Session{AllowGlobalUpdate: true})
 	global.Delete(&ACL{})
 	global.Delete(&Access{})
 	global.Delete(&Block{})
 	global.Delete(&Doc{})
-	fmt.Println("successfully.")
+	fmt.Println(locale.T("global.complete"))
 }
 
 /* 初始化 ACL*/
 func initACL() {
 	/* 获得访问控制列表 root_id => "public" | "protected" | "private" */
-	fmt.Print("Initrializing the ACL ... ")
+	fmt.Print(locale.T("models.init-ACL"))
 	acl, err_msg := client.GetACL()
 	if acl == nil {
 		panic(err_msg)
@@ -101,12 +103,13 @@ func initACL() {
 	// 	Columns:   []clause.Column{{Name: "id"}},
 	// 	DoUpdates: clause.AssignmentColumns([]string{"access", "updated_at"}),
 	// }).Create(&ACLs) // 插入或更新
-	fmt.Println("successfully.")
+	fmt.Println(locale.T("global.complete"))
 }
 
 /* 载入数据 */
 func loadData() {
-	fmt.Println("Start loading data ...")
+	fmt.Println(locale.T("models.before-load-data"))
+
 	var (
 		r       *client.ResponseBody
 		err     error
@@ -114,7 +117,7 @@ func loadData() {
 	)
 
 	/* 查询所有 ACL 并按照 path 的长度升序排列 */
-	fmt.Print("Loading Access Control List (ACL) ... ")
+	fmt.Print(locale.T("models.load-ACL"))
 	r, err = client.SQL(client.C.R(), fmt.Sprintf(`
 	SELECT
 	a.root_id,
@@ -150,10 +153,10 @@ func loadData() {
 	}
 	// TODO protected
 	DB.Create(&acls) // 插入记录
-	fmt.Println("successfully.")
+	fmt.Println(locale.T("global.complete"))
 
 	/* 按照顺序查询每条 ACL 记录对应的文档及其子文档并构建 Access 表 */
-	fmt.Print("Loading Access table ... ")
+	fmt.Print(locale.T("models.load-table", "Access"))
 	for i := 0; i < len(paths); i++ {
 		r, err = client.SQL(client.C.R(), fmt.Sprintf(`
 			SELECT
@@ -185,10 +188,10 @@ func loadData() {
 			UpdateAll: true,
 		}).Create(&accesses)
 	}
-	fmt.Println("successfully.")
+	fmt.Println(locale.T("global.complete"))
 
 	/* 为可访问的 Access 记录构建 Doc 表 */
-	fmt.Print("Loading Doc table ... ")
+	fmt.Print(locale.T("models.load-table", "Doc"))
 	for _, acl := range acls {
 		/* 获得可访问文档关联的 ACL 项 */
 		switch acl.Access {
@@ -214,10 +217,10 @@ func loadData() {
 			continue
 		}
 	}
-	fmt.Println("successfully.")
+	fmt.Println(locale.T("global.complete"))
 
 	/* 为可访问的 Access 记录构建 Block 表 */
-	fmt.Print("Loading Block table ... ")
+	fmt.Print(locale.T("models.load-table", "Block"))
 	docs := make([]Doc, 0)
 	DB.Select("id", "path").Find(&docs)
 	for _, doc := range docs {
@@ -250,6 +253,6 @@ func loadData() {
 			UpdateAll: true,
 		}).Create(&blocks)
 	}
-	fmt.Println("successfully.")
-	fmt.Println("Loading data successfully.")
+	fmt.Println(locale.T("global.complete"))
+	fmt.Println(locale.T("models.after-load-data"))
 }

@@ -1,0 +1,21 @@
+[global]
+success = "成功"
+complete = "完成"
+
+[config]
+success = "配置文件加载完成。"
+
+[client]
+success = "HTTP 客户端初始化完成。"
+
+[models]
+clear = "清理数据库 ... "
+init-ACL = "初始化访问控制列表(ACL) ... "
+load-ACL = "加载访问控制列表(ACL) ... "
+load-table = "加载 %s 表 ... "
+before-load-data = "开始加载数据 ..."
+after-load-data = "数据加载完成。"
+success = "数据库初始化完成。"
+
+[server]
+success = "Web 服务初始化完成。"

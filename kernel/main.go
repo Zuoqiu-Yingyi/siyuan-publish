@@ -7,6 +7,7 @@ import (
 	"publish/client"
 	"publish/command"
 	"publish/config"
+	"publish/locale"
 	"publish/models"
 	"publish/server"
 )
@@ -26,19 +27,20 @@ func main() {
 
 	/* 初始化配置文件 */
 	config.Init(path)
-	fmt.Println("Loading configuration file successfully.")
+	locale.Init(config.C.I18n.Directory, config.C.I18n.Default)
+	fmt.Println(locale.T("config.success"))
 
 	/* 初始化 HTTP 客户端 */
 	client.Init()
-	fmt.Println("Initrializing client successfully.")
+	fmt.Println(locale.T("client.success"))
 
 	/* 初始化数据库 */
 	models.Init()
-	fmt.Println("Initrializing database successfully.")
+	fmt.Println(locale.T("models.success"))
 
 	/* 初始化 Web 服务 */
 	server.Init()
-	fmt.Println("Initrializing server successfully.")
+	fmt.Println(locale.T("server.success"))
 
 	/* 运行 Web 服务 */
 	router := server.Server()

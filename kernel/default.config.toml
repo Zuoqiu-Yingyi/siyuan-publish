@@ -1,5 +1,10 @@
 Debug = false # 调试模式(控制台打印配置文件信息)
 
+# 国际化相关配置
+[I18n]
+Directory = "./app/locales" # 多语言配置文件目录
+Default = "zh-Hans" # 默认语言
+
 # 数据库配置
 [Database]
 Debug = false                # 调试模式
