@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"publish/config"
+	"publish/locale"
 	"publish/server/controller"
 	"publish/server/controller/cache"
 	"publish/server/controller/dynamic"
@@ -84,6 +85,8 @@ func Server() (router *gin.Engine) {
 		"mod": func(a, mod int) int {
 			return a % mod
 		},
+		/* i18n */
+		"Tr": locale.L.Tr,
 	})
 
 	/* 加载模板文件 */

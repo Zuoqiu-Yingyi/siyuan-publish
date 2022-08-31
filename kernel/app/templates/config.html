@@ -55,7 +55,6 @@
         plugin: { // 插件配置
             path: "{{.Render.Path.Plugins}}", // 插件目录访问路径
             plugins: null, // Plugins 对象
-            loaded: false, // 是否加载完成
             load: eval(`[{{ range $plugin := .Render.Plugin.Load }}"{{$plugin}}", {{ end }}]`), // 只加载不调用的插件
             before: eval(`[{{ range $plugin := .Render.Plugin.Before }}"{{$plugin}}", {{ end }}]`), // 渲染前调用的插件
             after: eval(`[{{ range $plugin := .Render.Plugin.After }}"{{$plugin}}", {{ end }}]`), // 渲染后调用的插件
@@ -72,6 +71,14 @@
         home: { // 主页信息
             url: "{{.Home.URL}}", // 主页 URL
             icon: "{{.Home.Icon}}", // 主页图标
+        },
+        i18n: { // 多语言
+            "pin": '{{ call .T "global.pin" }}',
+            "close": '{{ call .T "global.close" }}',
+            "home": '{{ call .T "global.home" }}',
+
+            "new-window": '{{ call .T "HTML.new-window" }}',
+            "new-page": '{{ call .T "HTML.new-page" }}',
         },
     };
 </script>

@@ -119,25 +119,25 @@ class Popover extends Base {
                     block__popover.innerHTML = `
                     <div class="block__icons block__icons--border">
                         <span class="fn__space fn__flex-1"></span>
-                        <span data-type="open-page" class="block__icon b3-tooltips b3-tooltips__sw" title="新标签页打开">
+                        <span data-type="open-page" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['new-page']}">
                             <svg>
                                 <use xlink:href="#iconExport"></use>
                             </svg>
                         </span>
                         <span class="fn__space"></span>
-                        <span data-type="open-window" class="block__icon b3-tooltips b3-tooltips__sw" title="新窗口打开">
+                        <span data-type="open-window" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['new-window']}">
                             <svg class="ft__secondary">
                                 <use xlink:href="#iconExport"></use>
                             </svg>
                         </span>
                         <span class="fn__space"></span>
-                        <span data-type="pin" class="block__icon b3-tooltips b3-tooltips__sw" title="钉住">
+                        <span data-type="pin" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['pin']}">
                             <svg>
                                 <use xlink:href="#iconPin"></use>
                             </svg>
                         </span>
                         <span class="fn__space"></span>
-                        <span data-type="close" class="block__icon b3-tooltips b3-tooltips__sw" title="关闭">
+                        <span data-type="close" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['close']}">
                             <svg style="width: 10px">
                                 <use xlink:href="#iconClose"></use>
                             </svg>

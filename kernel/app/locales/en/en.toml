@@ -1,6 +1,9 @@
 [global]
 success = "successfully"
 complete = "completely"
+pin = "Pin"
+close = "Close"
+home = "Home"
 
 [config]
 success = "Loading configuration file successfully."
@@ -19,3 +22,7 @@ success = "Initrializing database successfully."
 
 [server]
 success = "Initrializing server successfully."
+
+[HTML]
+new-window = "Open the page in a new window"
+new-page = "Open the page in a new tab"

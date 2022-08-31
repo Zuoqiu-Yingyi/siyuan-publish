@@ -84,7 +84,7 @@ class Link extends Base {
         if (this.home) {
             const a = this.context.document.createElement("a");
             a.href = window.publish.home.url;
-            a.title = "主页";
+            a.title = this.context.publish.i18n['home'];
 
             /* 为图标设置鼠标悬浮预览属性 */
             const icon = home.querySelector(".popover__block");

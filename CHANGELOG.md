@@ -10,6 +10,7 @@
 - 新增命令行参数 `--workspace` 设置工作空间目录 | Add the command line argument `--workspace` to set the workspace directory.
 - 新增命令行参数 `-v` 查看版本号 | Add the command line argument `-v` to view the version number.
 - 国际化命令行输出 | Internationalized command output.
+- 国际化 Web 页面 | Internationalized Web pages.
 
 ## v0.1.2 / 2022-08-08
 
