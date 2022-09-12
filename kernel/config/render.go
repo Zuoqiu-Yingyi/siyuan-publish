@@ -22,11 +22,13 @@ type Appearance struct {
 }
 
 type Editor struct {
-	FontSize                   int      `json:"fontSize"`
-	FontFamily                 []string `json:"fontFamily"`
-	CodeLineWrap               bool     `json:"codeLineWrap"`
 	CodeLigatures              bool     `json:"codeLigatures"`
+	CodeLineWrap               bool     `json:"codeLineWrap"`
 	CodeSyntaxHighlightLineNum bool     `json:"codeSyntaxHighlightLineNum"`
+	FontFamily                 []string `json:"fontFamily"`
+	FontSize                   int      `json:"fontSize"`
+	FullWidth                  bool     `json:"fullWidth"`
+	KatexMacros                string   `json:"katexMacros"`
 	PlantUMLServePath          string   `json:"plantUMLServePath"`
 
 	Contenteditable bool `json:"contenteditable"` // 文档内容是否可编辑

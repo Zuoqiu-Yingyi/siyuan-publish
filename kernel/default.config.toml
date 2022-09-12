@@ -3,7 +3,7 @@ Debug = false # 调试模式(控制台打印配置文件信息)
 # 国际化相关配置
 [I18n]
 Directory = "./app/locales" # 多语言配置文件目录
-Default = "zh-Hans" # 默认语言
+Default = "zh-Hans"         # 默认语言
 
 # 数据库配置
 [Database]
@@ -107,11 +107,13 @@ CodeBlockThemeDark = "atom-one-dark"   # 暗黑模式代码块配色方案
 
 # 编辑器设置
 [Render.Editor]
-FontSize = 16                                                  # 编辑器字体大小(单位: px)
-FontFamily = ["LXGW WenKai Mono"]                              # 编辑器字体列表
-CodeLineWrap = true                                            # 代码行是否启用自动换行
 CodeLigatures = true                                           # 代码是否启用连字符
+CodeLineWrap = true                                            # 代码行是否启用自动换行
 CodeSyntaxHighlightLineNum = true                              # 代码块是否显示行号
+FontFamily = ["LXGW WenKai Mono"]                              # 编辑器字体列表
+FontSize = 16                                                  # 编辑器字体大小(单位: px)
+FullWidth = true                                               # 是否开启自适应宽度
+KatexMacros = "{}"                                             # 数学公式宏(JSON 字符串)
 PlantUMLServePath = "https://www.plantuml.com/plantuml/svg/~1" # plant UML 渲染服务 URL
 
 Contenteditable = false # 文档内容是否可编辑
@@ -132,9 +134,9 @@ Before = [ # 渲染前调用的插件
     "title",      # 题头插件
     "breadcrumb", # 面包屑插件
     "edit-state", # 编辑状态插件
-    "link",    # 超链接插件
-    "locate",  # 定位插件
-    "popover", # 悬浮预览插件
+    "link",       # 超链接插件
+    "locate",     # 定位插件
+    "popover",    # 悬浮预览插件
 ]
 After = [ # 渲染后调用的插件
 ]

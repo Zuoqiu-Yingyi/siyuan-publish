@@ -139,11 +139,13 @@ func LoadDefaultConfig() {
 				CodeBlockThemeDark:  "atom-one-dark",
 			},
 			Editor: Editor{
-				FontSize:                   16,
-				FontFamily:                 []string{},
-				CodeLineWrap:               true,
 				CodeLigatures:              true,
+				CodeLineWrap:               true,
 				CodeSyntaxHighlightLineNum: true,
+				FontFamily:                 []string{},
+				FontSize:                   16,
+				FullWidth:                  true,
+				KatexMacros:                "{}",
 				PlantUMLServePath:          "https://www.plantuml.com/plantuml/svg/~1",
 
 				Contenteditable: false,

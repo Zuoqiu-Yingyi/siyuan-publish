@@ -43,7 +43,7 @@
 <body class="fn__flex-column">
     <div id="editor">
         {{ template "breadcrumb.html" . }}
-        <div class="protyle-content">
+        <div class="protyle-content"{{ if .Render.Editor.FullWidth }}data-fullwidth="true"{{ end }}>
             {{ template "background.html" . }}
             {{ template "title.html" . }}
             <article id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">
