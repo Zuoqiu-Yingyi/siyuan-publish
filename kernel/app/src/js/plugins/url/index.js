@@ -19,7 +19,7 @@ class Url extends Base {
         super(context);
         this.url = new URL(this.context.location.href);
         this.root = new URL(this.url);
-        this.root.pathname = "/block";
+        this.root.pathname = context.publish.config.url.pathname;
 
         this.context.meta.set('URL', {
             url: this.url,

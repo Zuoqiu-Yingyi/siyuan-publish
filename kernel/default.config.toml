@@ -15,7 +15,9 @@ SQLite = "./temp/publish.db" # 数据库文件, 可使用内存数据库模式 "
 # 服务器配置
 [Server]
 Debug = false                        # 调试模式
-Port = 80                            # 发布服务端口
+Port = 80                            # 发布服务端发布页面的 URL 路径名口
+Base = "/"                           # URL 相对路径默认目录
+Pathname = "/block"                  # 发布页面的 URL 路径名
 Logs = "./temp/logs/"                # 日志目录
 Templates = "./app/templates/*.html" # 模板目录
 

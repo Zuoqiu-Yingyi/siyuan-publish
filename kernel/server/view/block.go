@@ -39,6 +39,10 @@ func Block(c *gin.Context, doc *models.Doc) {
 			"URL":  config.C.Server.Index.URL,
 			"Icon": config.C.Server.Index.Icon,
 		},
+		"URL": gin.H{
+			"Base":     config.C.Server.Base,
+			"Pathname": config.C.Server.Pathname,
+		},
 		"Path":        doc.Path,
 		"Hpath":       doc.Hpath,
 		"Tags":        tags,

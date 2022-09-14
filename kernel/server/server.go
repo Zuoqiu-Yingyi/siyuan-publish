@@ -7,7 +7,6 @@ import (
 	"os"
 	"path"
 	"strconv"
-	"strings"
 	"time"
 
 	"publish/config"
@@ -129,22 +128,22 @@ func Server() (router *gin.Engine) {
 		router.Static(config.C.Server.Static.Stage.Path, config.C.Server.Static.Stage.FilePath)
 	}
 
-	router_block := router.Group("/block")
+	router_block := router.Group(config.C.Server.Pathname)
 	{
-		/* 请求重定向 */
-		redirect := func(c *gin.Context) {
-			// REF [重定向 | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/redirects/)
-			c.Request.URL.Path = strings.Replace(c.Request.URL.Path, "/block", "", 1)
-			router.HandleContext(c)
-		}
+		// /* 请求重定向 */
+		// redirect := func(c *gin.Context) {
+		// 	// REF [重定向 | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/redirects/)
+		// 	c.Request.URL.Path = strings.Replace(c.Request.URL.Path, "/block", "", 1)
+		// 	router.HandleContext(c)
+		// }
 
-		/* 资源文件请求重定向 */
-		router_block.GET("/appearance/*path", redirect)
-		router_block.GET("/assets/*path", redirect)
-		router_block.GET("/emojis/*path", redirect)
-		router_block.GET("/widgets/*path", redirect)
-		router_block.GET("/export/*path", redirect)
-		router_block.GET("/stage/*path", redirect)
+		// /* 资源文件请求重定向 */
+		// router_block.GET("/appearance/*path", redirect)
+		// router_block.GET("/assets/*path", redirect)
+		// router_block.GET("/emojis/*path", redirect)
+		// router_block.GET("/widgets/*path", redirect)
+		// router_block.GET("/export/*path", redirect)
+		// router_block.GET("/stage/*path", redirect)
 
 		/* 文档页面加载方式 */
 		// 使用 URL 参数 id 跳转到指定的块

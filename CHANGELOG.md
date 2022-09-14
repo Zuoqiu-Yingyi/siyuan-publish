@@ -14,6 +14,9 @@
 - 新增 `Render.Editor.FullWidth` 与 `Render.Editor.KatexMacros` 配置项 | Added `Render.Editor.FullWidth` and `Render.Editor.KatexMacros` configuration item.
   - `Render.Editor.FullWidth`: 是否开启自适应宽度 | Whether to turn on Adaptive Width.
   - `Render.Editor.KatexMacros`: Katex 宏(JSON 字符串) | Katex Macros (JSON string).
+- 新增 `Server.Base` 与 `Server.Pathname` 配置项 | Added `Server.Base` and `Server.Pathname` configuration item.
+  - `Server.Base`: HTML `<base>` 标签的 `href` 字段值(URL 相对路径默认目录) | The `href` field value of the HTML `<base>` tag (URL-relative path default directory).
+  - `Server.Pathname`: 发布页面的 URL 路径名 | The URL path name of the publishing page.
 
 ## v0.1.2 / 2022-08-08
 

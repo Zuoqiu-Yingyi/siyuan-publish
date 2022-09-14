@@ -18,7 +18,7 @@ var (
 
 type Config struct {
 	Debug    bool     `json:"debug"`
-	I18n     I18n     `json:i18n""`
+	I18n     I18n     `json:"i18n"`
 	Database Database `json:"database"`
 	Server   Server   `json:"server"`
 	Siyuan   Siyuan   `json:"siyuan"`
@@ -62,6 +62,8 @@ func LoadDefaultConfig() {
 		Server: Server{
 			Debug:     false,
 			Port:      80,
+			Base:      "/",
+			Pathname:  "/block",
 			Logs:      "./temp/logs/",
 			Templates: "./app/templates/*.html",
 			Mode: Mode{

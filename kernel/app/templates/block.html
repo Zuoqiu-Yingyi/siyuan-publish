@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <base id="baseURL" href="{{.URL.Base}}">
     <title>{{ .Title }}</title>
     {{ template "config.html" . }}
     <script async id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
