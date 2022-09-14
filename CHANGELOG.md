@@ -1,5 +1,8 @@
 # 更改日志 | CHANGE LOG
 
+## v0.1.3 / 2022-09-15
+
+- [v0.1.2 ... v0.1.3](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.2...v0.1.3)
 - 为面包屑添加主页项 | Add the home page item to the breadcrumbs.
 - 移除浮窗预览其他文档时的背景图片与背景颜色 | Remove the background image and background color of popover preview window.
 - 插件化字体设置 | Plugin font settings.
