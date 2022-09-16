@@ -1,0 +1,28 @@
+[global]
+success = "成功"
+complete = "完成"
+pin = "釘住"
+close = "關閉"
+home = "主頁"
+
+[config]
+success = "配置文件加載完成。"
+
+[client]
+success = "HTTP 客戶端初始化完成。"
+
+[models]
+clear = "清理數據庫 ... "
+init-ACL = "初始化訪問控製列表 (ACL) ... "
+load-ACL = "加載訪問控製列表 (ACL) ... "
+load-table = "加載 %s 表 ... "
+before-load-data = "開始加載數據 ..."
+after-load-data = "數據加載完成。"
+success = "數據庫初始化完成。"
+
+[server]
+success = "Web 服務初始化完成。"
+
+[HTML]
+new-window = "在新窗口打開當前頁面"
+new-page = "在新標簽頁打開當前頁面"

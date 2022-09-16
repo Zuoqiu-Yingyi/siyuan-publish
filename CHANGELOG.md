@@ -1,6 +1,7 @@
 # 更改日志 | CHANGE LOG
 
 - 更新 `publish-link` 渲染插件 | Updated the `publish-link` rendering plugin.
+- 支持繁体中文 `zh-Hant` | Support Chinese Traditional `zh-Hant`.
 
 ## v0.1.3 / 2022-09-15
 
