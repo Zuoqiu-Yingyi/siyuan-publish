@@ -1,5 +1,7 @@
 # 更改日志 | CHANGE LOG
 
+- 更新 `publish-link` 渲染插件 | Updated the `publish-link` rendering plugin.
+
 ## v0.1.3 / 2022-09-15
 
 - [v0.1.2 ... v0.1.3](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.2...v0.1.3)
