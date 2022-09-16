@@ -31,8 +31,14 @@
 │  │  │      publish.css // 自定义样式
 │  │  │
 │  │  └─js // 脚本文件
-│  │          config.js // 自定义配置
-│  │          publish.js // 自定义渲染
+│  │     │   after.js // 渲染后运行脚本
+│  │     │   before.js // 渲染前运行脚本
+│  │     │   context.js // 插件上下文
+│  │     │   plugin.js // 插件初始化
+│  │     │   render.js // 文档渲染
+│  │     │   utils.js // 工具组件
+│  │     │
+│  │     └─plugins // 渲染插件
 │  │
 │  └─templates // 模板
 │          background.html // 题头模板
