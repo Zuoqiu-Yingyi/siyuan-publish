@@ -28,6 +28,7 @@
 
     /* 发布配置 */
     window.publish = {
+        url: new URL(window.location),
         config: { // 配置选项
             theme: {
                 light: {
@@ -87,4 +88,59 @@
             "new-page": '{{ call .T "HTML.new-page" }}',
         },
     };
+
+    /* 设置主题模式 */
+    (() => {
+        /* 设置主题模式 */
+        function setThemeMode(mode) {
+            switch (mode) {
+                case 0: // 亮色
+                    document.body.style.color = '#5f6368';
+                    document.body.style.backgroundColor = '#f3f3f3';
+                    window.siyuan.config.appearance.mode = 0;
+                    break;
+                case 1: // 暗色
+                    document.body.style.color = '#9aa0a6';
+                    document.body.style.backgroundColor = '#292a2d';
+                    window.siyuan.config.appearance.mode = 1;
+                    break;
+            }
+        }
+
+        /* 使用 URL 参数 theme 设置主题模式 */
+        switch (window.publish.url.searchParams.get('theme')) {
+            case 'light':
+                setThemeMode(0);
+                break;
+            case 'dark':
+                setThemeMode(1);
+                break;
+            case 'auto':
+            default:
+                /* 使用服务器配置设置主题模式 */
+                switch (window.siyuan.config.appearance.mode) {
+                    case 0:
+                    default:
+                        setThemeMode(0);
+                        break;
+                    case 1:
+                        setThemeMode(1);
+                        break;
+                    case 2:
+                        /* 使用浏览器配置设置主题模式 */
+                        switch (true) {
+                            case window.top.matchMedia('(prefers-color-scheme: light)').matches:
+                                setThemeMode(0);
+                                break;
+                            case window.top.matchMedia('(prefers-color-scheme: dark)').matches:
+                                setThemeMode(1);
+                                break;
+                            default:
+                                setThemeMode(0);
+                                break;
+                        }
+                        break;
+                }
+        }
+    })();
 </script>

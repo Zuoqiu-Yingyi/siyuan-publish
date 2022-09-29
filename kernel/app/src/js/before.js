@@ -1,7 +1,6 @@
 import { merge } from './utils.js';
 import { plugins } from './plugin.js';
 
-
 (() => {
     /* 覆盖 ./app/templates/config.html 配置文件中定义的字段 */
     merge(window.siyuan, {});
