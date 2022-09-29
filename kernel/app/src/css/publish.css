@@ -33,6 +33,9 @@
 #editor #preview [data-node-id]:hover > .copy-link {
   display: block;
 }
+#editor #preview [data-node-id] .protyle-linenumber__rows > span {
+  height: auto !important;
+}
 #editor #preview a,
 #editor #breadcrumb a {
   /* 取消附加的超链接样式 */

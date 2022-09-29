@@ -3,6 +3,7 @@
 - 更新 `publish-link` 渲染插件 | Updated the `publish-link` rendering plugin.
 - 支持繁体中文 `zh-Hant` | Support Chinese Traditional `zh-Hant`.
 - 修复代码块无法应用亮色配色问题 | Fixed an issue where code blocks could not apply light color theme.
+- 修复代码块行号在 chromium 浏览器中高度异常问题 | Fixed an issue where code block line numbers were highly unusual in the chromium browser.
 
 ## v0.1.3 / 2022-09-15
 
