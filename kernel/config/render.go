@@ -54,9 +54,11 @@ type Style struct {
 }
 
 type Theme struct {
-	Default string `json:"default"`
-	Theme   string `json:"theme"`
-	Custom  string `json:"custom"`
+	Color           string `json:"color"`
+	BackgroundColor string `json:"backgroundColor"`
+	Default         string `json:"default"`
+	Theme           string `json:"theme"`
+	Custom          string `json:"custom"`
 }
 
 type Script struct {

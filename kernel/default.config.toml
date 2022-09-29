@@ -164,12 +164,18 @@ Publish = "/css/publish.css"          # 发布样式文件 URL
 
 # 渲染器明亮主题样式文件 URL
 [Render.File.Style.Light]
+Color = "#202124"                          # 默认前景颜色(主题未加载时)
+BackgroundColor = "#F3F3F3"                # 默认背景颜色(主题未加载时)
+
 Default = "/appearance/themes/daylight/theme.css" # 基础主题配色
 Theme = "/appearance/themes/daylight/theme.css"   # 主题样式
 Custom = "/appearance/themes/daylight/custom.css" # 自定义主题样式
 
 # 渲染器暗黑主题样式文件 URL
 [Render.File.Style.Dark]
+Color = "#C9D1D9"                          # 默认文字颜色(主题未加载时)
+BackgroundColor = "#292A2D"                # 默认背景颜色(主题未加载时)
+
 Default = "/appearance/themes/midnight/theme.css" # 基础主题配色
 Theme = "/appearance/themes/midnight/theme.css"   # 主题样式
 Custom = "/appearance/themes/midnight/custom.css" # 自定义主题样式

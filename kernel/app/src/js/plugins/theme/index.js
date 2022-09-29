@@ -43,5 +43,9 @@ class Theme extends Base {
                 this.DOM.themeCustomStyle.href = this.context.publish.config.theme.dark.custom;
                 break;
         }
+
+        /* 移除默认颜色 */
+        this.context.document.body.style.color = null;
+        this.context.document.body.style.backgroundColor = null;
     }
 }
