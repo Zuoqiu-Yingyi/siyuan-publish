@@ -181,16 +181,21 @@ class Popover extends Base {
                             popover.drag.size.width = block__popover.offsetWidth; // 窗口宽度
                             popover.drag.size.height = block__popover.offsetHeight; // 窗口高度
 
-                            that.dragMousedown(e, element, doc, mousemoveHandler);
+                            that.dragMousedown(e, doc, mousemoveHandler);
                         });
                         element.addEventListener("mouseup", e => {
+                            /* 取消其他默认事件处理 */
+                            e.preventDefault();
+                            e.stopPropagation();
+
                             flag_popover_dragging = false;
-                            that.dragMouseup(e, element, doc, mousemoveHandler);
+                            that.dragMouseup(e, doc, mousemoveHandler);
                         });
                     }
                     // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
                     // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
-                    function borderDrag(e) {
+                    /* 悬浮子窗口拖拽 */
+                    function popoverDrag(e) {
                         // console.log(e);
                         /* 子窗口左上角将要移动到的位置坐标 */
                         let x = e.clientX - popover.drag.position.x;
@@ -245,7 +250,7 @@ class Popover extends Base {
                         block__popover.style.width = `${size.width}px`;
                         block__popover.style.height = `${size.height}px`;
                     }
-                    dragRegister(border, borderDrag);
+                    dragRegister(border, popoverDrag);
                     dragRegister(width_handle, widthDrag);
                     dragRegister(height_handle, heightDrag);
                     dragRegister(size_handle, sizeDrag);
@@ -326,39 +331,35 @@ class Popover extends Base {
     /**
      * 拖动功能鼠标按下时的处理器
      * @params {Event} e: 鼠标事件
-     * @params {HTMLElement} target: 拖拽的目标元素
-     * @params {HTMLElement} satge: 在哪个元素内拖拽
+     * @params {HTMLElement} stage: 在哪个元素内拖拽
      * @params {function} mousemoveHandler: 鼠标移动事件的处理器
      */
-    dragMousedown(e, target, satge, mousemoveHandler) {
+    dragMousedown(e, stage, mousemoveHandler) {
         /* 取消其他默认事件处理 */
         e.preventDefault();
         e.stopPropagation();
 
-        target.removeEventListener("mousedown", this.dragMousedown); // 避免重复触发
-
         /* 避免 mousemove 事件在 iframe 中无法触发 */
         // REF [在 iframe 上无法捕获 mousemove](https://blog.csdn.net/DongFuPanda/article/details/109533365)
-        satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
+        stage.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'none');
 
-        satge.addEventListener("mousemove", mousemoveHandler, true);
+        stage.addEventListener("mousemove", mousemoveHandler, true);
     }
 
 
     /**
      * 拖动功能鼠标抬起时的处理器
      * @params {Event} e: 鼠标事件
-     * @params {HTMLElement} target: 拖拽的目标元素
-     * @params {HTMLElement} satge: 在哪个元素内拖拽
+     * @params {HTMLElement} stage: 在哪个元素内拖拽
      * @params {function} mousemoveHandler: 鼠标移动事件的处理器
      */
-    dragMouseup(e, target, satge, mousemoveHandler) {
+    dragMouseup(e, stage, mousemoveHandler) {
         /* 取消其他默认事件处理 */
         e.preventDefault();
         e.stopPropagation();
 
-        satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
-        satge.removeEventListener("mousemove", mousemoveHandler, true);
-        target.addEventListener("mousedown", this.dragMousedown);
+        stage.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
+
+        stage.removeEventListener("mousemove", mousemoveHandler, true);
     }
 }
