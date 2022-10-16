@@ -191,11 +191,6 @@ class Popover extends Base {
                     // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
                     // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
                     function borderDrag(e) {
-                        // REF [JavaScript 实现鼠标拖动元素 - 佚名787 - 博客园](https://www.cnblogs.com/nizhengjia/p/4654228.html)
-                        /* 取消其他默认事件处理 */
-                        e.preventDefault();
-                        e.stopPropagation();
-
                         // console.log(e);
                         /* 子窗口左上角将要移动到的位置坐标 */
                         let x = e.clientX - popover.drag.position.x;
@@ -240,24 +235,12 @@ class Popover extends Base {
                         };
                     }
                     function widthDrag(e) {
-                        /* 取消其他默认事件处理 */
-                        e.preventDefault();
-                        e.stopPropagation();
-
                         block__popover.style.width = `${calcSize(e).width}px`;
                     }
                     function heightDrag(e) {
-                        /* 取消其他默认事件处理 */
-                        e.preventDefault();
-                        e.stopPropagation();
-
                         block__popover.style.height = `${calcSize(e).height}px`;
                     }
                     function sizeDrag(e) {
-                        /* 取消其他默认事件处理 */
-                        e.preventDefault();
-                        e.stopPropagation();
-
                         const size = calcSize(e);
                         block__popover.style.width = `${size.width}px`;
                         block__popover.style.height = `${size.height}px`;
