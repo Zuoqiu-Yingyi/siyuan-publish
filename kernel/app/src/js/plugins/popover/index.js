@@ -10,7 +10,7 @@ class Popover extends Base {
         UUID: '2B17F759-5E17-4A00-B588-E3C447C8F73D',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.1',
+        VERSION: '0.0.2',
         DESCRIPTION: '鼠标悬浮预览',
         DEPENDENCY: [
             'publish-url'
@@ -46,6 +46,10 @@ class Popover extends Base {
             };
             /* 获得鼠标位置 */
             document.addEventListener("mousemove", e => {
+                /* 取消其他默认事件处理 */
+                e.preventDefault();
+                e.stopPropagation();
+
                 this.context.publish.mouse.position.x = e.pageX;
                 this.context.publish.mouse.position.y = e.pageY;
             });
@@ -165,6 +169,10 @@ class Popover extends Base {
                     const that = this;
                     function dragRegister(element, mousemoveHandler) {
                         element.addEventListener("mousedown", e => {
+                            /* 取消其他默认事件处理 */
+                            e.preventDefault();
+                            e.stopPropagation();
+
                             flag_popover_dragging = true; // 正在拖拽
                             block__popover.style.zIndex = popover.z_index++; // 将当前窗口置顶
                             /* 记录鼠标与窗口的相对位置 */
@@ -183,6 +191,11 @@ class Popover extends Base {
                     // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
                     // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
                     function borderDrag(e) {
+                        // REF [JavaScript 实现鼠标拖动元素 - 佚名787 - 博客园](https://www.cnblogs.com/nizhengjia/p/4654228.html)
+                        /* 取消其他默认事件处理 */
+                        e.preventDefault();
+                        e.stopPropagation();
+
                         // console.log(e);
                         /* 子窗口左上角将要移动到的位置坐标 */
                         let x = e.clientX - popover.drag.position.x;
@@ -227,12 +240,24 @@ class Popover extends Base {
                         };
                     }
                     function widthDrag(e) {
+                        /* 取消其他默认事件处理 */
+                        e.preventDefault();
+                        e.stopPropagation();
+
                         block__popover.style.width = `${calcSize(e).width}px`;
                     }
                     function heightDrag(e) {
+                        /* 取消其他默认事件处理 */
+                        e.preventDefault();
+                        e.stopPropagation();
+
                         block__popover.style.height = `${calcSize(e).height}px`;
                     }
                     function sizeDrag(e) {
+                        /* 取消其他默认事件处理 */
+                        e.preventDefault();
+                        e.stopPropagation();
+
                         const size = calcSize(e);
                         block__popover.style.width = `${size.width}px`;
                         block__popover.style.height = `${size.height}px`;
@@ -323,7 +348,10 @@ class Popover extends Base {
      * @params {function} mousemoveHandler: 鼠标移动事件的处理器
      */
     dragMousedown(e, target, satge, mousemoveHandler) {
-        e.stopPropagation(); // 阻止冒泡
+        /* 取消其他默认事件处理 */
+        e.preventDefault();
+        e.stopPropagation();
+
         target.removeEventListener("mousedown", this.dragMousedown); // 避免重复触发
 
         /* 避免 mousemove 事件在 iframe 中无法触发 */
@@ -342,7 +370,10 @@ class Popover extends Base {
      * @params {function} mousemoveHandler: 鼠标移动事件的处理器
      */
     dragMouseup(e, target, satge, mousemoveHandler) {
-        e.stopPropagation(); // 阻止冒泡
+        /* 取消其他默认事件处理 */
+        e.preventDefault();
+        e.stopPropagation();
+
         satge.querySelectorAll('iframe').forEach(iframe => iframe.style.pointerEvents = 'auto');
         satge.removeEventListener("mousemove", mousemoveHandler, true);
         target.addEventListener("mousedown", this.dragMousedown);
