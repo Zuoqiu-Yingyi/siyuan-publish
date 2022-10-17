@@ -52,7 +52,8 @@ func File(c *gin.Context) {
 	} else if !v { // 资源文件不存在
 		/* 下载资源文件 */
 		// REF [下载 - Req](https://req.cool/zh/docs/tutorial/download/)
-		if _, err := client.C.R().SetOutputFile(file_path).Get(config.C.Siyuan.Server + root_path + relative_path); err != nil {
+		if response, err := client.C.R().SetOutputFile(file_path).Get(root_path + relative_path); err != nil || response.IsError() {
+			utils.Remove(file_path)
 			c.Status(http.StatusNotFound)
 			return
 		}

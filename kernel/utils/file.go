@@ -14,3 +14,18 @@ func IsPathExists(path string) (bool, error) {
 		return false, err // 如果有错误了，但是不是不存在的错误，所以把这个错误原封不动的返回
 	}
 }
+
+// 移除文件
+func Remove(path string) (bool, error) {
+	if exist, err := IsPathExists(path); err != nil {
+		return false, err
+	} else if exist {
+		if err = os.Remove(path); err != nil {
+			return false, err
+		} else {
+			return true, nil
+		}
+	} else {
+		return false, nil
+	}
+}

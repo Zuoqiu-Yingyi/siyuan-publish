@@ -39,7 +39,7 @@ func File(c *gin.Context) {
 
 	/* 获取资源文件 */
 	// REF [下载 - Req](https://req.cool/zh/docs/tutorial/download/)
-	if response, err := client.C.R().SetOutput(buffer).Get(config.C.Siyuan.Server + root_path + relative_path); err != nil {
+	if response, err := client.C.R().SetOutput(buffer).Get(root_path + relative_path); err != nil || response.IsError() {
 		c.Status(http.StatusNotFound)
 	} else {
 		// [从 reader 读取数据 | Gin Web Framework](https://gin-gonic.com/zh-cn/docs/examples/serving-data-from-reader/)

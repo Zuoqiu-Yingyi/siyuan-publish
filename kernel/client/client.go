@@ -18,7 +18,8 @@ func Init() {
 		// SetCommonContentType("application/json").
 		SetCommonHeader("Authorization", "Token "+config.C.Siyuan.Token).
 		SetTimeout(time.Duration(config.C.Siyuan.Timeout) * time.Millisecond).
-		SetCommonRetryCount(config.C.Siyuan.Retry)
+		SetCommonRetryCount(config.C.Siyuan.Retry).
+		SetBaseURL(config.C.Siyuan.Server)
 
 	if config.C.Siyuan.Debug { // 是否启动客户端调试模式
 		C.DevMode()

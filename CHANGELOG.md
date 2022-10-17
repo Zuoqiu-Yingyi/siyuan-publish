@@ -8,6 +8,7 @@
 - 拖拽浮窗时取消划选效果 | Cancels the swipe effect when dragging the floating window.
 - 重构浮窗拖拽功能 | Refactored floating window dragging function.
 - 修复无法划选文本问题 | Fixed an issue where text could not be sized.
+- 修复静态资源请求错误时创建空文件问题 | Fixed an issue where an empty file was created when a static resource request was wrong.
 
 ## v0.1.3 / 2022-09-15
 
