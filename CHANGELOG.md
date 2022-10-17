@@ -1,5 +1,8 @@
 # 更改日志 | CHANGE LOG
 
+## v0.1.4 / 2022-10-18
+
+- [v0.1.3 ... v0.1.4](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.3...v0.1.4)
 - 更新 `publish-link` 渲染插件 | Updated the `publish-link` rendering plugin.
 - 支持繁体中文 `zh-Hant` | Support Chinese Traditional `zh-Hant`.
 - 修复代码块无法应用亮色配色问题 | Fixed an issue where code blocks could not apply light color theme.
