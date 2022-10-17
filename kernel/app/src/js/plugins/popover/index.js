@@ -10,7 +10,7 @@ class Popover extends Base {
         UUID: '2B17F759-5E17-4A00-B588-E3C447C8F73D',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.3',
+        VERSION: '0.0.4',
         DESCRIPTION: '鼠标悬浮预览',
         DEPENDENCY: [
             'publish-url'
@@ -183,7 +183,7 @@ class Popover extends Base {
 
                             that.dragMousedown(e, doc, mousemoveHandler);
                         });
-                        element.addEventListener("mouseup", e => {
+                        element.addEventListener("mouseup", e => { // 松开按键结束拖拽
                             /* 取消其他默认事件处理 */
                             e.preventDefault();
                             e.stopPropagation();
@@ -191,6 +191,10 @@ class Popover extends Base {
                             flag_popover_dragging = false;
                             that.dragMouseup(e, doc, mousemoveHandler);
                         });
+                        doc.addEventListener('mouseleave', e => { // 鼠标移出拖拽区域结束拖拽
+                            flag_popover_dragging = false;
+                            this.dragMouseup(e, doc, eventHandler);
+                        }, false);
                     }
                     // REF [JS拖动浮动DIV - boystar - 博客园](https://www.cnblogs.com/boystar/p/5231697.html)
                     // REF [JS鼠标事件完成元素拖拽（简单-高级） - 百度文库](https://wenku.baidu.com/view/0c56050c3269a45177232f60ddccda38376be161?bfetype=new)
