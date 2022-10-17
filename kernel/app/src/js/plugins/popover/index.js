@@ -10,7 +10,7 @@ class Popover extends Base {
         UUID: '2B17F759-5E17-4A00-B588-E3C447C8F73D',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.2',
+        VERSION: '0.0.3',
         DESCRIPTION: '鼠标悬浮预览',
         DEPENDENCY: [
             'publish-url'
@@ -46,9 +46,9 @@ class Popover extends Base {
             };
             /* 获得鼠标位置 */
             document.addEventListener("mousemove", e => {
-                /* 取消其他默认事件处理 */
-                e.preventDefault();
-                e.stopPropagation();
+                /* 不能取消其他默认事件处理, 不然无法划选 */
+                // e.preventDefault();
+                // e.stopPropagation();
 
                 this.context.publish.mouse.position.x = e.pageX;
                 this.context.publish.mouse.position.y = e.pageY;

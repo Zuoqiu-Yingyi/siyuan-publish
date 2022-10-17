@@ -7,6 +7,7 @@
 - 设置主题样式未加载完成时的默认背景颜色与文字颜色 | Sets the default background color and text color when the theme style is not finished loading.
 - 拖拽浮窗时取消划选效果 | Cancels the swipe effect when dragging the floating window.
 - 重构浮窗拖拽功能 | Refactored floating window dragging function.
+- 修复无法划选文本问题 | Fixed an issue where text could not be sized.
 
 ## v0.1.3 / 2022-09-15
 
