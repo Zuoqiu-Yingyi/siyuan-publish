@@ -1,5 +1,7 @@
 # 更改日志 | CHANGE LOG
 
+- 修复错误页面可能导致调试信息泄露问题 | Fix error pages that could cause debugging information disclosure.
+
 ## v0.1.4 / 2022-10-18
 
 - [v0.1.3 ... v0.1.4](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.3...v0.1.4)
