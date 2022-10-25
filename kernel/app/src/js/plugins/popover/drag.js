@@ -19,21 +19,23 @@ class Drag {
 
         this.handler = {
             /**
-             * 拖拽移动事件处理
+             * 拖拽事件处理方法
              * @params {Event} e: 鼠标事件
              * @params {HTMLElement} draggable: 可拖拽的区域
              * @params {HTMLElement} target: 操作的目标元素
-             * @params {HTMLElement} stage: 在哪个元素内拖拽
-             */
+             * @params {HTMLElement} stage: 在哪个元素范围内拖拽
+            */
+
+            /* 拖拽移动 */
             move: (e, draggable, target, stage) => {
                 // console.log(e);
                 /* 子窗口左上角将要移动到的位置坐标 */
-                let x = e.clientX - this.status.drag.position.x;
-                let y = e.clientY - this.status.drag.position.y;
+                let x = e.clientX - this.status.drag.position.x - stage.clientLeft;
+                let y = e.clientY - this.status.drag.position.y - stage.clientTop;
 
                 /* 子窗口左上角可以可以移动到区域边缘 */
-                let window_width = stage.clientWidth - target.offsetWidth;
-                let window_height = stage.clientHeight - target.offsetHeight;
+                const window_width = stage.clientWidth - target.offsetWidth;
+                const window_height = stage.clientHeight - target.offsetHeight;
 
                 x = (x < 0) ? 0 : x;                          // 当子窗口移动到主窗口最左边时
                 x = (x > window_width) ? window_width : x;    // 当子窗口移动到主窗口最右边时
@@ -42,18 +44,22 @@ class Drag {
 
                 // target.style.left = `${x}px`;
                 // target.style.top = `${y}px`;
+
                 target.style.left = `${100 * x / document.documentElement.offsetWidth}vw`;
                 target.style.top = `${100 * y / document.documentElement.offsetHeight}vh`;
             },
+            /* 拖拽调整元素大小 */
             resize: (e, draggable, target, stage) => {
                 const size = this.calcSize(e, draggable, target, stage);
                 target.style.width = `${100 * size.width / document.documentElement.offsetWidth}vw`;
                 target.style.height = `${100 * size.height / document.documentElement.offsetHeight}vh`;
             },
+            /* 拖拽调整元素宽度 */
             rewidth: (e, draggable, target, stage) => {
                 const size = this.calcSize(e, draggable, target, stage);
                 target.style.width = `${100 * size.width / document.documentElement.offsetWidth}vw`;
             },
+            /* 拖拽调整元素高度 */
             reheight: (e, draggable, target, stage) => {
                 const size = this.calcSize(e, draggable, target, stage);
                 target.style.height = `${100 * size.height / document.documentElement.offsetHeight}vh`;
@@ -105,14 +111,19 @@ class Drag {
         mousemoveHandler,
         final,
     ) {
+        // console.log(e);
         /* 取消其他默认事件处理 */
         e.preventDefault();
         e.stopPropagation();
 
         this.status.flags.dragging = true; // 正在拖拽
-        /* 记录鼠标与窗口的相对位置 */
-        this.status.drag.position.x = e.clientX - target.offsetLeft; // 鼠标相对于子窗口左上角的横向偏移量(鼠标横坐标 - this.status 的 左侧偏移量)
-        this.status.drag.position.y = e.clientY - target.offsetTop; // 鼠标相对于子窗口左上角的纵向偏移量(鼠标纵坐标 - this.status 的 上侧偏移量)
+        /* 记录鼠标与拖拽控件的相对位置 */
+        const rect = target.getBoundingClientRect();
+        // console.log(e, rect);
+        const x = Math.round(rect.x);
+        const y = Math.round(rect.y);
+        this.status.drag.position.x = e.clientX - x; // 鼠标相对于子窗口左上角的横向偏移量(鼠标横坐标 - target 的 左侧偏移量)
+        this.status.drag.position.y = e.clientY - y; // 鼠标相对于子窗口左上角的纵向偏移量(鼠标纵坐标 - target 的 上侧偏移量)
         this.status.drag.size.width = target.offsetWidth; // 窗口宽度
         this.status.drag.size.height = target.offsetHeight; // 窗口高度
 

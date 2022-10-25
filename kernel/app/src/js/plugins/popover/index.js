@@ -12,10 +12,10 @@ class Popover extends Base {
         UUID: '2B17F759-5E17-4A00-B588-E3C447C8F73D',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.4',
+        VERSION: '0.0.5',
         DESCRIPTION: '鼠标悬浮预览',
         DEPENDENCY: [
-            'publish-url'
+            'publish-url',
         ],
         CALL: {
             async: false,
