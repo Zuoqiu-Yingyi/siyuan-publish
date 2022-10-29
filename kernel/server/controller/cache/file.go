@@ -35,6 +35,9 @@ func File(c *gin.Context) {
 	case strings.HasPrefix(request_fullpath, config.C.Server.Static.Export.Path):
 		root_path = config.C.Server.Static.Export.Path
 		file_path = path.Join(config.C.Server.Static.Export.FilePath, relative_path)
+	case strings.HasPrefix(request_fullpath, config.C.Server.Static.Snippets.Path):
+		root_path = config.C.Server.Static.Snippets.Path
+		file_path = path.Join(config.C.Server.Static.Snippets.FilePath, relative_path)
 	case strings.HasPrefix(request_fullpath, config.C.Server.Static.Stage.Path):
 		root_path = config.C.Server.Static.Stage.Path
 		file_path = path.Join(config.C.Server.Static.Stage.FilePath, relative_path)

@@ -31,6 +31,8 @@ func File(c *gin.Context) {
 		root_path = config.C.Server.Static.Emojis.Path
 	case strings.HasPrefix(request_fullpath, config.C.Server.Static.Export.Path):
 		root_path = config.C.Server.Static.Export.Path
+	case strings.HasPrefix(request_fullpath, config.C.Server.Static.Snippets.Path):
+		root_path = config.C.Server.Static.Snippets.Path
 	case strings.HasPrefix(request_fullpath, config.C.Server.Static.Stage.Path):
 		root_path = config.C.Server.Static.Stage.Path
 	case strings.HasPrefix(request_fullpath, config.C.Server.Static.Widgets.Path):

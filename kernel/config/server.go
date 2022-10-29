@@ -31,6 +31,7 @@ type Static struct {
 	Assets     StaticPath `json:"assets"`     // 思源 assets 目录
 	Emojis     StaticPath `json:"emojis"`     // 思源 emojis 目录
 	Export     StaticPath `json:"export"`     // 思源 export 目录
+	Snippets   StaticPath `json:"snippets"`   // 思源 snippets 目录
 	Stage      StaticPath `json:"stage"`      // 思源 stage 目录
 	Widgets    StaticPath `json:"widgets"`    // 思源 widgets 目录
 	Favicon    StaticPath `json:"favicon"`    // favicon.ico 文件路径

@@ -52,6 +52,10 @@ Assets.FilePath = "./temp/static/assets/" # 文件目录
 Emojis.Path = "/emojis"                   # 访问目录
 Emojis.FilePath = "./temp/static/emojis/" # 文件目录
 
+# 片段文件目录, 存放思源笔记工作区 /data/snippets/ 目录下的文件
+Snippets.Path = "/snippets"                   # 访问目录
+Snippets.FilePath = "./temp/static/snippets/" # 文件目录
+
 # 挂件文件目录, 存放思源笔记工作区 /data/widgets/ 目录下的文件
 Widgets.Path = "/widgets"                   # 访问目录
 Widgets.FilePath = "./temp/static/widgets/" # 文件目录
@@ -164,8 +168,8 @@ Publish = "/css/publish.css"          # 发布样式文件 URL
 
 # 渲染器明亮主题样式文件 URL
 [Render.File.Style.Light]
-Color = "#202124"                          # 默认前景颜色(主题未加载时)
-BackgroundColor = "#F3F3F3"                # 默认背景颜色(主题未加载时)
+Color = "#202124"           # 默认前景颜色(主题未加载时)
+BackgroundColor = "#F3F3F3" # 默认背景颜色(主题未加载时)
 
 Default = "/appearance/themes/daylight/theme.css" # 基础主题配色
 Theme = "/appearance/themes/daylight/theme.css"   # 主题样式
@@ -173,8 +177,8 @@ Custom = "/appearance/themes/daylight/custom.css" # 自定义主题样式
 
 # 渲染器暗黑主题样式文件 URL
 [Render.File.Style.Dark]
-Color = "#C9D1D9"                          # 默认文字颜色(主题未加载时)
-BackgroundColor = "#292A2D"                # 默认背景颜色(主题未加载时)
+Color = "#C9D1D9"           # 默认文字颜色(主题未加载时)
+BackgroundColor = "#292A2D" # 默认背景颜色(主题未加载时)
 
 Default = "/appearance/themes/midnight/theme.css" # 基础主题配色
 Theme = "/appearance/themes/midnight/theme.css"   # 主题样式

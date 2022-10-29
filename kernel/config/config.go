@@ -100,6 +100,10 @@ func LoadDefaultConfig() {
 					Path:     "/stage",
 					FilePath: "./temp/static/stage/",
 				},
+				Snippets: StaticPath{
+					Path:     "/Snippets",
+					FilePath: "./temp/static/snippets/",
+				},
 				Widgets: StaticPath{
 					Path:     "/widgets",
 					FilePath: "./temp/static/widgets/",
