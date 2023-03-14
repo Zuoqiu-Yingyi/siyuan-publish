@@ -56,6 +56,7 @@ class Link extends Base {
         this.preview.querySelectorAll(`span[data-type="block-ref"][data-id]`).forEach(item => {
             const id = item.dataset.id;
             const a = this.context.document.createElement("a");
+            if (this.context.siyuan.config.editor.contenteditable) a.setAttribute('contenteditable', false);
             a.classList.add(this.CLASS_NAME_LINK_TRIGGER);
             this.URL.root.searchParams.set("id", id);
             a.href = this.URL.root.href.replace(this.URL.root.origin, "");
@@ -69,6 +70,7 @@ class Link extends Base {
         /* 将链接转化为超链接 */
         this.preview.querySelectorAll(`span[data-type="a"][data-href]`).forEach(item => {
             const a = this.context.document.createElement("a");
+            if (this.context.siyuan.config.editor.contenteditable) a.setAttribute('contenteditable', false);
             a.classList.add(this.CLASS_NAME_LINK_TRIGGER)
             let href = item.dataset.href;
             if (this.REG.url.test(href)) { // 思源块超链接转化为站点超链接
@@ -87,6 +89,7 @@ class Link extends Base {
         /* 文档首页转化为超链接 */
         if (this.home) {
             const a = this.context.document.createElement("a");
+            if (this.context.siyuan.config.editor.contenteditable) a.setAttribute('contenteditable', false);
             a.href = window.publish.home.url;
             a.title = this.context.publish.i18n['home'];
 
@@ -104,6 +107,7 @@ class Link extends Base {
         this.breadcrumb.querySelectorAll(`.protyle-breadcrumb__item[data-node-id]`).forEach(item => {
             const id = item.dataset.nodeId;
             const a = this.context.document.createElement("a");
+            if (this.context.siyuan.config.editor.contenteditable) a.setAttribute('contenteditable', false);
             this.URL.root.searchParams.set("id", id);
             a.href = this.URL.root.href.replace(this.URL.root.origin, "");
 
@@ -124,6 +128,7 @@ class Link extends Base {
                 ? this.TYPE_ICON_MAP[item.dataset.type]
                 : this.TYPE_ICON_MAP[item.dataset.type][item.dataset.subtype];
             const a = this.context.document.createElement("a");
+            if (this.context.siyuan.config.editor.contenteditable) a.setAttribute('contenteditable', false);
             a.classList.add(this.CLASS_NAME_LINK_COPY);
             a.href = this.URL.root.href.replace(this.URL.root.origin, "");
             a.title = this.URL.root.href;

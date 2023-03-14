@@ -7,6 +7,7 @@
 - 添加自动获取基本样式文件功能 | Adds the function to automatically get basic style file.
 - 调整超链接格式 | Adjust hyperlink format.
 - 添加开发用脚本 | Add development scripts.
+- 修复页面可编辑时无法访问正文超链接问题 | Fixed the issue where the main body hyperlink could not be accessed when the page was editable.
 
 ## v0.1.4 / 2022-10-18
 
