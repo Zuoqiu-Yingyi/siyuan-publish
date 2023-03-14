@@ -12,7 +12,9 @@
     <base id="baseURL" href="{{.URL.Base}}">
     <title>{{ .Title }}</title>
     {{ template "config.html" . }}
+    {{ if ne .Render.File.Script.Emoji "" }}
     <script async id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
+    {{ end }}
     <script async id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
     
     <script async id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
@@ -46,7 +48,7 @@
 </head>
 
 <body class="fn__flex-column">
-    <div id="editor">
+    <div id="editor" class="fn__flex-1 protyle">
         {{ template "breadcrumb.html" . }}
         <div class="protyle-content"{{ if .Render.Editor.FullWidth }}data-fullwidth="true"{{ end }}>
             {{ template "background.html" . }}

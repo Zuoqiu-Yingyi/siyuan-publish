@@ -5,6 +5,7 @@
 - 添加静态文件目录 `snippets` | Add static file directory `snippets`.
 - 更新 go module | Update go module.
 - 添加自动获取基本样式文件功能 | Adds the function to automatically get basic style file.
+- 调整超链接格式 | Adjust hyperlink format.
 
 ## v0.1.4 / 2022-10-18
 

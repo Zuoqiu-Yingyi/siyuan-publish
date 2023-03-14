@@ -12,10 +12,11 @@ class Popover extends Base {
         UUID: '2B17F759-5E17-4A00-B588-E3C447C8F73D',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.5',
+        VERSION: '0.0.6',
         DESCRIPTION: '鼠标悬浮预览',
         DEPENDENCY: [
             'publish-url',
+            'publish-link',
         ],
         CALL: {
             async: false,
@@ -26,13 +27,12 @@ class Popover extends Base {
     constructor(context) {
         super(context);
         this.URL = this.context.meta.get('URL')
-        this.POPOVER_TRIGGER = 'popover-trigger';
+        this.CLASS_NAME_LINK_TRIGGER = this.context.meta.get('CLASS_NAME_LINK_TRIGGER');
         this.POPOVER_SIZE = { // 悬浮预览元素的尺寸
             width: this.context.top.publish.config.popover.width,
             height: this.context.top.publish.config.popover.height,
         };
 
-        this.context.meta.set('POPOVER_TRIGGER', this.POPOVER_TRIGGER);
         this.context.meta.set('POPOVER_SIZE', this.POPOVER_SIZE);
     }
 
@@ -310,7 +310,7 @@ class Popover extends Base {
 
         /* 鼠标悬浮在某个元素内一段时间后触发 */
         // REF [javascript - Iterating over result of getElementsByClassName using Array.forEach - Stack Overflow](https://stackoverflow.com/questions/3871547/iterating-over-result-of-getelementsbyclassname-using-array-foreach)
-        Array.from(document.getElementsByClassName(this.POPOVER_TRIGGER)).forEach(item => {
+        Array.from(document.getElementsByClassName(this.CLASS_NAME_LINK_TRIGGER)).forEach(item => {
             item.addEventListener("mouseenter", () => {
                 if (this.context.top.publish.popover.timeout) {
                     clearTimeout(this.context.top.publish.popover.timeout);

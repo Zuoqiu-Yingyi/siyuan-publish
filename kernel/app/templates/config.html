@@ -101,11 +101,13 @@
                 case 0: // 亮色
                     document.body.style.color = window.publish.config.theme.light.color;
                     document.body.style.backgroundColor = window.publish.config.theme.light.backgroundColor;
+                    document.documentElement.dataset.themeMode = 'light';
                     window.siyuan.config.appearance.mode = 0;
                     break;
-                case 1: // 暗色
+                    case 1: // 暗色
                     document.body.style.color = window.publish.config.theme.dark.color;
                     document.body.style.backgroundColor = window.publish.config.theme.dark.backgroundColor;
+                    document.documentElement.dataset.themeMode = 'dark';
                     window.siyuan.config.appearance.mode = 1;
                     break;
             }
