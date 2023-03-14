@@ -23,6 +23,9 @@ success = "數據庫初始化完成。"
 [server]
 success = "Web 服務初始化完成。"
 
+[static]
+success = "靜態文件目錄初始化完成。"
+
 [HTML]
 new-window = "在新窗口打開當前頁面"
 new-page = "在新標簽頁打開當前頁面"

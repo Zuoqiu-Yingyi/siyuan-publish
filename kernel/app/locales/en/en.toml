@@ -23,6 +23,9 @@ success = "Initrializing database successfully."
 [server]
 success = "Initrializing server successfully."
 
+[static]
+success = "Initrializing static directory successfully."
+
 [HTML]
 new-window = "Open the page in a new window"
 new-page = "Open the page in a new tab"

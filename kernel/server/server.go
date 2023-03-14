@@ -35,7 +35,7 @@ func Init() {
 		if err := os.RemoveAll(config.C.Server.Static.Path); err != nil {
 			panic(err)
 		} else {
-			fmt.Println("Removing static directory successfully.")
+			fmt.Println(locale.T("static.success"))
 		}
 	}
 

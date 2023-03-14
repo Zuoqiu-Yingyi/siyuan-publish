@@ -8,6 +8,7 @@ import (
 
 /*
 SQL 查询
+
 	@params request *req.Request: HTTP 客户端请求对象
 	@params stmt string: SQL 语句
 
@@ -25,6 +26,7 @@ func SQL(request *req.Request, stmt string) (r *ResponseBody, err error) {
 
 /*
 通过 ID 查询指定块的信息
+
 	@params request *req.Request: HTTP 客户端请求对象
 	@params id string: 块 ID
 
@@ -37,6 +39,7 @@ func GetBlockByID(request *req.Request, id string) (r *ResponseBody, err error) 
 
 /*
 查询含有指定块属性名称的文档
+
 	@params request *req.Request: HTTP 客户端请求对象
 	@params attrName string: 属性名称
 
@@ -59,6 +62,7 @@ func GetDocsByAttrName(request *req.Request, attrName string) (r *ResponseBody, 
 
 /*
 通过嵌入块 API 获得块 DOM
+
 	@params request *req.Request: HTTP 客户端请求对象
 	@params stmt string: SQL 语句
 	@params headingMode int: 对标题块的处理方式
@@ -84,6 +88,7 @@ func SearchEmbedBlock(request *req.Request, stmt string, headingMode int, exclud
 
 /*
 查询文档
+
 	@params request *req.Request: HTTP 客户端请求对象
 	@params id string: 文档块/文档内顶级块 ID
 	@params k string: 需要标记(高亮)的文本
@@ -116,6 +121,7 @@ func GetDoc(request *req.Request, id, k string, mode, size int) (r *ResponseBody
 
 /*
 通过 ID 获得指定块的 DOM
+
 	@params request *req.Request: HTTP 客户端请求对象
 	@params id string: 块 ID
 	@params headingMode int: 对标题块的处理方式
@@ -127,4 +133,19 @@ func GetDoc(request *req.Request, id, k string, mode, size int) (r *ResponseBody
 */
 func GetBlockDomByID(request *req.Request, id string, headingMode int) (r *ResponseBody, err error) {
 	return SearchEmbedBlock(request, fmt.Sprintf(`SELECT * FROM blocks WHERE id = '%s' LIMIT 1;`, id), headingMode, make([]string, 0))
+}
+
+/*
+通过 pathname 使用 GET 方法获得指定资源
+
+	@params request *req.Request: HTTP 客户端请求对象
+	@params pathname string: URL pathname
+
+	@return *Response: 响应体
+	@return error: 错误
+*/
+func Get(request *req.Request, pathname string) (r *req.Response, err error) {
+	r, err = request.
+		Get(pathname)
+	return
 }

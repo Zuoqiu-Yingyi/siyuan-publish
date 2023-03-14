@@ -31,6 +31,8 @@ func Init(path string) {
 
 		/* 加载默认配置 */
 		LoadDefaultConfig()
+	} else {
+
 	}
 	if C.Debug {
 		if str, err := json.MarshalIndent(C, "", "    "); err == nil {
@@ -188,7 +190,8 @@ func LoadDefaultConfig() {
 			},
 			File: File{
 				Style: Style{
-					Base:    "/stage/build/export/base.css",
+					// Base:    "/stage/build/export/base.css",
+					Base:    "",
 					Publish: "/css/publish.css",
 					Light: Theme{
 						Color:           "#3F6368",

@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	VERSION = "0.1.3" // 版本信息
+	VERSION = "0.1.5" // 版本信息
 )
 
 func main() {

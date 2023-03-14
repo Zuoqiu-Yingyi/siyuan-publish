@@ -23,6 +23,9 @@ success = "数据库初始化完成。"
 [server]
 success = "Web 服务初始化完成。"
 
+[static]
+success = "静态文件目录初始化完成。"
+
 [HTML]
 new-window = "在新窗口打开当前页面"
 new-page = "在新标签页打开当前页面"

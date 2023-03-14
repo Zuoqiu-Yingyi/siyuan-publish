@@ -140,8 +140,8 @@ Before = [ # 渲染前调用的插件
     "title",      # 题头插件
     "breadcrumb", # 面包屑插件
     "edit-state", # 编辑状态插件
-    "link",       # 超链接插件
     "locate",     # 定位插件
+    "link",       # 超链接插件
     "popover",    # 悬浮预览插件
 ]
 After = [ # 渲染后调用的插件
@@ -163,8 +163,9 @@ Plugins = "/js/plugins"    # 插件目录访问路径
 
 # 渲染器样式文件 URL
 [Render.File.Style]
-Base = "/stage/build/export/base.css" # 基础样式文件 URL
-Publish = "/css/publish.css"          # 发布样式文件 URL
+# Base = "/stage/build/export/base.css" # 基础样式文件 URL
+Base = ""                    # 基础样式文件 URL (设置为空则自动解析)
+Publish = "/css/publish.css" # 发布样式文件 URL
 
 # 渲染器明亮主题样式文件 URL
 [Render.File.Style.Light]
@@ -187,7 +188,7 @@ Custom = "/appearance/themes/midnight/custom.css" # 自定义主题样式
 # 渲染器脚本文件 URL
 [Render.File.Script]
 Icon = "/appearance/icons/material/icon.js"       # 图标脚本 URL
-Emoji = "/appearance/emojis/twitter-emoji.js"     # 表情脚本 URL
+Emoji = "/appearance/emojis/twitter-emoji.js"     # 表情脚本 URL (12 MB)
 Lute = "/stage/protyle/js/lute/lute.min.js"       # 解析器脚本 URL
 HTML = "/stage/protyle/js/protyle-html.js"        # HTML 解析脚本 URL
 Protyle = "/stage/build/export/protyle-method.js" # 渲染器脚本 URL
