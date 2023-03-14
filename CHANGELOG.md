@@ -6,6 +6,7 @@
 - 更新 go module | Update go module.
 - 添加自动获取基本样式文件功能 | Adds the function to automatically get basic style file.
 - 调整超链接格式 | Adjust hyperlink format.
+- 添加开发用脚本 | Add development scripts.
 
 ## v0.1.4 / 2022-10-18
 
