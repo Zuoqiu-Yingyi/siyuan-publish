@@ -2,7 +2,7 @@
   overflow: auto;
   height: 100%;
 }
-#editor #preview [data-node-id] > .link-copy {
+#editor #protyle [data-node-id] > .link-copy {
   display: none;
   position: absolute;
   top: 0.375rem;
@@ -10,40 +10,40 @@
   width: 1.5rem;
   z-index: 1;
 }
-#editor #preview [data-node-id] > .link-copy > svg {
+#editor #protyle [data-node-id] > .link-copy > svg {
   color: var(--b3-theme-on-surface-light);
 }
-#editor #preview [data-node-id].hr > .link-copy {
+#editor #protyle [data-node-id].hr > .link-copy {
   /* 调整分割线块的块超连接标志位置 */
   top: -0.25rem;
 }
-#editor #preview [data-node-id].sb > .link-copy,
-#editor #preview [data-node-id].bq > .link-copy {
+#editor #protyle [data-node-id].sb > .link-copy,
+#editor #protyle [data-node-id].bq > .link-copy {
   /* 调整容器块的块超连接标志位置 */
   top: -0.25rem;
 }
-#editor #preview [data-node-id].list > .link-copy {
+#editor #protyle [data-node-id].list > .link-copy {
   /* 调整列表块的块超连接标志位置 */
   top: -0.625rem;
 }
-#editor #preview [data-node-id].li > [data-node-id][data-type="NodeHeading"] > .link-copy {
+#editor #protyle [data-node-id].li > [data-node-id][data-type="NodeHeading"] > .link-copy {
   /* 调整列表项内标题块的块超连接标志位置 */
   top: 0;
 }
-#editor #preview [data-node-id]:hover > .link-copy {
+#editor #protyle [data-node-id]:hover > .link-copy {
   display: block;
 }
-#editor #preview [data-node-id] .protyle-linenumber__rows > span {
+#editor #protyle [data-node-id] .protyle-linenumber__rows > span {
   height: auto !important;
 }
-#editor #preview a,
+#editor #protyle a,
 #editor #breadcrumb a {
   /* 取消附加的超链接样式 */
   outline: 0;
   text-decoration: none;
   color: transparent;
 }
-#editor #preview a:hover,
+#editor #protyle a:hover,
 #editor #breadcrumb a:hover {
   text-decoration: none;
 }

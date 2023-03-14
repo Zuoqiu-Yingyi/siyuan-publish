@@ -46,7 +46,7 @@ class DOM extends Base {
             titleTags: this.context.document.getElementById('title-tags'),
             titleIcon: this.context.document.getElementById('title-icon'),
             editor: this.context.document.getElementById('editor'),
-            preview: this.context.document.getElementById('preview'),
+            protyle: this.context.document.getElementById('protyle'),
         };
 
         this.context.meta.set('DOM', this.DOM);

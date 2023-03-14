@@ -27,5 +27,5 @@ success = "Web 服务初始化完成。"
 success = "静态文件目录初始化完成。"
 
 [HTML]
-new-window = "在新窗口打开当前页面"
-new-page = "在新标签页打开当前页面"
+new-window = "使用新窗口打开"
+new-page = "使用新标签页打开"

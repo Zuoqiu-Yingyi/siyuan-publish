@@ -37,7 +37,7 @@ class Link extends Base {
         this.publish_selected = this.context.obj.get('publish-selected');
 
         this.home = this.DOM.home;
-        this.preview = this.DOM.preview;
+        this.protyle = this.DOM.protyle;
         this.breadcrumb = this.DOM.breadcrumb;
 
         this.context.meta.set('CLASS_NAME_LINK_TRIGGER', this.CLASS_NAME_LINK_TRIGGER);
@@ -53,7 +53,7 @@ class Link extends Base {
 
     ref2link() {
         /* 将块引用转化为超链接 */
-        this.preview.querySelectorAll(`span[data-type="block-ref"][data-id]`).forEach(item => {
+        this.protyle.querySelectorAll(`span[data-type="block-ref"][data-id]`).forEach(item => {
             const id = item.dataset.id;
             const a = this.context.document.createElement("a");
             if (this.context.siyuan.config.editor.contenteditable) a.setAttribute('contenteditable', false);
@@ -68,7 +68,7 @@ class Link extends Base {
 
     a2link() {
         /* 将链接转化为超链接 */
-        this.preview.querySelectorAll(`span[data-type="a"][data-href]`).forEach(item => {
+        this.protyle.querySelectorAll(`span[data-type="a"][data-href]`).forEach(item => {
             const a = this.context.document.createElement("a");
             if (this.context.siyuan.config.editor.contenteditable) a.setAttribute('contenteditable', false);
             a.classList.add(this.CLASS_NAME_LINK_TRIGGER)
@@ -122,7 +122,7 @@ class Link extends Base {
 
     blockLink() {
         /* 为所有块添加悬浮复制超链接 */
-        this.preview.querySelectorAll(`[data-node-id]`).forEach(item => {
+        this.protyle.querySelectorAll(`[data-node-id]`).forEach(item => {
             this.URL.root.searchParams.set("id", item.dataset.nodeId);
             const icon = typeof this.TYPE_ICON_MAP[item.dataset.type] === 'string'
                 ? this.TYPE_ICON_MAP[item.dataset.type]

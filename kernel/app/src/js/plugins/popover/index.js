@@ -123,48 +123,54 @@ class Popover extends Base {
                             break;
                     }
                     block__popover.innerHTML = `
-                    <div class="block__icons block__icons--border">
-                        <span class="fn__space fn__flex-1"></span>
-                        <span data-type="open-page" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['new-page']}">
-                            <svg>
-                                <use xlink:href="#iconExport"></use>
-                            </svg>
-                        </span>
-                        <span class="fn__space"></span>
-                        <span data-type="open-window" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['new-window']}">
-                            <svg class="ft__secondary">
-                                <use xlink:href="#iconExport"></use>
-                            </svg>
-                        </span>
-                        <span class="fn__space"></span>
-                        <span data-type="pin" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['pin']}">
-                            <svg>
-                                <use xlink:href="#iconPin"></use>
-                            </svg>
-                        </span>
-                        <span class="fn__space"></span>
-                        <span data-type="close" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['close']}">
-                            <svg style="width: 10px">
-                                <use xlink:href="#iconClose"></use>
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="block__content">
-                        <iframe src="${href}" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="fn__flex-1"></iframe>
-                    </div>
-                    <div class="block__nwse"></div>
-                    <div class="block__ew"></div>
-                    <div class="block__ns"></div>`;
+<div class="block__icons block__icons--border">
+    <span class="fn__space fn__flex-1"></span>
+    <span data-type="open-page" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['new-page']}">
+        <svg>
+            <use xlink:href="#iconExport"></use>
+        </svg>
+    </span>
+    <span class="fn__space"></span>
+    <span data-type="open" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['new-window']}">
+        <svg>
+            <use xlink:href="#iconOpenWindow"></use>
+        </svg>
+    </span>
+    <span class="fn__space"></span>
+    <span data-type="pin" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['pin']}">
+        <svg>
+            <use xlink:href="#iconPin"></use>
+        </svg>
+    </span>
+    <span class="fn__space"></span>
+    <span data-type="close" class="block__icon b3-tooltips b3-tooltips__sw" title="${this.context.publish.i18n['close']}">
+        <svg style="width: 10px">
+            <use xlink:href="#iconClose"></use>
+        </svg>
+    </span>
+</div>
+<div class="block__content">
+    <iframe src="${href}" border="0" frameborder="no" framespacing="0" allowfullscreen="true" class="fn__flex-1"></iframe>
+</div>
+<div class="block__rd"></div>
+<div class="block__ld"></div>
+<div class="block__lt"></div>
+<div class="block__rt"></div>
+<div class="block__r"></div>
+<div class="block__d"></div>
+<div class="block__t"></div>
+<div class="block__l"></div>
+`;
 
                     const iframe = block__popover.querySelector("iframe");
                     const border = block__popover.querySelector(".block__icons--border");
+                    const icon_open_page = block__popover.querySelector('[data-type="open-page"]');
+                    const icon_open = block__popover.querySelector('[data-type="open"]');
                     const icon_pin = block__popover.querySelector('[data-type="pin"]');
                     const icon_close = block__popover.querySelector('[data-type="close"]');
-                    const icon_open_page = block__popover.querySelector('[data-type="open-page"]');
-                    const icon_open_window = block__popover.querySelector('[data-type="open-window"]');
-                    const size_handle = block__popover.querySelector(".block__nwse");
-                    const width_handle = block__popover.querySelector(".block__ew");
-                    const height_handle = block__popover.querySelector(".block__ns");
+                    const handle_rd = block__popover.querySelector(".block__rd");
+                    const handle_r = block__popover.querySelector(".block__r");
+                    const handle_d = block__popover.querySelector(".block__d");
 
                     /* 鼠标移出预览时关闭预览 */
                     function close(_) {
@@ -191,14 +197,24 @@ class Popover extends Base {
                     /* 鼠标移出元素后自动关闭 */
                     setTimeout(() => block__popover.addEventListener("mouseleave", close), TIMEOUT.SHOW_MIN);
 
-                    /* 在新窗口打开 */
+                    /* 在新标签页打开 */
                     // REF [Window.open() - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
                     // REF [Window open() 方法 | 菜鸟教程](https://www.runoob.com/jsref/met-win-open.html)
-                    icon_open_page.addEventListener("click", _ => this.context.top.open(iframe.src));
-                    icon_open_window.addEventListener("click", e => {
+                    icon_open_page.addEventListener("click", _ => {
+                        this.context.top.open(iframe.src);
+
+                        /* 浮窗未被钉住, 则关闭 */
+                        if (!icon_pin.classList.contains("block__icon--active")) {
+                            icon_close.click();
+                        }
+                    });
+
+                    /* 新窗口打开 */
+                    icon_open.addEventListener("click", e => {
                         // console.log(e);
                         // console.log(e.target.getBoundingClientRect());
                         // console.log(block__popover.getBoundingClientRect());
+
                         const position = block__popover.getBoundingClientRect();
                         const x_relative = e.x - position.x;
                         const y_relative = e.y - position.y;
@@ -224,9 +240,20 @@ class Popover extends Base {
                             width,
                             height,
                         );
+
+                        /* 浮窗未被钉住, 则关闭 */
+                        if (!icon_pin.classList.contains("block__icon--active")) {
+                            icon_close.click();
+                        }
                     });
 
                     /* 拖动功能 */
+
+                    /* 阻止点击按钮时拖动被触发 */
+                    icon_open_page.addEventListener("mousedown", e => e.stopPropagation());
+                    icon_open.addEventListener("mousedown", e => e.stopPropagation());
+                    icon_pin.addEventListener("mousedown", e => e.stopPropagation());
+                    icon_close.addEventListener("mousedown", e => e.stopPropagation());
 
                     // 鼠标移动时状态
                     var flag_popover_dragging = false; // 悬浮预览窗口是否正在拖动
@@ -244,13 +271,12 @@ class Popover extends Base {
                         undefined,
                         undefined,
                         (e, that, ..._) => {
-                            // 移出浏览器则从新窗口打开
                             const positon = doc.documentElement.getBoundingClientRect();
                             if (e.x < positon.left
                                 || e.x > positon.right
                                 || e.y < positon.top
                                 || e.y > positon.bottom
-                            ) {
+                            ) {  // 移出浏览器则从新窗口打开
                                 const left = e.screenX - that.status.drag.position.x;
                                 const top = e.screenY - that.status.drag.position.y;
                                 let width;
@@ -273,27 +299,34 @@ class Popover extends Base {
                                     width,
                                     height,
                                 );
+
+                                /* 浮窗未被钉住, 则关闭 */
                                 if (!icon_pin.classList.contains("block__icon--active")) {
-                                    /* 浮窗未被钉住, 则关闭 */
                                     icon_close.click();
+                                }
+                            } else { // 未移出浏览器, 钉住窗口
+                                if (!icon_pin.classList.contains("block__icon--active")) {
+                                    icon_pin.click();
                                 }
                             }
                         },
                     );
+
+                    /* 窗口拖动调整尺寸 */
                     drag.register(
-                        size_handle,
+                        handle_rd,
                         block__popover,
                         doc.documentElement,
                         drag.handler.resize,
                     );
                     drag.register(
-                        width_handle,
+                        handle_r,
                         block__popover,
                         doc.documentElement,
                         drag.handler.rewidth,
                     );
                     drag.register(
-                        height_handle,
+                        handle_d,
                         block__popover,
                         doc.documentElement,
                         drag.handler.reheight,

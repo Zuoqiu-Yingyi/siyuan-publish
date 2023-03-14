@@ -3,17 +3,17 @@
  */
 
 (() => {
-    const previewElement = document.getElementById('preview');
+    const protyleElement = document.getElementById('protyle');
 
-    Protyle.highlightRender(previewElement, window.publish.render.protyle);
-    Protyle.mathRender(previewElement, window.publish.render.protyle, false);
-    Protyle.mermaidRender(previewElement, window.publish.render.protyle);
-    Protyle.flowchartRender(previewElement, window.publish.render.protyle);
-    Protyle.graphvizRender(previewElement, window.publish.render.protyle);
-    Protyle.chartRender(previewElement, window.publish.render.protyle);
-    Protyle.mindmapRender(previewElement, window.publish.render.protyle);
-    Protyle.abcRender(previewElement, window.publish.render.protyle);
-    Protyle.plantumlRender(previewElement, window.publish.render.protyle);
+    Protyle.highlightRender(protyleElement, window.publish.render.protyle);
+    Protyle.mathRender(protyleElement, window.publish.render.protyle, false);
+    Protyle.mermaidRender(protyleElement, window.publish.render.protyle);
+    Protyle.flowchartRender(protyleElement, window.publish.render.protyle);
+    Protyle.graphvizRender(protyleElement, window.publish.render.protyle);
+    Protyle.chartRender(protyleElement, window.publish.render.protyle);
+    Protyle.mindmapRender(protyleElement, window.publish.render.protyle);
+    Protyle.abcRender(protyleElement, window.publish.render.protyle);
+    Protyle.plantumlRender(protyleElement, window.publish.render.protyle);
 
     document.querySelectorAll(".protyle-action__copy").forEach((item) => {
         item.addEventListener("click", (event) => {

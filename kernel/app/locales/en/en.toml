@@ -27,5 +27,5 @@ success = "Initrializing server successfully."
 success = "Initrializing static directory successfully."
 
 [HTML]
-new-window = "Open the page in a new window"
-new-page = "Open the page in a new tab"
+new-window = "Open with New Window"
+new-page = "Open with New Tab"

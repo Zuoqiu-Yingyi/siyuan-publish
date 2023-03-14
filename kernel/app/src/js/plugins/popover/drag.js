@@ -164,7 +164,7 @@ class Drag {
      * @params {HTMLElement} draggable: 可拖拽的区域
      * @params {HTMLElement} target: 拖拽的目标元素
      * @params {HTMLElement} stage: 在哪个元素内拖拽
-     * @params {function} mousemoveHandler: 鼠标移动事件的处理器
+     * @params {function} handler: 鼠标移动事件的处理器
      * @params {function} preproccess: 预处理方法
      * @params {function} postproccess: 后处理方法
      * @params {function} final: 拖动完成回调方法
@@ -195,7 +195,7 @@ class Drag {
             stage,
             eventHandler,
             final,
-        ), true);
+        ), false);
     }
 }
 export const drag = new Drag();
