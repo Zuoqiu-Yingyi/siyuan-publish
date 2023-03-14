@@ -3,6 +3,7 @@
 - 修复错误页面可能导致调试信息泄露问题 | Fix error pages that could cause debugging information disclosure.
 - 优化拖拽功能 | Optimized drag-and-drop function.
 - 添加静态文件目录 `snippets` | Add static file directory `snippets`.
+- 更新 go module | Update go module.
 
 ## v0.1.4 / 2022-10-18
 
