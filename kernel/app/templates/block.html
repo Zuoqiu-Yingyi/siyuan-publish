@@ -15,10 +15,11 @@
     {{ if ne .Render.File.Script.Emoji "" }}
     <script async id="emojiScript" src="{{.Render.File.Script.Emoji}}"></script>
     {{ end }}
-    <script async id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
-    
     <script async id="beforeScript" type="module" src="{{.Render.File.Script.Before}}"></script>
-    
+
+    <script defer id="iconDefaultScript" src="{{.Render.File.Script.IconDefault}}"></script>
+    <script defer id="iconScript" src="{{.Render.File.Script.Icon}}"></script>
+
     <script defer id="luteScript" src="{{.Render.File.Script.Lute}}"></script>
     <script defer id="protyleScript" src="{{.Render.File.Script.Protyle}}"></script>
     <!-- 依赖 luteScript -->
@@ -39,9 +40,9 @@
     <link id="themeStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Theme}}" />
     <link id="themeCustomStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Dark.Custom}}" />
     {{ else }}
-    <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href/>
-    <link id="themeStyle" rel="stylesheet" type="text/css" href/>
-    <link id="themeCustomStyle" rel="stylesheet" type="text/css" href/>
+    <link id="themeDefaultStyle" rel="stylesheet" type="text/css" href />
+    <link id="themeStyle" rel="stylesheet" type="text/css" href />
+    <link id="themeCustomStyle" rel="stylesheet" type="text/css" href />
     {{ end }}
     <link id="publishStyle" rel="stylesheet" type="text/css" href="{{.Render.File.Style.Publish}}" />
 
@@ -50,10 +51,10 @@
 <body class="fn__flex-column">
     <div id="editor" class="fn__flex-1 protyle">
         {{ template "breadcrumb.html" . }}
-        <div class="protyle-content"{{ if .Render.Editor.FullWidth }}data-fullwidth="true"{{ end }}>
+        <div class="protyle-content" {{ if .Render.Editor.FullWidth }}data-fullwidth="true" {{ end }}>
             {{ template "background.html" . }}
             {{ template "title.html" . }}
-            <article id="preview" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">
+            <article id="protyle" class="protyle-wysiwyg protyle-wysiwyg--attr" spellcheck="false" contenteditable="false">
                 {{ html .Content }}
             </article>
         </div>

@@ -62,15 +62,16 @@ type Theme struct {
 }
 
 type Script struct {
-	Icon    string `json:"icon"`
-	Emoji   string `json:"emoji"`
-	Lute    string `json:"lute"`
-	HTML    string `json:"html"`
-	Protyle string `json:"protyle"`
-	Plugin  string `json:"plugin"`
-	Before  string `json:"before"`
-	Render  string `json:"render"`
-	After   string `json:"after"`
+	IconDefault string `json:"iconDefault"`
+	Icon        string `json:"icon"`
+	Emoji       string `json:"emoji"`
+	Lute        string `json:"lute"`
+	HTML        string `json:"html"`
+	Protyle     string `json:"protyle"`
+	Plugin      string `json:"plugin"`
+	Before      string `json:"before"`
+	Render      string `json:"render"`
+	After       string `json:"after"`
 }
 
 type Path struct {

@@ -187,11 +187,12 @@ Custom = "/appearance/themes/midnight/custom.css" # 自定义主题样式
 
 # 渲染器脚本文件 URL
 [Render.File.Script]
-Icon = "/appearance/icons/material/icon.js"       # 图标脚本 URL
-Emoji = "/appearance/emojis/twitter-emoji.js"     # 表情脚本 URL (12 MB)
-Lute = "/stage/protyle/js/lute/lute.min.js"       # 解析器脚本 URL
-HTML = "/stage/protyle/js/protyle-html.js"        # HTML 解析脚本 URL
-Protyle = "/stage/build/export/protyle-method.js" # 渲染器脚本 URL
-Before = "/js/before.js"                          # 渲染前处理脚本 URL
-Render = "/js/render.js"                          # 渲染脚本 URL
-After = "/js/after.js"                            # 渲染后处理脚本 URL
+IconDefault = "/appearance/icons/material/icon.js" # 默认图标脚本 URL
+Icon = "/appearance/icons/material/icon.js"        # 自定义图标脚本 URL
+Emoji = "/appearance/emojis/twitter-emoji.js"      # 表情脚本 URL (12 MB)
+Lute = "/stage/protyle/js/lute/lute.min.js"        # 解析器脚本 URL
+HTML = "/stage/protyle/js/protyle-html.js"         # HTML 解析脚本 URL
+Protyle = "/stage/build/export/protyle-method.js"  # 渲染器脚本 URL
+Before = "/js/before.js"                           # 渲染前处理脚本 URL
+Render = "/js/render.js"                           # 渲染脚本 URL
+After = "/js/after.js"                             # 渲染后处理脚本 URL
