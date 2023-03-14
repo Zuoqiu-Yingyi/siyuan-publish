@@ -33,7 +33,7 @@ File = "cache" # 资源文件加载模式
 [Server.Index]
 Paths = ["/"]                            # 首页路径
 URL = "/block?id=20200812220555-lj3enxa" # 首页重定向目标
-Icon = "#icon-1f4d4"                     # 首页图标
+Icon = "#iconFile"                       # 首页图标
 
 # 静态 Web 文件服务目录配置
 [Server.Static]
@@ -189,10 +189,11 @@ Custom = "/appearance/themes/midnight/custom.css" # 自定义主题样式
 [Render.File.Script]
 IconDefault = "/appearance/icons/material/icon.js" # 默认图标脚本 URL
 Icon = "/appearance/icons/material/icon.js"        # 自定义图标脚本 URL
-Emoji = "/appearance/emojis/twitter-emoji.js"      # 表情脚本 URL (12 MB)
-Lute = "/stage/protyle/js/lute/lute.min.js"        # 解析器脚本 URL
-HTML = "/stage/protyle/js/protyle-html.js"         # HTML 解析脚本 URL
-Protyle = "/stage/build/export/protyle-method.js"  # 渲染器脚本 URL
-Before = "/js/before.js"                           # 渲染前处理脚本 URL
-Render = "/js/render.js"                           # 渲染脚本 URL
-After = "/js/after.js"                             # 渲染后处理脚本 URL
+# Emoji = "/appearance/emojis/twitter-emoji.js"      # 表情脚本 URL (12 MB)
+Emoji = ""                                        # 使用默认表情
+Lute = "/stage/protyle/js/lute/lute.min.js"       # 解析器脚本 URL
+HTML = "/stage/protyle/js/protyle-html.js"        # HTML 解析脚本 URL
+Protyle = "/stage/build/export/protyle-method.js" # 渲染器脚本 URL
+Before = "/js/before.js"                          # 渲染前处理脚本 URL
+Render = "/js/render.js"                          # 渲染脚本 URL
+After = "/js/after.js"                            # 渲染后处理脚本 URL

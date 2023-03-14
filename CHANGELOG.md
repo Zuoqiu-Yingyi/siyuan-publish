@@ -10,6 +10,7 @@
 - 修复页面可编辑时无法访问正文超链接问题 | Fixed the issue where the main body hyperlink could not be accessed when the page was editable.
 - 修复悬浮预览窗口 | Fixed the popover preview window.
 - 调整 `protyle` 元素 ID | Adjust the `protyle` element ID.
+- 默认配置更改为使用系统 Emoji 图标 | Default configuration changed to use system Emoji icon.
 
 ## v0.1.4 / 2022-10-18
 
