@@ -52,6 +52,10 @@
 │       README-en.md // 英文介绍
 │       README-zh-SC.md // 中文介绍
 │
+├─scripts // 脚本
+│       dev-build.ps1 // 开发构建脚本
+│       dev-run.ps1 // 开发运行脚本
+│
 └─temp // 运行时的临时文件目录(运行时自动生成)
    │    publish.db // 数据库文件
    │
@@ -137,7 +141,7 @@
   4. `Server.Index`: 自定义站点首页路径, 设置好后访问该路径列表中的某一项时都会重定向至设置的首页 URL
   5. `Siyuan.Server`: 思源内核服务地址, 用于加载想要发布的资源
   6. `Siyuan.Server.Token`: 思源内核服务的访问令牌, 若思源内核服务启用了访问授权码则需要配置该选项, 可以在思源<kbd>设置</kbd>><kbd>关于</kbd>><kbd>API Token</kbd>中复制
-  7. `Render.File.Style.Base`: 思源基础样式文件的 URL, 建议设置为思源安装目录 `/resource/stage/build/mobile/` 下的 CSS 文件访问 URL, 例如该 CSS 文件名为 `base.2ad8890755ebaf8cc6d3.css`, 那么该选项设置为 `/stage/build/mobile/base.2ad8890755ebaf8cc6d3.css`
+
 * 保存配置文件
 
 ### 启动内核

@@ -1,5 +1,8 @@
 # 更改日志 | CHANGE LOG
 
+## v0.1.5 / 2022-03-15
+
+- [v0.1.4 ... v0.1.5](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.4...v0.1.5)
 - 修复错误页面可能导致调试信息泄露问题 | Fix error pages that could cause debugging information disclosure.
 - 优化拖拽功能 | Optimized drag-and-drop function.
 - 添加静态文件目录 `snippets` | Add static file directory `snippets`.

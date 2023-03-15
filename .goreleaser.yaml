@@ -51,14 +51,7 @@ builds:
 
 # [Archives - GoReleaser](https://goreleaser.com/customization/archive/)
 archives:
-  - replacements:
-      windows: Windows
-      linux: Linux
-      darwin: macOS
-      # 386: i386
-      # amd64: x86_64
-
-    # Archive format. Valid options are `tar.gz`, `tar.xz`, `tar`, `gz`, `zip` and `binary`.
+  - # Archive format. Valid options are `tar.gz`, `tar.xz`, `tar`, `gz`, `zip` and `binary`.
     # If format is `binary`, no archives are created and the binaries are instead
     # uploaded directly.
     # Default is `tar.gz`.
@@ -70,7 +63,15 @@ archives:
     #   - `{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}`
     # - if format is `binary`:
     #   - `{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}`
-    name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    # name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    name_template: >-
+      {{ .ProjectName }}
+      _v{{- .Version }}
+      _{{- if eq .Os "windows"}}Windows
+      {{- else if eq .Os "linux" }}Linux
+      {{- else if eq .Os "darwin" }}macOS
+      {{- .Arch }}
+      {{- end }}
 
     # Set to true, if you want all files in the archive to be in a single directory.
     # If set to true and you extract the archive 'goreleaser_Linux_arm64.tar.gz',
