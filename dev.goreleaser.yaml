@@ -65,13 +65,13 @@ archives:
     #   - `{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}`
     # name_template: "{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     name_template: >-
-      {{ .ProjectName }}
-      _v{{- .Version }}
-      _{{- if eq .Os "windows"}}Windows
+      {{ .ProjectName }}_v
+      {{- .Version }}_
+      {{- if eq .Os "windows"}}Windows
       {{- else if eq .Os "linux" }}Linux
       {{- else if eq .Os "darwin" }}macOS
-      {{ end }}_
-      {{ .Arch }}
+      {{- end }}_
+      {{- .Arch }}
 
     # Set to true, if you want all files in the archive to be in a single directory.
     # If set to true and you extract the archive 'goreleaser_Linux_arm64.tar.gz',

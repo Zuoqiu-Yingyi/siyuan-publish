@@ -14,6 +14,7 @@
 - 修复悬浮预览窗口 | Fixed the popover preview window.
 - 调整 `protyle` 元素 ID | Adjust the `protyle` element ID.
 - 默认配置更改为使用系统 Emoji 图标 | Default configuration changed to use system Emoji icon.
+- 更新 goreleaser 配置文件 | Update goreleaser configuration file.
 
 ## v0.1.4 / 2022-10-18
 
