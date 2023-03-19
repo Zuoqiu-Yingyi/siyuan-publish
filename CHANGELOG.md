@@ -1,5 +1,7 @@
 # 更改日志 | CHANGE LOG
 
+- 更新 CI/CD 配置文件 | Update CI/CD configuration file.
+
 ## v0.1.5 / 2022-03-15
 
 - [v0.1.4 ... v0.1.5](https:///github.com/Zuoqiu-Yingyi/siyuan-publish/compare/v0.1.4...v0.1.5)

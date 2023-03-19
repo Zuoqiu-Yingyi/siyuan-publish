@@ -31,6 +31,7 @@
 
 # 自定义配置文件
 /kernel/custom.config.toml
+/kernel/test.config.toml
 
 # 临时文件文件目录
 /kernel/temp/*
