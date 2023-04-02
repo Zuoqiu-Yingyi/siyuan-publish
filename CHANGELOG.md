@@ -1,6 +1,7 @@
 # 更改日志 | CHANGE LOG
 
 - 更新 CI/CD 配置文件 | Update CI/CD configuration file.
+- 更新文档 | Update documentation.
 
 ## v0.1.5 / 2022-03-15
 

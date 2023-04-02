@@ -18,7 +18,7 @@
 
 ## 文档 | DOCUMENTATION
 
-[简体中文](./docs/README-zh_SC.md) | [English](./docs/README-en.md)
+[简体中文](./docs/README-zh-Hans.md) | [English](./docs/README-en.md)
 
 ## 贡献者介绍 | CONTRIBUTOR INTRODUCTION
 
