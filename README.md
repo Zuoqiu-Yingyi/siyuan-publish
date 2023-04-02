@@ -1,7 +1,4 @@
 # siyuan-publish
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <center>
 
@@ -12,8 +9,8 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Zuoqiu-Yingyi/siyuan-publish?style=flat-square)
 ![hits](https://hits.b3log.org/Zuoqiu-Yingyi/siyuan-publish.svg)
 [![GitHub all releases](https://img.shields.io/github/downloads/Zuoqiu-Yingyi/siyuan-publish/total?style=flat-square)](https://github.com/Zuoqiu-Yingyi/siyuan-publish/releases)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#贡献者介绍--contributor-introduction)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-
 </center>
 
 [思源笔记](https://github.com/siyuan-note/siyuan) 发布工具  
