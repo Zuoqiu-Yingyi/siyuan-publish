@@ -6,9 +6,9 @@
 
 ### Requirements
 
-* The device has installed Siyuan Note or can access Siyuan Note server service
+* The device has installed SiYuan Note or can access SiYuan Note server service
 * Download the latest app distribution for the device `Operating System` and `Architecture` in [Releases](https://github.com/Zuoqiu-Yingyi/siyuan-publish/releases)
-* Unless otherwise stated, `kernel` below refers to the executable program of this application, and `Siyuan kernel` refers to the application program providing Siyuan Note server functionality
+* Unless otherwise stated, `kernel` below refers to the executable program of this application, and `SiYuan kernel` refers to the application program providing SiYuan Note server functionality
 
 ### Installation
 
@@ -63,12 +63,12 @@
    │
    ├─logs // Running log directory
    └─static // Static resource file temporary directory
-      ├─appearance // Appearance resource directory (corresponding to Siyuan Note workspace /conf/appearance/ directory)
-      ├─aeests // Document resource file directory (corresponding to Siyuan Note workspace /data/assets/ directory)
-      ├─emojis // Emotion resource file directory (corresponding to Siyuan Note workspace /data/emojis/ directory)
-      ├─export // Export resource file directory (corresponding to Siyuan Note workspace /temp/export/ directory)
-      ├─stage // Rendering tool resource file directory (corresponding to Siyuan Note installation /resource/stage/ directory)
-      └─widgets // Widget resource file directory (corresponding to Siyuan Note workspace /data/widgets/ directory)
+      ├─appearance // Appearance resource directory (corresponding to SiYuan Note workspace /conf/appearance/ directory)
+      ├─aeests // Document resource file directory (corresponding to SiYuan Note workspace /data/assets/ directory)
+      ├─emojis // Emotion resource file directory (corresponding to SiYuan Note workspace /data/emojis/ directory)
+      ├─export // Export resource file directory (corresponding to SiYuan Note workspace /temp/export/ directory)
+      ├─stage // Rendering tool resource file directory (corresponding to SiYuan Note installation /resource/stage/ directory)
+      └─widgets // Widget resource file directory (corresponding to SiYuan Note workspace /data/widgets/ directory)
 ```
 
 * The configuration file format is TOML, for more information, please refer to [TOML: A human-friendly configuration file format](https://toml.io/cn/)
@@ -79,42 +79,42 @@
   1. `Server.Port`: Web service access port, the default is port `80`
   2. `Server.Mode.Page`: Document page loading mode, field value can be set to one of the following three:
 
-      * `dynamic`: Dynamic loading mode, when set to this mode, the kernel will request data from the Siyuan kernel in real-time
+      * `dynamic`: Dynamic loading mode, when set to this mode, the kernel will request data from the SiYuan kernel in real-time
 
         * The kernel determines in real-time whether the accessed document is public
         * The kernel does not use the database cache Access Control List (ACL), so changing the access control permission of a document by editing the custom attribute<kbd>publish-access</kbd> can take effect in real-time
-        * Siyuan kernel cannot be turned off, the published content cannot be accessed normally when the Siyuan kernel is turned off or the Siyuan kernel service is inaccessible
-      * `cache`: Dynamic cache mode, when set to this mode, the kernel will first query the cache content from the database, and if the cache content is not found, it will request data from the Siyuan kernel and write it to the cache
+        * SiYuan kernel cannot be turned off, the published content cannot be accessed normally when the SiYuan kernel is turned off or the SiYuan kernel service is inaccessible
+      * `cache`: Dynamic cache mode, when set to this mode, the kernel will first query the cache content from the database, and if the cache content is not found, it will request data from the SiYuan kernel and write it to the cache
 
-        * The kernel will request data from the Siyuan kernel to establish an ACL at startup and write the ACL to the database, so when editing the custom attribute<kbd>publish-access</kbd> to change the access control permission of a document, it cannot take effect in real-time and must be restarted in the kernel to update the ACL
+        * The kernel will request data from the SiYuan kernel to establish an ACL at startup and write the ACL to the database, so when editing the custom attribute<kbd>publish-access</kbd> to change the access control permission of a document, it cannot take effect in real-time and must be restarted in the kernel to update the ACL
 
           * Note: If `Database.Reset = false` is set, restarting the kernel will not rebuild the ACL
         * The document content and the access control permission associated with the document will be written to the database after the first access, so after changing the cached document content or moving the cached document, the published content will not be updated in real-time, and the kernel needs to be restarted to clear the cache content
 
           * Note: If `Database.Reset = false` is set, restarting the kernel will not clear the cache
-        * Siyuan kernel cannot be turned off, the cached content can be accessed normally when the Siyuan kernel is turned off or the Siyuan kernel service is inaccessible, and the content outside the cache cannot be accessed normally
+        * SiYuan kernel cannot be turned off, the cached content can be accessed normally when the SiYuan kernel is turned off or the SiYuan kernel service is inaccessible, and the content outside the cache cannot be accessed normally
       * `static`: Static loading mode, when set to this mode, the kernel will write all published document information to the database at startup
 
-        * The kernel will request data from the Siyuan kernel to establish an ACL at startup and write the ACL to the database, so when editing the custom attribute<kbd>publish-access</kbd> to change the access control permission of a document, it cannot take effect in real-time and must be restarted in the kernel to update the ACL
+        * The kernel will request data from the SiYuan kernel to establish an ACL at startup and write the ACL to the database, so when editing the custom attribute<kbd>publish-access</kbd> to change the access control permission of a document, it cannot take effect in real-time and must be restarted in the kernel to update the ACL
 
           * Note: If `Database.Reset = false` is set, restarting the kernel will not rebuild the ACL
         * The document content and access control permission associated with the document will be written to the database when the kernel starts, so when changing the content of published documents or moving published documents after the kernel starts, the published content will not be updated in real-time, the kernel can be restarted to update the database
 
           * Note: If `Database.Reset = false` is set, restarting the kernel will not update the database
-        * When Siyuan kernel is turned off or inaccessible, the published documents can be accessed normally
+        * When SiYuan kernel is turned off or inaccessible, the published documents can be accessed normally
   3. `Server.Mode.File`: Resource file loading mode, its field value can be set to one of the following three:
 
-      * `dynamic`: Dynamic loading mode, when requesting resource files from the kernel in this mode, the kernel will forward the request to Siyuan kernel in real-time
+      * `dynamic`: Dynamic loading mode, when requesting resource files from the kernel in this mode, the kernel will forward the request to SiYuan kernel in real-time
 
-        * Since Siyuan `assets` directory resources can be accessed publicly when published as long as resource names are known, this option poses some security risks
-        * When Siyuan kernel is turned off or inaccessible, resources cannot be loaded
-      * `cache`: Dynamic cache mode, when requesting resource files from the kernel in this mode, the kernel first checks whether the corresponding static resource directory (cache directory) contains the file, if not, it requests the file from the Siyuan kernel and saves it to the corresponding static resource directory (cache directory)
+        * Since SiYuan `assets` directory resources can be accessed publicly when published as long as resource names are known, this option poses some security risks
+        * When SiYuan kernel is turned off or inaccessible, resources cannot be loaded
+      * `cache`: Dynamic cache mode, when requesting resource files from the kernel in this mode, the kernel first checks whether the corresponding static resource directory (cache directory) contains the file, if not, it requests the file from the SiYuan kernel and saves it to the corresponding static resource directory (cache directory)
 
-        * Since Siyuan `assets` directory resources can be accessed publicly when published as long as resource names are known, this option poses certain security risks
+        * Since SiYuan `assets` directory resources can be accessed publicly when published as long as resource names are known, this option poses certain security risks
         * Cached resources can be loaded normally when the kernel is closed or cannot be accessed, while uncached resources cannot be loaded
   4. `Server.Index`: Custom site homepage path. Once set, accessing any item in the path list will redirect to the set homepage URL
-  5. `Siyuan.Server`: Siyuan kernel service address used to load resources for publishing
-  6. `Siyuan.Server.Token`: Access token for Siyuan kernel service. If access authorization code is enabled for the Siyuan kernel service, this option needs to be configured. The token can be copied from <kbd>Settings</kbd> > <kbd>About</kbd> > <kbd>API Token</kbd> in Siyuan
+  5. `Siyuan.Server`: SiYuan kernel service address used to load resources for publishing
+  6. `Siyuan.Server.Token`: Access token for SiYuan kernel service. If access authorization code is enabled for the SiYuan kernel service, this option needs to be configured. The token can be copied from <kbd>Settings</kbd> > <kbd>About</kbd> > <kbd>API Token</kbd> in SiYuan
 
 ### Start Kernel
 

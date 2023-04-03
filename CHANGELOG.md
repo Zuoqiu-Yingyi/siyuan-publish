@@ -3,6 +3,7 @@
 - 更新 CI/CD 配置文件 | Update CI/CD configuration file.
 - 更新文档 | Update documentation.
 - 更新贡献者配置 | Update contributor configuration.
+- 更新英文文档 | Update English documentation.
 
 ## v0.1.5 / 2022-03-15
 
