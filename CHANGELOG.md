@@ -4,6 +4,7 @@
 - 更新文档 | Update documentation.
 - 更新贡献者配置 | Update contributor configuration.
 - 更新英文文档 | Update English documentation.
+- [#5](https://github.com/Zuoqiu-Yingyi/siyuan-publish/issues/5) 修复切换页面主题模式时未设置 `html` 标签 `data-theme-mode` 属性问题 | Fixed an issue where the `html` tag `data-theme-mode` attribute was not set when switching page theme mode.
 
 ## v0.1.5 / 2022-03-15
 

@@ -10,7 +10,7 @@ class DOM extends Base {
         UUID: '0B8E96C8-885B-41E6-BA4D-B24A7C2C7666',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.2',
+        VERSION: '0.0.3',
         DESCRIPTION: '页面 DOM 元素',
         DEPENDENCY: [],
     };
@@ -18,6 +18,8 @@ class DOM extends Base {
     constructor(context) {
         super(context);
         this.DOM = {
+            documentElement: thie.context.document.documentElement,
+
             editorFontSize: this.context.document.getElementById('editorFontSize'),
 
             baseStyle: this.context.document.getElementById('baseStyle'),

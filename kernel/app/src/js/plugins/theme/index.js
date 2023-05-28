@@ -10,7 +10,7 @@ class Theme extends Base {
         UUID: '51B1E8AC-A3B6-4581-BBFF-DA8BE72C2BFD',
         REPO: '',
         AUTHOR: 'siyuan-publish',
-        VERSION: '0.0.1',
+        VERSION: '0.0.2',
         DESCRIPTION: '主题渲染',
         DEPENDENCY: [
             'publish-dom',
@@ -36,11 +36,13 @@ class Theme extends Base {
                 this.DOM.themeDefaultStyle.href = this.context.publish.config.theme.light.default;
                 this.DOM.themeStyle.href = this.context.publish.config.theme.light.theme;
                 this.DOM.themeCustomStyle.href = this.context.publish.config.theme.light.custom;
+                this.DOM.documentElement.dataset.themeMode = "light";
                 break;
             case 1:
                 this.DOM.themeDefaultStyle.href = this.context.publish.config.theme.dark.default;
                 this.DOM.themeStyle.href = this.context.publish.config.theme.dark.theme;
                 this.DOM.themeCustomStyle.href = this.context.publish.config.theme.dark.custom;
+                this.DOM.documentElement.dataset.themeMode = "dark";
                 break;
         }
 

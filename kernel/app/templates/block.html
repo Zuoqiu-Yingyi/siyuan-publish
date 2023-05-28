@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<head data-theme-mode="{{ if eq .Render.Appearance.Mode 0 }}light{{ else if eq .Render.Appearance.Mode 1 }}dark{{ else }}auto{{ end }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
